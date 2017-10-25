@@ -4,6 +4,9 @@ namespace Model;
 
 class Marking
 {
+    /** @var  int */
+    private $id;
+
     /** @var  string */
     private $fullHierarchyName;
 
@@ -19,9 +22,6 @@ class Marking
     /** @var  string */
     private $name;
 
-    /** @var  int */
-    private $id;
-
     /** @var  string */
     private $slug;
 
@@ -34,13 +34,13 @@ class Marking
      * @param int $id
      * @param string $slug
      */
-    public function __construct(string $fullHierarchyName, string $projectId, int $parentId, array $hierarchy, string $name, int $id, string $slug)
+    public function __construct(int $id, string $fullHierarchyName, string $projectId, int $parentId, array $hierarchy, string $name, string $slug)
     {
+        $this->id = $id;
         $this->fullHierarchyName = $fullHierarchyName;
         $this->projectId = $projectId;
         $this->hierarchy = $hierarchy;
         $this->name = $name;
-        $this->id = $id;
         $this->slug = $slug;
     }
 

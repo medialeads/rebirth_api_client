@@ -2,16 +2,22 @@
 
 namespace Transformer;
 
+require_once(__DIR__ . "/AbstractTransformer.php");
 require_once(__DIR__ . '/../Model/VariantPrice.php');
 
 use Model\VariantPrice;
 
-class VariantPriceTransformer
+class VariantPriceTransformer extends AbstractTransformer
 {
-    public function fromArray($variantPrice)
+    public static function doFromArray(array $variantPrices): array
     {
-        $supplierProfile = SupplierProfileTransformer::fromArray($variantPrice['supplier_profile']);
+        $response = array();
+        foreach ($variantPrices as $variantPrice) {
+            $supplierProfile = SupplierProfileTransformer::fromArray($variantPrice['supplier_profile']);
 
-        return new VariantPrice($variantPrice['id'], $variantPrice['calculation_value'], $variantPrice['reduced_value'], $variantPrice['value'], $supplierProfile, $variantPrice['from_quantity']);
+            $response[] =  new VariantPrice($variantPrice['id'], $variantPrice['calculation_value'], $variantPrice['reduced_value'], $variantPrice['value'], $supplierProfile, $variantPrice['from_quantity']);
+        }
+
+        return $response;
     }
 }

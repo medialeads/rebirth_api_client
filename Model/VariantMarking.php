@@ -162,7 +162,7 @@ class VariantMarking
      * @param array $dynamicFixedPrices
      * @param mixed $maximumSquaredSize
      */
-    public function __construct(bool $freeEntrySquaredSize, string $type, mixed $minimumLength, mixed $minimumDiameter, mixed $numberOfPositions, bool $freeEntryNumberOfLogos, mixed $maximumDiameter, mixed $diameter, mixed $projectId, bool $freeEntryLength, array $staticVariablePriceHolders, int $id, mixed $minimumNumberOfColors, bool $freeEntryDiameter, array $staticFixedPrices, bool $fullColor, MarkingPosition $markingPosition, bool $freeEntryNumberOfColors, mixed $maximumNumberOfPositions, bool $freeEntryNumberOfPositions, mixed $maximumQuantity, mixed $minimumNumberOfLogos, mixed $length, mixed $minimumWidth, mixed $minimumSquaredSize, mixed $dynamicVariablePriceHolders, mixed $numberOfColors, SupplierMarking $supplierMarking, Marking $marking, mixed $maximumLength, mixed $squaredSize, mixed $width, mixed $maximumNumberOfLogos, string $comment, mixed $maximumWidth, mixed $minimumQuantity, mixed $maximumNumberOfColors, array $dynamicFixedPrices, mixed $maximumSquaredSize)
+    public function __construct(int $id, bool $freeEntrySquaredSize, string $type, mixed $minimumLength, mixed $minimumDiameter, mixed $numberOfPositions, bool $freeEntryNumberOfLogos, mixed $maximumDiameter, mixed $diameter, mixed $projectId, bool $freeEntryLength, array $staticVariablePriceHolders, mixed $minimumNumberOfColors, bool $freeEntryDiameter, array $staticFixedPrices, bool $fullColor, MarkingPosition $markingPosition, bool $freeEntryNumberOfColors, mixed $maximumNumberOfPositions, bool $freeEntryNumberOfPositions, mixed $maximumQuantity, mixed $minimumNumberOfLogos, mixed $length, mixed $minimumWidth, mixed $minimumSquaredSize, mixed $dynamicVariablePriceHolders, mixed $numberOfColors, SupplierMarking $supplierMarking, Marking $marking, mixed $maximumLength, mixed $squaredSize, mixed $width, mixed $maximumNumberOfLogos, string $comment, mixed $maximumWidth, mixed $minimumQuantity, mixed $maximumNumberOfColors, array $dynamicFixedPrices, mixed $maximumSquaredSize)
     {
         if (!$supplierMarking instanceof SupplierMarking) {
             throw new \InvalidArgumentException();
@@ -197,6 +197,7 @@ class VariantMarking
             }
         }
 
+        $this->id = $id;
         $this->freeEntrySquaredSize = $freeEntrySquaredSize;
         $this->type = $type;
         $this->minimumLength = $minimumLength;
@@ -208,7 +209,6 @@ class VariantMarking
         $this->projectId = $projectId;
         $this->freeEntryLength = $freeEntryLength;
         $this->staticVariablePriceHolders = $staticVariablePriceHolders;
-        $this->id = $id;
         $this->minimumNumberOfColors = $minimumNumberOfColors;
         $this->freeEntryDiameter = $freeEntryDiameter;
         $this->staticFixedPrices = $staticFixedPrices;
@@ -236,6 +236,14 @@ class VariantMarking
         $this->maximumNumberOfColors = $minimumNumberOfColors;
         $this->dynamicFixedPrices = $dynamicFixedPrices;
         $this->maximumSquaredSize = $maximumSquaredSize;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     /**
@@ -324,14 +332,6 @@ class VariantMarking
     public function getStaticVariablePriceHolders(): array
     {
         return $this->staticVariablePriceHolders;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     /**

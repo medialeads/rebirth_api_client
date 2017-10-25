@@ -2,13 +2,20 @@
 
 namespace Transformer;
 
+require_once(__DIR__ . "/AbstractTransformer.php");
 require_once(__DIR__ . "/../Model/AttributeGroup.php");
 
 use Model\AttributeGroup;
 
-class AttributeGroupTransformer
+class AttributeGroupTransformer extends AbstractTransformer
 {
-    public function fromArray($attributeGroup) {
-        return new AttributeGroup($attributeGroup['id'], $attributeGroup['project_id'], $attributeGroup['name'], $attributeGroup['slug']);
+    public static function doFromArray(array $attributeGroups): array
+    {
+        $response = array();
+        foreach ($attributeGroups as $attributeGroup) {
+            $response[] = new AttributeGroup($attributeGroup['id'], $attributeGroup['project_id'], $attributeGroup['name'], $attributeGroup['slug']);
+        }
+
+        return $response;
     }
 }

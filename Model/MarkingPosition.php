@@ -4,29 +4,29 @@ namespace Model;
 
 class MarkingPosition
 {
+    /** @var  int */
+    private $id;
+
     /** @var  string */
     private $projectId;
 
     /** @var  string */
     private $name;
 
-    /** @var  int */
-    private $id;
-
     /** @var  string */
     private $slug;
 
     /**
+     * @param int $id
      * @param string $projectId
      * @param string $name
-     * @param int $id
      * @param string $slug
      */
-    public function __construct(string $projectId, string $name, int $id, string $slug)
+    public function __construct(int $id, string $projectId, string $name, string $slug)
     {
+        $this->id = $id;
         $this->projectId = $projectId;
         $this->name = $name;
-        $this->id = $id;
         $this->slug = $slug;
     }
 

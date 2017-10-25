@@ -2,29 +2,20 @@
 
 namespace Transformer;
 
+require_once(__DIR__ . "/AbstractTransformer.php");
 require_once(__DIR__ . "/../Model/Hierarchy.php");
 
 use Model\Hierarchy;
 
-class HierarchyTransformer
+class HierarchyTransformer extends AbstractTransformer
 {
-    public function fromArray($hierarchy)
+    public static function doFromArray(array $hierarchies): array
     {
-        $type = null;
-        if (array_key_exists('type', $hierarchy)) {
-            $type = $hierarchy['type'];
+        $response = array();
+        foreach ($hierarchies as $hierarchy) {
+            $response[] = new Hierarchy($hierarchy['id'], $hierarchy['project_id'], $hierarchy['parent_id'], $hierarchy['type'], $hierarchy['value'], $hierarchy['slug']);
         }
 
-        $value = null;
-        if (array_key_exists('value', $hierarchy)) {
-            $value = $hierarchy['value'];
-        }
-
-        $slug = null;
-        if (array_key_exists('slug', $hierarchy)) {
-            $slug = $hierarchy['slug'];
-        }
-
-        return new Hierarchy($hierarchy['id'], $hierarchy['project_id'], $hierarchy['parent_id'], $type, $value, $slug);
+        return $response;
     }
 }

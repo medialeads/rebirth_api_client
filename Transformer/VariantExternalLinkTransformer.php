@@ -2,14 +2,20 @@
 
 namespace Transformer;
 
+require_once(__DIR__ . "/AbstractTransformer.php");
 require_once(__DIR__ . "/../Model/VariantExternalLink.php");
 
 use Model\VariantExternalLink;
 
-class VariantExternalLinkTransformer
+class VariantExternalLinkTransformer extends AbstractTransformer
 {
-    public function fromArray($variantExternalLink)
+    public static function doFromArray(array $variantExternalLinks): array
     {
-        return new VariantExternalLink($variantExternalLink['id'], $variantExternalLink['project_id'], $variantExternalLink['type'], $variantExternalLink['url']);
+        $response = array();
+        foreach ($variantExternalLinks as $variantExternalLink) {
+            $response[] = new VariantExternalLink($variantExternalLink['id'], $variantExternalLink['project_id'], $variantExternalLink['type'], $variantExternalLink['url']);
+        }
+
+        return $response;
     }
 }

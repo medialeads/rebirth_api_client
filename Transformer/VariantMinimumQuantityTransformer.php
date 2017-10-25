@@ -2,21 +2,22 @@
 
 namespace Transformer;
 
+require_once(__DIR__ . "/AbstractTransformer.php");
 require_once(__DIR__ . '/../Model/VariantMinimumQuantity.php');
 
 use Model\VariantMinimumQuantity;
 
-class VariantMinimumQuantityTransformer
+class VariantMinimumQuantityTransformer extends AbstractTransformer
 {
-    public function fromArray($variantMinimumQuantity)
+    public static function doFromArray(array $variantMinimumQuantities): array
     {
-        $projectId = null;
-        if (array_key_exists('project_id', $variantMinimumQuantity)) {
-            $projectId = $variantMinimumQuantity['project_id'];
+        $response = array();
+        foreach ($variantMinimumQuantities as $variantMinimumQuantity) {
+            $supplierProfile = SupplierProfileTransformer::fromArray($variantMinimumQuantity['supplier_profile']);
+
+            $response[] =  new VariantMinimumQuantity($variantMinimumQuantity['id'], $variantMinimumQuantity['project_id'], $variantMinimumQuantity['value'], $supplierProfile);
         }
 
-        $supplierProfile = SupplierProfileTransformer::fromArray($variantMinimumQuantity['supplier_profile']);
-
-        return new VariantMinimumQuantity($variantMinimumQuantity['id'], $projectId, $variantMinimumQuantity['value'], $supplierProfile);
+        return $response;
     }
 }

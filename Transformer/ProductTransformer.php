@@ -8,20 +8,12 @@ require_once(__DIR__ . '/../Model/Product.php');
 
 use Model\Product;
 
-class ProductTransformer
+class ProductTransformer extends AbstractTransformer
 {
-    public function fromArray(array $data)
+    public static function doFromArray(array $products): array
     {
-        // check si pas d'erreur
-        // check si c'est un tableau
-        // check 1ere clé : si numérique / si pas numérique
-        $simple = false;
-
-        if (!self::isNumericArray($data)) {
-            $data = array($data);
-        }
-
-        foreach ($data as $product) {
+        $response = array();
+        foreach ($products as $product) {
             $labels = array();
             foreach ($product['labels'] as $label) {
                 $labels[] = LabelTransformer::fromArray($label);
@@ -34,28 +26,6 @@ class ProductTransformer
             $products[] = new Product($product['id'], date_create($product['last_indexed_at']), $product['country_of_origin'], $product['main_product_image_id'],   $labels, $variants);
             var_dump($products); die();
         }
-        die();
 
-
-        if ($simple) {
-            return reset($data);
-        }
-
-        return $data;
-    }
-
-    /**
-     * @param array $array
-     * @return bool
-     */
-    private function isNumericArray(array $array)
-    {
-        foreach (array_keys($array) as $a) {
-            if (!is_int($a)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

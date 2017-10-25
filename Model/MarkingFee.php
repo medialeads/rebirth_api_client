@@ -26,7 +26,7 @@ class MarkingFee
 
     /**
      * @param int $id
-     * @param int $projectId
+     * @param string $projectId
      * @param string $name
      * @param string $slug
      */
@@ -49,7 +49,7 @@ class MarkingFee
     /**
      * @return string
      */
-    public function getProjectId(): int
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
