@@ -15,6 +15,8 @@ class VariantMinimumQuantityTransformer extends AbstractTransformer
         foreach ($variantMinimumQuantities as $variantMinimumQuantity) {
             $supplierProfile = SupplierProfileTransformer::fromArray($variantMinimumQuantity['supplier_profile']);
 
+            $variantMinimumQuantity['project_id'] = 1; //TODO REMOVE
+
             $response[] =  new VariantMinimumQuantity($variantMinimumQuantity['id'], $variantMinimumQuantity['project_id'], $variantMinimumQuantity['value'], $supplierProfile);
         }
 

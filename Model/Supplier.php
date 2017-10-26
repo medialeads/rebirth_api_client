@@ -4,6 +4,9 @@ namespace Model;
 
 class Supplier
 {
+    /** @var  int */
+    private $id;
+
     /** @var  string */
     private $projectId;
 
@@ -16,9 +19,6 @@ class Supplier
     /** @var  string */
     private $name;
 
-    /** @var  int */
-    private $id;
-
     /** @var  string */
     private $legalName;
 
@@ -27,22 +27,30 @@ class Supplier
 
     /**
      * @param string $projectId
-     * @param string $vatIdentificationNumber
+     * @param string|null $vatIdentificationNumber
      * @param array $supplierProfiles
      * @param string $name
      * @param int $id
      * @param string $legalName
      * @param string $slug
      */
-    public function __construct(string $projectId, string $vatIdentificationNumber, array $supplierProfiles, string $name, int $id, string $legalName, string $slug)
+    public function __construct(int $id, string $projectId, $vatIdentificationNumber, array $supplierProfiles, string $name, string $legalName, string $slug)
     {
+        $this->id = $id;
         $this->projectId = $projectId;
         $this->vatIdentificationNumber = $vatIdentificationNumber;
         $this->supplierProfiles = $supplierProfiles;
         $this->name = $name;
-        $this->id = $id;
         $this->legalName = $legalName;
         $this->slug = $slug;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     /**
@@ -54,9 +62,9 @@ class Supplier
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getVatIdentificationNumber(): string
+    public function getVatIdentificationNumber()
     {
         return $this->vatIdentificationNumber;
     }
@@ -75,14 +83,6 @@ class Supplier
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     /**

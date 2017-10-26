@@ -122,6 +122,7 @@ class VariantMarking
     private $maximumSquaredSize;
 
     /**
+     * @param int $id
      * @param bool $freeEntrySquaredSize
      * @param string $type
      * @param mixed $minimumLength
@@ -132,13 +133,12 @@ class VariantMarking
      * @param mixed $diameter
      * @param mixed $projectId
      * @param bool $freeEntryLength
-     * @param array $staticVariablePriceHolders
-     * @param int $id
+     * @param array $staticVariablePriceHolders@param int $id
      * @param mixed $minimumNumberOfColors
      * @param bool $freeEntryDiameter
      * @param array $staticFixedPrices
      * @param bool $fullColor
-     * @param MarkingPosition $markingPosition
+     * @param MarkingPosition|null $markingPosition
      * @param bool $freeEntryNumberOfColors
      * @param mixed $maximumNumberOfPositions
      * @param bool $freeEntryNumberOfPositions
@@ -149,7 +149,7 @@ class VariantMarking
      * @param mixed $minimumSquaredSize
      * @param mixed $dynamicVariablePriceHolders
      * @param mixed $numberOfColors
-     * @param SupplierMarking $supplierMarking
+     * @param SupplierMarking|null $supplierMarking
      * @param Marking $marking
      * @param mixed $maximumLength
      * @param mixed $squaredSize
@@ -162,17 +162,24 @@ class VariantMarking
      * @param array $dynamicFixedPrices
      * @param mixed $maximumSquaredSize
      */
-    public function __construct(int $id, bool $freeEntrySquaredSize, string $type, mixed $minimumLength, mixed $minimumDiameter, mixed $numberOfPositions, bool $freeEntryNumberOfLogos, mixed $maximumDiameter, mixed $diameter, mixed $projectId, bool $freeEntryLength, array $staticVariablePriceHolders, mixed $minimumNumberOfColors, bool $freeEntryDiameter, array $staticFixedPrices, bool $fullColor, MarkingPosition $markingPosition, bool $freeEntryNumberOfColors, mixed $maximumNumberOfPositions, bool $freeEntryNumberOfPositions, mixed $maximumQuantity, mixed $minimumNumberOfLogos, mixed $length, mixed $minimumWidth, mixed $minimumSquaredSize, mixed $dynamicVariablePriceHolders, mixed $numberOfColors, SupplierMarking $supplierMarking, Marking $marking, mixed $maximumLength, mixed $squaredSize, mixed $width, mixed $maximumNumberOfLogos, string $comment, mixed $maximumWidth, mixed $minimumQuantity, mixed $maximumNumberOfColors, array $dynamicFixedPrices, mixed $maximumSquaredSize)
+    public function __construct(int $id, bool $freeEntrySquaredSize, string $type, $minimumLength, $minimumDiameter, $numberOfPositions, bool $freeEntryNumberOfLogos, $maximumDiameter, $diameter, $projectId, bool $freeEntryLength, array $staticVariablePriceHolders, $minimumNumberOfColors, bool $freeEntryDiameter, array $staticFixedPrices, bool $fullColor, $markingPosition, bool $freeEntryNumberOfColors, $maximumNumberOfPositions, bool $freeEntryNumberOfPositions, $maximumQuantity, $minimumNumberOfLogos, $length, $minimumWidth, $minimumSquaredSize, $dynamicVariablePriceHolders, $numberOfColors, $supplierMarking, Marking $marking, $maximumLength, $squaredSize, $width, $maximumNumberOfLogos, $comment, $maximumWidth, $minimumQuantity, $maximumNumberOfColors, array $dynamicFixedPrices, $maximumSquaredSize)
     {
-        if (!$supplierMarking instanceof SupplierMarking) {
-            throw new \InvalidArgumentException();
+        if ($type === "supplier") {
+            if (!$supplierMarking instanceof SupplierMarking) {
+                throw new \UnexpectedValueException('Type is "supplier", variable $supplierMarking must be instance of SupplierMarking ');
+            }
+        } else {
+            if ($supplierMarking instanceof SupplierMarking) {
+                throw new \UnexpectedValueException('Type is "simple", variable $supplierMarking must be null');
+            }
         }
+
 
         if (!$marking instanceof Marking) {
             throw new \InvalidArgumentException();
         }
 
-        if (!$markingPosition instanceof MarkingPosition) {
+        if (!$markingPosition instanceof MarkingPosition && null !== $markingPosition) {
             throw new \InvalidArgumentException();
         }
 

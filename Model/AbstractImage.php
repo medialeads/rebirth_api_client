@@ -4,11 +4,11 @@ namespace Model;
 
 abstract class AbstractImage
 {
-    /** @var  string */
-    private $originalFilename;
-
     /** @var  int */
     private $id;
+
+    /** @var  string */
+    private $originalFilename;
 
     /** @var  string */
     private $url;
@@ -18,19 +18,11 @@ abstract class AbstractImage
      * @param int $id
      * @param string $url
      */
-    public function __construct(string $originalFilename, int $id, string $url)
+    public function __construct(int $id, string $originalFilename, string $url)
     {
-        $this->originalFilename = $originalFilename;
         $this->id = $id;
+        $this->originalFilename = $originalFilename;
         $this->url = $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOriginalFilename(): string
-    {
-        return $this->originalFilename;
     }
 
     /**
@@ -39,6 +31,14 @@ abstract class AbstractImage
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginalFilename(): string
+    {
+        return $this->originalFilename;
     }
 
     /**

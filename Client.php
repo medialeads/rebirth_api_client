@@ -38,6 +38,8 @@ class Client
             throw new UnexpectedValueException("API did not answer with JSON data.");
         }
 
-        ProductTransformer::fromArray($data['products']);
+        $products = ProductTransformer::fromArray($data['products']);
+
+        return $products;
     }
 }

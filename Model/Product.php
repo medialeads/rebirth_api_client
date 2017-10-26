@@ -22,7 +22,7 @@ class Product
     /** @var array */
     private $variants;
 
-    /** @var  string */
+    /** @var  string|null */
     private $unionCustomsCode;
 
     /** @var  int */
@@ -62,10 +62,10 @@ class Product
      * @param int $id
      * @param \DateTimeInterface $lastIndexedAt
      * @param string $projectKey
-     * @param string $countryOfOrigin
+     * @param string|null $countryOfOrigin
      * @param int $mainProductImageId
      * @param array $variants
-     * @param string $unionCustomsCode
+     * @param string|null $unionCustomsCode
      * @param int $mainCategoryId
      * @param array $labels
      * @param array $productImages
@@ -78,7 +78,7 @@ class Product
      * @param string $internalReference
      * @param Brand $brand
      */
-    public function __construct(int $id, \DateTimeInterface $lastIndexedAt, string $projectKey, string $countryOfOrigin, int $mainProductImageId, array $variants, string $unionCustomsCode, int $mainCategoryId, array $labels, array $productImages, array $visibleOn, string $projectId, int $mainVariantId, Supplier $supplier, array $categories, string $supplierBaseReference, string $internalReference, Brand $brand)
+    public function __construct(int $id, \DateTimeInterface $lastIndexedAt, string $projectKey, $countryOfOrigin, int $mainProductImageId, array $variants, $unionCustomsCode, int $mainCategoryId, array $labels, array $productImages, array $visibleOn, string $projectId, int $mainVariantId, Supplier $supplier, array $categories, string $supplierBaseReference, string $internalReference, Brand $brand)
     {
         foreach ($categories as $category) {
             if (!$category instanceof Category) {
@@ -151,9 +151,9 @@ class Product
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountryOfOrigin(): string
+    public function getCountryOfOrigin()
     {
         return $this->countryOfOrigin;
     }
@@ -175,9 +175,9 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getUnionCustomsCode(): mixed
+    public function getUnionCustomsCode()
     {
         return $this->unionCustomsCode;
     }

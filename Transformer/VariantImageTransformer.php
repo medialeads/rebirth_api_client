@@ -13,7 +13,7 @@ class VariantImageTransformer extends AbstractTransformer
     {
         $response = array();
         foreach ($variantImages as $variantImage) {
-            $response[] = new VariantImage($variantImage['original_filename'], $variantImage['id'], $variantImage['url']);
+            $response[] = new VariantImage($variantImage['id'], $variantImage['original_filename'], $variantImage['url']);
         }
 
         return $response;

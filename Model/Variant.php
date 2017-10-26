@@ -2,12 +2,14 @@
 
 namespace Model;
 
+use Helper\VariantHelper;
+
 class Variant
 {
     /** @var  int */
     private $id;
 
-    /** @var  string */
+    /** @var  string|null */
     private $subPackagingInformation;
 
     /** @var  array */
@@ -19,7 +21,7 @@ class Variant
     /** @var  string */
     private $description;
 
-    /** @var  string */
+    /** @var  string|null */
     private $markingAdditionalInformation;
 
     /** @var  string */
@@ -28,10 +30,10 @@ class Variant
     /** @var  string */
     private $netWeight;
 
-    /** @var  int */
+    /** @var  int|null */
     private $mainVariantImageId;
 
-    /** @var  string */
+    /** @var  string|null */
     private $subSubPackagingSize;
 
     /** @var  array */
@@ -55,7 +57,7 @@ class Variant
     /** @var  string */
     private $slug;
 
-    /** @var  string */
+    /** @var  string|null */
     private $subPackagingSize;
 
     /** @var  array */
@@ -64,10 +66,10 @@ class Variant
     /** @var  string */
     private $packagingGrossWeight;
 
-    /** @var  string */
+    /** @var  string|null */
     private $packagingSize;
 
-    /** @var  int */
+    /** @var  int|null */
     private $europeanArticleNumbering;
 
     /** @var  array */
@@ -88,7 +90,7 @@ class Variant
     /** @var  array */
     private $attributes;
 
-    /** @var  string */
+    /** @var  string|null */
     private $subSubPackagingInformation;
 
     /** @var  bool */
@@ -96,15 +98,15 @@ class Variant
 
     /**
      * @param int $id
-     * @param string $subPackagingInformation
+     * @param string|null $subPackagingInformation
      * @param array $variantMarkings
      * @param array $supplierProfiles
      * @param string $description
-     * @param string $markingAdditionalInformation
+     * @param string|null $markingAdditionalInformation
      * @param string $supplierReference
      * @param string $netWeight
-     * @param int $mainVariantImageId
-     * @param string $subSubPackagingSize
+     * @param int|null $mainVariantImageId
+     * @param string|null $subSubPackagingSize
      * @param array $variantMinimumQuantities
      * @param string $projectId
      * @param array $variantPrices
@@ -112,21 +114,21 @@ class Variant
      * @param string $grossWeight
      * @param string $packagingInformation
      * @param string $slug
-     * @param string $subPackagingSize
+     * @param string|null $subPackagingSize
      * @param array $variantImages
-     * @param string $packagingGrossWeight
-     * @param string $packagingSize
-     * @param int $europeanArticleNumbering
+     * @param string|null $packagingGrossWeight
+     * @param string|null $packagingSize
+     * @param int|null $europeanArticleNumbering
      * @param array $variantSamplePrices
      * @param string $size
      * @param array $variantExternalLinks
      * @param string $name
      * @param array $variantListPrices
      * @param array $attributes
-     * @param string $subSubPackagingInformation
+     * @param string|null $subSubPackagingInformation
      * @param bool $mandatoryMarking
      */
-    public function __construct(int $id, string $subPackagingInformation, array $variantMarkings, array $supplierProfiles, string $description, string $markingAdditionalInformation, string $supplierReference, string $netWeight, int $mainVariantImageId, string $subSubPackagingSize, array $variantMinimumQuantities, string $projectId, array $variantPrices, $stock, string $grossWeight, string $packagingInformation, string $slug, string $subPackagingSize, array $variantImages, string $packagingGrossWeight, string $packagingSize, int $europeanArticleNumbering, array $variantSamplePrices, string $size, array $variantExternalLinks, string $name, array $variantListPrices, array $attributes, string $subSubPackagingInformation, bool $mandatoryMarking)
+    public function __construct(int $id, $subPackagingInformation, array $variantMarkings, array $supplierProfiles, string $description, $markingAdditionalInformation, string $supplierReference, string $netWeight, $mainVariantImageId, $subSubPackagingSize, array $variantMinimumQuantities, string $projectId, array $variantPrices, $stock, string $grossWeight, string $packagingInformation, string $slug, $subPackagingSize, array $variantImages, $packagingGrossWeight, $packagingSize, $europeanArticleNumbering, array $variantSamplePrices, string $size, array $variantExternalLinks, string $name, array $variantListPrices, array $attributes, $subSubPackagingInformation, bool $mandatoryMarking)
     {
         foreach ($variantMarkings as $variantMarking) {
             if (!$variantMarking instanceof VariantMarking) {
@@ -191,9 +193,9 @@ class Variant
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSubPackagingInformation(): string
+    public function getSubPackagingInformation()
     {
         return $this->subPackagingInformation;
     }
@@ -223,9 +225,9 @@ class Variant
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMarkingAdditionalInformation(): string
+    public function getMarkingAdditionalInformation()
     {
         return $this->markingAdditionalInformation;
     }
@@ -247,17 +249,17 @@ class Variant
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMainVariantImageId(): int
+    public function getMainVariantImageId()
     {
         return $this->mainVariantImageId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSubSubPackagingSize(): string
+    public function getSubSubPackagingSize()
     {
         return $this->subSubPackagingSize;
     }
@@ -343,25 +345,25 @@ class Variant
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPackagingGrossWeight(): string
+    public function getPackagingGrossWeight()
     {
         return $this->packagingGrossWeight;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPackagingSize(): string
+    public function getPackagingSize()
     {
         return $this->packagingSize;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getEuropeanArticleNumbering(): int
+    public function getEuropeanArticleNumbering()
     {
         return $this->europeanArticleNumbering;
     }
@@ -415,9 +417,9 @@ class Variant
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSubSubPackagingInformation(): string
+    public function getSubSubPackagingInformation()
     {
         return $this->subSubPackagingInformation;
     }
@@ -428,5 +430,10 @@ class Variant
     public function isMandatoryMarking(): bool
     {
         return $this->mandatoryMarking;
+    }
+
+    public function getCalculatedPrice()
+    {
+        return VariantHelper::getCalculatedPrice($this);
     }
 }

@@ -4,18 +4,22 @@ namespace Transformer;
 
 abstract class AbstractTransformer
 {
-    public final static function fromArray(array $array)
+    public final static function fromArray($array)
     {
+        if (null === $array) {
+            return null;
+        }
         reset($array);
         $key = key($array);
         $simple = false;
-
-        if (!is_int($key) || $key !== 0) {
-            $array = array($array);
-            $simple = true;
+        if (!empty($array)) {
+            $simple = !is_int($key) || $key !== 0;
+            if ($simple) {
+                $array = array($array);
+            }
         }
 
-        $response = static::fromArray($array);
+        $response = static::doFromArray($array);
 
         if ($simple) {
             return reset($response);

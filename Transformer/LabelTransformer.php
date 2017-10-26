@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../Model/Label.php');
 
 use Model\Label;
 
-class LabelTransformer
+class LabelTransformer extends AbstractTransformer
 {
     public static function doFromArray(array $labels): array
     {

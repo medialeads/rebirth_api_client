@@ -20,7 +20,7 @@ class Category
     private $projectId;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $parentId;
 
@@ -39,11 +39,11 @@ class Category
      * @param int $id
      * @param string $fullHierarchyName
      * @param string $projectId
-     * @param int $parentId
+     * @param int|null $parentId
      * @param string $name
      * @param string $slug
      */
-    public function __construct(int $id, string $fullHierarchyName, string $projectId, int $parentId, string $name, string $slug)
+    public function __construct(int $id, string $fullHierarchyName, string $projectId, $parentId, string $name, string $slug)
     {
         $this->id = $id;
         $this->fullHierarchyName = $fullHierarchyName;
@@ -78,9 +78,9 @@ class Category
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getParentId(): int
+    public function getParentId()
     {
         return $this->parentId;
     }

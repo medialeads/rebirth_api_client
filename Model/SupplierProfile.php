@@ -2,7 +2,10 @@
 
 namespace Model;
 
-class SupplierProfile
+
+require_once('SupplierProfileInterface.php');
+
+class SupplierProfile implements SupplierProfileInterface
 {
     /** @var  int */
     private $id;
@@ -26,15 +29,15 @@ class SupplierProfile
     private $status;
 
     /**
+     * @param int $id
      * @param string $countryCode
      * @param string $projectId
      * @param string $name
-     * @param string $association
-     * @param int $id
+     * @param string|null $association
      * @param bool $displayPrices
      * @param string $status
      */
-    public function __construct(int $id, string $countryCode, string $projectId = "", string $name = "", string $association = "", bool $displayPrices = false, string $status = "")
+    public function __construct(int $id, string $countryCode, string $projectId, string $name, $association, bool $displayPrices, string $status)
     {
         $this->countryCode = $countryCode;
         $this->projectId = $projectId;

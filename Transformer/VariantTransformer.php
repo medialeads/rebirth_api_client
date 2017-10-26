@@ -4,11 +4,13 @@ namespace Transformer;
 
 require_once(__DIR__ . "/AbstractTransformer.php");
 require_once(__DIR__ . "/../Model/Variant.php");
+require_once(__DIR__ . "/AttributeTransformer.php");
 require_once(__DIR__ . "/VariantMinimumQuantityTransformer.php");
 require_once(__DIR__ . "/SupplierProfileTransformer.php");
 require_once(__DIR__ . "/VariantPriceTransformer.php");
 require_once(__DIR__ . "/VariantImageTransformer.php");
 require_once(__DIR__ . "/VariantSamplePriceTransformer.php");
+require_once(__DIR__ . "/VariantListPriceTransformer.php");
 require_once(__DIR__ . "/VariantExternalLinkTransformer.php");
 require_once(__DIR__ . "/VariantMarkingTransformer.php");
 
@@ -38,7 +40,7 @@ class VariantTransformer extends AbstractTransformer
 
             $variantMarkings = VariantMarkingTransformer::fromArray($variant['variant_markings']);
 
-            $response[] =  new Variant($variant['id'], $variant['sub_packaging_information'], $variantMarkings, $supplierProfiles, $variant['description'], $variant['marking_additional_information'], $variant['supplier_reference'], $variant['net_weight'], $variant['main_variant_image_id'], $variant['sub_sub_packaging_size'], $variantMinimumQuantities, $variant['project_id'], $variantPrices, $variant['stock'], $variant['gross_weight'], $variant['packaging_information'], $variant['slug'], $variant['sub_packaging_size'], $variantImages, $variant['packaging_gross_weight'], $variant['packagingSize'], $variant['european_article_numbering'], $variantSamplePrices, $variant['size'], $variantExternalLinks, $variant['name'], $variantListPrices, $attributes, $variant['sub_sub_packaging_information'], $variant['mandatoryMarking']);
+            $response[] = new Variant($variant['id'], $variant['sub_packaging_information'], $variantMarkings, $supplierProfiles, $variant['description'], $variant['marking_additional_information'], $variant['supplier_reference'], $variant['net_weight'], $variant['main_variant_image_id'], $variant['sub_sub_packaging_size'], $variantMinimumQuantities, $variant['project_id'], $variantPrices, $variant['stock'], $variant['gross_weight'], $variant['packaging_information'], $variant['slug'], $variant['sub_packaging_size'], $variantImages, $variant['packaging_gross_weight'], $variant['packaging_size'], $variant['european_article_numbering'], $variantSamplePrices, $variant['size'], $variantExternalLinks, $variant['name'], $variantListPrices, $attributes, $variant['sub_sub_packaging_information'], $variant['mandatory_marking']);
         }
 
         return $response;

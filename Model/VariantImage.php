@@ -7,12 +7,12 @@ require_once(__DIR__ . '/AbstractImage.php');
 class VariantImage extends AbstractImage
 {
     /**
-     * @param string $originalFilename
      * @param int $id
+     * @param string $originalFilename
      * @param string $url
      */
-    public function __construct(string $originalFilename, int $id, string $url)
+    public function __construct(int $id, string $originalFilename, string $url)
     {
-        parent::__construct($originalFilename, $id, $url);
+        parent::__construct($id, $originalFilename, $url);
     }
 }
