@@ -1,14 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . '/../Model/VariantImage.php');
-
-use Model\VariantImage;
+use ES\APIv2Client\Model\VariantImage;
 
 class VariantImageTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $variantImages
+     *
+     * @return array
+     */
     public static function doFromArray(array $variantImages): array
     {
         $response = array();

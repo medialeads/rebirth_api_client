@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class StaticVariablePriceHolder
 {
@@ -40,14 +40,15 @@ class StaticVariablePriceHolder
     private $supplierProfile;
 
     /**
+     * @param $id
      * @param $condition
-     * @param bool $totalPrice
-     * @param string $projectId
-     * @param array $markingFees
-     * @param array $staticVariablePrices
-     * @param int $id
+     * @param $totalPrice
+     * @param $projectId
+     * @param $markingFees
+     * @param $staticVariablePrices
+     * @param $supplierProfile
      */
-    public function __construct(int $id, $condition, bool $totalPrice, string $projectId, array $markingFees, array $staticVariablePrices, SupplierProfile $supplierProfile)
+    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $staticVariablePrices, $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -77,7 +78,7 @@ class StaticVariablePriceHolder
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -93,7 +94,7 @@ class StaticVariablePriceHolder
     /**
      * @return bool
      */
-    public function isTotalPrice(): bool
+    public function isTotalPrice()
     {
         return $this->totalPrice;
     }
@@ -101,7 +102,7 @@ class StaticVariablePriceHolder
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -109,7 +110,7 @@ class StaticVariablePriceHolder
     /**
      * @return array
      */
-    public function getMarkingFees(): array
+    public function getMarkingFees()
     {
         return $this->markingFees;
     }
@@ -117,7 +118,7 @@ class StaticVariablePriceHolder
     /**
      * @return array
      */
-    public function getStaticVariablePrices(): array
+    public function getStaticVariablePrices()
     {
         return $this->staticVariablePrices;
     }
@@ -125,7 +126,7 @@ class StaticVariablePriceHolder
     /**
      * @return SupplierProfile
      */
-    public function getSupplierProfile(): SupplierProfile
+    public function getSupplierProfile()
     {
         return $this->supplierProfile;
     }

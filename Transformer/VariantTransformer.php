@@ -1,23 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . "/../Model/Variant.php");
-require_once(__DIR__ . "/AttributeTransformer.php");
-require_once(__DIR__ . "/VariantMinimumQuantityTransformer.php");
-require_once(__DIR__ . "/SupplierProfileTransformer.php");
-require_once(__DIR__ . "/VariantPriceTransformer.php");
-require_once(__DIR__ . "/VariantImageTransformer.php");
-require_once(__DIR__ . "/VariantSamplePriceTransformer.php");
-require_once(__DIR__ . "/VariantListPriceTransformer.php");
-require_once(__DIR__ . "/VariantExternalLinkTransformer.php");
-require_once(__DIR__ . "/VariantMarkingTransformer.php");
-
-use Model\Variant;
+use ES\APIv2Client\Model\Variant;
 
 class VariantTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $variants
+     *
+     * @return array
+     */
     public static function doFromArray(array $variants): array
     {
         $response = array();

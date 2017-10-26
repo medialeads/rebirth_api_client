@@ -1,168 +1,246 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class VariantMarking
 {
-    /** @var  bool */
-    private $freeEntrySquaredSize;
-
-    /** @var  string */
-    private $type;
-
-    /** @var  float|null */
-    private $minimumLength;
-
-    /** @var  float|null */
-    private $minimumDiameter;
-
-    /** @var  int|null */
-    private $numberOfPositions;
-
-    /** @var  bool */
-    private $freeEntryNumberOfLogos;
-
-    /** @var  float|null */
-    private $maximumDiameter;
-
-    /** @var  float|null */
-    private $diameter;
-
-    /** @var  string */
-    private $projectId;
-
-    /** @var  bool */
-    private $freeEntryLength;
-
-    /** @var  array */
-    private $staticVariablePriceHolders;
-
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  int|null */
+    /**
+     * @var bool
+     */
+    private $freeEntrySquaredSize;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var float|null
+     */
+    private $minimumLength;
+
+    /**
+     * @var float|null
+     */
+    private $minimumDiameter;
+
+    /**
+     * @var int|null
+     */
+    private $numberOfPositions;
+
+    /**
+     * @var bool
+     */
+    private $freeEntryNumberOfLogos;
+
+    /**
+     * @var float|null
+     */
+    private $maximumDiameter;
+
+    /**
+     * @var float|null
+     */
+    private $diameter;
+
+    /**
+     * @var string
+     */
+    private $projectId;
+
+    /**
+     * @var bool
+     */
+    private $freeEntryLength;
+
+    /**
+     * @var array
+     */
+    private $staticVariablePriceHolders;
+
+    /**
+     * @var int|null
+     */
     private $minimumNumberOfColors;
 
-    /** @var  bool */
+    /**
+     * @var bool
+     */
     private $freeEntryDiameter;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $staticFixedPrices;
 
-    /** @var  bool */
+    /**
+     * @var bool
+     */
     private $fullColor;
 
-    /** @var  MarkingPosition */
+    /**
+     * @var MarkingPosition|null
+     */
     private $markingPosition;
 
-    /** @var  bool */
+    /**
+     * @var bool
+     */
     private $freeEntryNumberOfColors;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $maximumNumberOfPositions;
 
-    /** @var  bool */
+    /**
+     * @var bool
+     */
     private $freeEntryNumberOfPositions;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $maximumQuantity;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $minimumNumberOfLogos;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $length;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $minimumWidth;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $minimumSquaredSize;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $dynamicVariablePriceHolders;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $numberOfColors;
 
-    /** @var  SupplierMarking */
+    /**
+     * @var SupplierMarking|null
+     */
     private $supplierMarking;
 
-    /** @var  Marking */
+    /**
+     * @var Marking
+     */
     private $marking;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $maximumLength;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $squaredSize;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $width;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $maximumNumberOfLogos;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $comment;
 
-    /** @var  float|null */
+    /**
+     * @var int|null
+     */
     private $maximumWidth;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $minimumQuantity;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $maximumNumberOfColors;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $dynamicFixedPrices;
 
-    /** @var  float|null */
+    /**
+     * @var float|null
+     */
     private $maximumSquaredSize;
 
     /**
      * @param int $id
      * @param bool $freeEntrySquaredSize
      * @param string $type
-     * @param mixed $minimumLength
-     * @param mixed $minimumDiameter
-     * @param mixed $numberOfPositions
+     * @param float|null $minimumLength
+     * @param float|null $minimumDiameter
+     * @param int|null $numberOfPositions
      * @param bool $freeEntryNumberOfLogos
-     * @param mixed $maximumDiameter
-     * @param mixed $diameter
-     * @param mixed $projectId
+     * @param float|null $maximumDiameter
+     * @param float|null $diameter
+     * @param string $projectId
      * @param bool $freeEntryLength
-     * @param array $staticVariablePriceHolders@param int $id
-     * @param mixed $minimumNumberOfColors
+     * @param array $staticVariablePriceHolders
+     * @param int|null $minimumNumberOfColors
      * @param bool $freeEntryDiameter
      * @param array $staticFixedPrices
      * @param bool $fullColor
      * @param MarkingPosition|null $markingPosition
      * @param bool $freeEntryNumberOfColors
-     * @param mixed $maximumNumberOfPositions
+     * @param int|null $maximumNumberOfPositions
      * @param bool $freeEntryNumberOfPositions
-     * @param mixed $maximumQuantity
-     * @param mixed $minimumNumberOfLogos
-     * @param mixed $length
-     * @param mixed $minimumWidth
-     * @param mixed $minimumSquaredSize
-     * @param mixed $dynamicVariablePriceHolders
-     * @param mixed $numberOfColors
+     * @param int|null $maximumQuantity
+     * @param int|null $minimumNumberOfLogos
+     * @param float|null $length
+     * @param float|null $minimumWidth
+     * @param float|null $minimumSquaredSize
+     * @param array $dynamicVariablePriceHolders
+     * @param int|null $numberOfColors
      * @param SupplierMarking|null $supplierMarking
      * @param Marking $marking
-     * @param mixed $maximumLength
-     * @param mixed $squaredSize
-     * @param mixed $width
-     * @param mixed $maximumNumberOfLogos
+     * @param float|null $maximumLength
+     * @param float|null $squaredSize
+     * @param float|null $width
+     * @param int|null $maximumNumberOfLogos
      * @param string $comment
-     * @param mixed $maximumWidth
-     * @param mixed $minimumQuantity
-     * @param mixed $maximumNumberOfColors
+     * @param int|null $maximumWidth
+     * @param int|null $minimumQuantity
+     * @param int|null $maximumNumberOfColors
      * @param array $dynamicFixedPrices
-     * @param mixed $maximumSquaredSize
+     * @param float|null $maximumSquaredSize
      */
-    public function __construct(int $id, bool $freeEntrySquaredSize, string $type, $minimumLength, $minimumDiameter, $numberOfPositions, bool $freeEntryNumberOfLogos, $maximumDiameter, $diameter, $projectId, bool $freeEntryLength, array $staticVariablePriceHolders, $minimumNumberOfColors, bool $freeEntryDiameter, array $staticFixedPrices, bool $fullColor, $markingPosition, bool $freeEntryNumberOfColors, $maximumNumberOfPositions, bool $freeEntryNumberOfPositions, $maximumQuantity, $minimumNumberOfLogos, $length, $minimumWidth, $minimumSquaredSize, $dynamicVariablePriceHolders, $numberOfColors, $supplierMarking, Marking $marking, $maximumLength, $squaredSize, $width, $maximumNumberOfLogos, $comment, $maximumWidth, $minimumQuantity, $maximumNumberOfColors, array $dynamicFixedPrices, $maximumSquaredSize)
+    public function __construct($id, $freeEntrySquaredSize, $type, $minimumLength, $minimumDiameter, $numberOfPositions, $freeEntryNumberOfLogos, $maximumDiameter, $diameter, $projectId, $freeEntryLength, $staticVariablePriceHolders, $minimumNumberOfColors, $freeEntryDiameter, $staticFixedPrices, $fullColor, $markingPosition, $freeEntryNumberOfColors, $maximumNumberOfPositions, $freeEntryNumberOfPositions, $maximumQuantity, $minimumNumberOfLogos, $length, $minimumWidth, $minimumSquaredSize, $dynamicVariablePriceHolders, $numberOfColors, $supplierMarking, $marking, $maximumLength, $squaredSize, $width, $maximumNumberOfLogos, $comment, $maximumWidth, $minimumQuantity, $maximumNumberOfColors, $dynamicFixedPrices, $maximumSquaredSize)
     {
         if ($type === "supplier") {
             if (!$supplierMarking instanceof SupplierMarking) {

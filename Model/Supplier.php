@@ -1,28 +1,42 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Supplier
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  string */
+    /**
+     * @var null|string
+     */
     private $vatIdentificationNumber;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $supplierProfiles;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $legalName;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $slug;
 
     /**
@@ -34,7 +48,7 @@ class Supplier
      * @param string $legalName
      * @param string $slug
      */
-    public function __construct(int $id, string $projectId, $vatIdentificationNumber, array $supplierProfiles, string $name, string $legalName, string $slug)
+    public function __construct($id, $projectId, $vatIdentificationNumber, $supplierProfiles, $name, $legalName, $slug)
     {
         $this->id = $id;
         $this->projectId = $projectId;
@@ -48,7 +62,7 @@ class Supplier
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -56,7 +70,7 @@ class Supplier
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -72,7 +86,7 @@ class Supplier
     /**
      * @return array
      */
-    public function getSupplierProfiles(): array
+    public function getSupplierProfiles()
     {
         return $this->supplierProfiles;
     }
@@ -80,7 +94,7 @@ class Supplier
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -88,7 +102,7 @@ class Supplier
     /**
      * @return string
      */
-    public function getLegalName(): string
+    public function getLegalName()
     {
         return $this->legalName;
     }
@@ -96,7 +110,7 @@ class Supplier
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }

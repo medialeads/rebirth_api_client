@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Category
 {
@@ -43,7 +43,7 @@ class Category
      * @param string $name
      * @param string $slug
      */
-    public function __construct(int $id, string $fullHierarchyName, string $projectId, $parentId, string $name, string $slug)
+    public function __construct($id, $fullHierarchyName, $projectId, $parentId, $name, $slug)
     {
         $this->id = $id;
         $this->fullHierarchyName = $fullHierarchyName;
@@ -56,7 +56,7 @@ class Category
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -64,7 +64,7 @@ class Category
     /**
      * @return string
      */
-    public function getFullHierarchyName(): string
+    public function getFullHierarchyName()
     {
         return $this->fullHierarchyName;
     }
@@ -72,7 +72,7 @@ class Category
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -88,7 +88,7 @@ class Category
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -96,7 +96,7 @@ class Category
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }

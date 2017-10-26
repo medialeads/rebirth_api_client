@@ -1,17 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . "/../Model/DynamicVariablePriceHolder.php");
-require_once(__DIR__ . "/MarkingFeeTransformer.php");
-require_once(__DIR__ . "/StaticFixedPriceTransformer.php");
-require_once(__DIR__ . "/SupplierProfileTransformer.php");
-
-use Model\DynamicVariablePriceHolder;
+use ES\APIv2Client\Model\DynamicVariablePriceHolder;
 
 class DynamicVariablePriceHolderTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $dynamicVariablePriceHolders
+     *
+     * @return array
+     */
     public static function doFromArray(array $dynamicVariablePriceHolders): array
     {
         $response = array();

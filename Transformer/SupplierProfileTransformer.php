@@ -1,11 +1,9 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . '/../Model/SupplierProfile.php');
-
-use Model\SupplierProfile;
+use ES\APIv2Client\Model\SupplierProfile;
+use ES\APIv2Client\Model\PartialSupplierProfile;
 
 class SupplierProfileTransformer extends AbstractTransformer
 {
@@ -14,11 +12,24 @@ class SupplierProfileTransformer extends AbstractTransformer
      */
     protected static $_instances = array();
 
+    /**
+     * @param array $supplierProfiles
+     *
+     * @return array
+     */
     public static function doFromArray(array $supplierProfiles): array
     {
         $response = array();
         foreach ($supplierProfiles as $supplierProfile) {
-            $supplierProfile = new SupplierProfile($supplierProfile['id'], $supplierProfile['country_code']);
+            if (isset(self::$_instances[$supplierProfile['id']])) {
+                $response[] =  self::$_instances[$supplierProfile['id']];
+                break;
+            }
+            if (isset($supplierProfile['name'])) {
+                $supplierProfile = new SupplierProfile($supplierProfile['id'], $supplierProfile['country_code'], $supplierProfile['project_id'], $supplierProfile['name'], $supplierProfile['association'], $supplierProfile['display_prices'], $supplierProfile['status']);
+            } else {
+                $supplierProfile = new PartialSupplierProfile($supplierProfile['id'], $supplierProfile['country_code']);
+            }
             self::$_instances[$supplierProfile->getId()] = $supplierProfile;
             $response[] =  $supplierProfile;
         }

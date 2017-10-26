@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 abstract class AbstractImage
 {
@@ -18,7 +18,7 @@ abstract class AbstractImage
      * @param int $id
      * @param string $url
      */
-    public function __construct(int $id, string $originalFilename, string $url)
+    public function __construct($id, $originalFilename, $url)
     {
         $this->id = $id;
         $this->originalFilename = $originalFilename;
@@ -28,7 +28,7 @@ abstract class AbstractImage
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -36,7 +36,7 @@ abstract class AbstractImage
     /**
      * @return string
      */
-    public function getOriginalFilename(): string
+    public function getOriginalFilename()
     {
         return $this->originalFilename;
     }
@@ -44,7 +44,7 @@ abstract class AbstractImage
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl()
     {
         return $this->url;
     }

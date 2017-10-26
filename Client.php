@@ -1,7 +1,8 @@
 <?php
-require_once(__DIR__ . "/Transformer/ProductTransformer.php");
 
-use Transformer\ProductTransformer;
+namespace ES\APIv2Client;
+
+use ES\APIv2Client\Transformer\ProductTransformer;
 
 class Client
 {
@@ -35,7 +36,7 @@ class Client
         $data = json_decode($data, true);
 
         if (null === $data) {
-            throw new UnexpectedValueException("API did not answer with JSON data.");
+            throw new \UnexpectedValueException("API did not answer with JSON data.");
         }
 
         $products = ProductTransformer::fromArray($data['products']);

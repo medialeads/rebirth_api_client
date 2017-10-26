@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Brand
 {
@@ -36,7 +36,7 @@ class Brand
      * @param string $suffix
      * @param string $slug
      */
-    public function __construct(int $id, string $projectId, string $name, string $suffix, string $slug)
+    public function __construct($id, $projectId, $name, $suffix, $slug)
     {
         $this->id = $id;
         $this->projectId = $projectId;
@@ -48,7 +48,7 @@ class Brand
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -56,7 +56,7 @@ class Brand
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -64,7 +64,7 @@ class Brand
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -72,7 +72,7 @@ class Brand
     /**
      * @return string
      */
-    public function getSuffix(): string
+    public function getSuffix()
     {
         return $this->suffix;
     }
@@ -80,7 +80,7 @@ class Brand
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }

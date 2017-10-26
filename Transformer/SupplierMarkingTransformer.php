@@ -1,14 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . "/../Model/SupplierMarking.php");
-
-use Model\SupplierMarking;
+use ES\APIv2Client\Model\SupplierMarking;
 
 class SupplierMarkingTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $supplierMarkings
+     *
+     * @return array
+     */
     public static function doFromArray(array $supplierMarkings): array
     {
         $response = array();

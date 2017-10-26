@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class AttributeGroup
 {
@@ -22,7 +22,7 @@ class AttributeGroup
      * @param int $id
      * @param string $slug
      */
-    public function __construct(int $id, string $projectId, string $name, string $slug)
+    public function __construct($id, $projectId, $name, $slug)
     {
         $this->id = $id;
         $this->projectId = $projectId;
@@ -33,7 +33,7 @@ class AttributeGroup
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -41,7 +41,7 @@ class AttributeGroup
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -49,7 +49,7 @@ class AttributeGroup
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -57,7 +57,7 @@ class AttributeGroup
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }

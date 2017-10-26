@@ -1,15 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . "/../Model/Attribute.php");
-require_once(__DIR__ . "/AttributeGroupTransformer.php");
-
-use Model\Attribute;
+use ES\APIv2Client\Model\Attribute;
 
 class AttributeTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $attributes
+     *
+     * @return array
+     */
     public static function doFromArray(array $attributes): array
     {
         $response = array();

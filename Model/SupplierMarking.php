@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class SupplierMarking
 {
@@ -10,7 +10,7 @@ class SupplierMarking
     private $id;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $nameComplement;
 
@@ -25,11 +25,11 @@ class SupplierMarking
     private $projectId;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $comment;
 
-    public function __construct(int $id, mixed $nameComplement, string $code, string $projectId, mixed $comment)
+    public function __construct($id, $nameComplement, $code, $projectId, $comment)
     {
         $this->id = $id;
         $this->nameComplement = $nameComplement;
@@ -41,7 +41,7 @@ class SupplierMarking
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -57,7 +57,7 @@ class SupplierMarking
     /**
      * @return string
      */
-    public function getCode(): string
+    public function getCode()
     {
         return $this->code;
     }
@@ -65,7 +65,7 @@ class SupplierMarking
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }

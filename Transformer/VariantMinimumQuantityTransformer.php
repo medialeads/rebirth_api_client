@@ -1,14 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . '/../Model/VariantMinimumQuantity.php');
-
-use Model\VariantMinimumQuantity;
+use ES\APIv2Client\Model\VariantMinimumQuantity;
 
 class VariantMinimumQuantityTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $variantMinimumQuantities
+     *
+     * @return array
+     */
     public static function doFromArray(array $variantMinimumQuantities): array
     {
         $response = array();

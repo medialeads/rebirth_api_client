@@ -1,14 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . "/../Model/VariantListPrice.php");
-
-use Model\VariantListPrice;
+use ES\APIv2Client\Model\VariantListPrice;
 
 class VariantListPriceTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $variantListPrices
+     *
+     * @return array
+     */
     public static function doFromArray(array $variantListPrices): array
     {
         $response = array();

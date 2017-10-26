@@ -1,31 +1,42 @@
 <?php
 
-namespace Model;
-
-
-require_once('SupplierProfileInterface.php');
+namespace ES\APIv2Client\Model;
 
 class SupplierProfile implements SupplierProfileInterface
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $countryCode;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var  string */
+    /**
+     * @var null|string
+     */
     private $association;
 
-    /** @var  bool */
+    /**
+     * @var bool
+     */
     private $displayPrices;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $status;
 
     /**
@@ -37,7 +48,7 @@ class SupplierProfile implements SupplierProfileInterface
      * @param bool $displayPrices
      * @param string $status
      */
-    public function __construct(int $id, string $countryCode, string $projectId, string $name, $association, bool $displayPrices, string $status)
+    public function __construct($id, $countryCode, $projectId, $name, $association, $displayPrices, $status)
     {
         $this->countryCode = $countryCode;
         $this->projectId = $projectId;
@@ -51,7 +62,7 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @return string
      */
-    public function getCountryCode(): string
+    public function getCountryCode()
     {
         return $this->countryCode;
     }
@@ -59,7 +70,7 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -67,7 +78,7 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -83,7 +94,7 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -91,7 +102,7 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @return bool
      */
-    public function getDisplayPrices(): bool
+    public function getDisplayPrices()
     {
         return $this->displayPrices;
     }
@@ -99,7 +110,7 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getStatus()
     {
         return $this->status;
     }

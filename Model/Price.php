@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Price
 {
@@ -19,10 +19,14 @@ class Price
      */
     private $reducedValue;
 
-    /** @var  mixed */
+    /**
+     * @var mixed
+     */
     private $value;
 
-    /** @var  SupplierProfile */
+    /**
+     * @var SupplierProfile
+     */
     private $supplierProfile;
 
     /**
@@ -32,8 +36,12 @@ class Price
      * @param mixed $value
      * @param SupplierProfile $supplierProfile
      */
-    public function __construct(int $id, mixed $calculationValue, float $reducedValue, mixed $value, SupplierProfile $supplierProfile)
+    public function __construct($id, $calculationValue, $reducedValue, $value, $supplierProfile)
     {
+        if ($supplierProfile instanceof SupplierProfile) {
+            throw new \InvalidArgumentException();
+        }
+
         $this->id = $id;
         $this->calculationValue = $calculationValue;
         $this->reducedValue = $reducedValue;
@@ -44,7 +52,7 @@ class Price
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -76,7 +84,7 @@ class Price
     /**
      * @return SupplierProfile
      */
-    public function getSupplierProfile(): SupplierProfile
+    public function getSupplierProfile()
     {
         return $this->supplierProfile;
     }

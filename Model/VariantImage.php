@@ -1,8 +1,6 @@
 <?php
 
-namespace Model;
-
-require_once(__DIR__ . '/AbstractImage.php');
+namespace ES\APIv2Client\Model;
 
 class VariantImage extends AbstractImage
 {
@@ -11,7 +9,7 @@ class VariantImage extends AbstractImage
      * @param string $originalFilename
      * @param string $url
      */
-    public function __construct(int $id, string $originalFilename, string $url)
+    public function __construct($id, $originalFilename, $url)
     {
         parent::__construct($id, $originalFilename, $url);
     }

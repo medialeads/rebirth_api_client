@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class DynamicFixedPrice
 {
@@ -60,7 +60,7 @@ class DynamicFixedPrice
      * @param $value
      * @param SupplierProfile $supplierProfile
      */
-    public function __construct(int $id, $condition, string $calculationValue, bool $totalPrice, string $projectId, array $markingFees, string $reducedValue, $value, SupplierProfile $supplierProfile)
+    public function __construct($id, $condition, $calculationValue, $totalPrice, $projectId, $markingFees, $reducedValue, $value, $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -86,7 +86,7 @@ class DynamicFixedPrice
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -102,7 +102,7 @@ class DynamicFixedPrice
     /**
      * @return string
      */
-    public function getCalculationValue(): string
+    public function getCalculationValue()
     {
         return $this->calculationValue;
     }
@@ -110,7 +110,7 @@ class DynamicFixedPrice
     /**
      * @return bool
      */
-    public function isTotalPrice(): bool
+    public function isTotalPrice()
     {
         return $this->totalPrice;
     }
@@ -118,7 +118,7 @@ class DynamicFixedPrice
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -126,7 +126,7 @@ class DynamicFixedPrice
     /**
      * @return array
      */
-    public function getMarkingFees(): array
+    public function getMarkingFees()
     {
         return $this->markingFees;
     }
@@ -134,7 +134,7 @@ class DynamicFixedPrice
     /**
      * @return string
      */
-    public function getReducedValue(): string
+    public function getReducedValue()
     {
         return $this->reducedValue;
     }
@@ -142,7 +142,7 @@ class DynamicFixedPrice
     /**
      * @return string
      */
-    public function getValue(): string
+    public function getValue()
     {
         return $this->value;
     }
@@ -150,7 +150,7 @@ class DynamicFixedPrice
     /**
      * @return SupplierProfile
      */
-    public function getSupplierProfile(): SupplierProfile
+    public function getSupplierProfile()
     {
         return $this->supplierProfile;
     }

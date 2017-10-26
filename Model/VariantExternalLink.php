@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class VariantExternalLink
 {
@@ -30,7 +30,7 @@ class VariantExternalLink
      * @param string $type
      * @param string $url
      */
-    public function __construct(int $id, string $projectId, string $type, string $url)
+    public function __construct($id, $projectId, $type, $url)
     {
         $this->id = $id;
         $this->projectId = $projectId;
@@ -41,7 +41,7 @@ class VariantExternalLink
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -49,7 +49,7 @@ class VariantExternalLink
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -57,7 +57,7 @@ class VariantExternalLink
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -65,7 +65,7 @@ class VariantExternalLink
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl()
     {
         return $this->url;
     }

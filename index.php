@@ -1,6 +1,8 @@
 <?php
 
-require_once("Client.php");
+namespace ES\APIv2Client;
+
+require_once __DIR__.'/vendor/autoload.php';
 
 $client = new Client("lol");
-$products = $client->search();
+var_dump($client->search());

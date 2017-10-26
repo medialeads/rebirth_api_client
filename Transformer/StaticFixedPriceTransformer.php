@@ -1,15 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . '/../Model/StaticFixedPrice.php');
-require_once(__DIR__ . '/SupplierProfileTransformer.php');
-
-use Model\StaticFixedPrice;
+use ES\APIv2Client\Model\StaticFixedPrice;
 
 class StaticFixedPriceTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $staticFixedPrices
+     *
+     * @return array
+     */
     public static function doFromArray(array $staticFixedPrices): array
     {
         $response = array();

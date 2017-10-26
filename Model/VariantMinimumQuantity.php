@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class VariantMinimumQuantity
 {
@@ -30,7 +30,7 @@ class VariantMinimumQuantity
      * @param int $value
      * @param SupplierProfile $supplierProfile
      */
-    public function __construct(int $id, $projectId, int $value, SupplierProfile $supplierProfile)
+    public function __construct($id, $projectId, $value, $supplierProfile)
     {
 
         if (!$supplierProfile instanceof SupplierProfile) {
@@ -46,7 +46,7 @@ class VariantMinimumQuantity
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -62,7 +62,7 @@ class VariantMinimumQuantity
     /**
      * @return int
      */
-    public function getValue(): int
+    public function getValue()
     {
         return $this->value;
     }

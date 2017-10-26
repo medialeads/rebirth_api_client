@@ -1,15 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-use Model\Brand;
-
-require_once(__DIR__ . '/AbstractTransformer.php');
-require_once(__DIR__ . '/../Model/Brand.php');
-
+use ES\APIv2Client\Model\Brand;
 
 class BrandTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $brands
+     *
+     * @return array
+     */
     public static function doFromArray(array $brands): array
     {
         $response = array();

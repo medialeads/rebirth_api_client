@@ -1,15 +1,16 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
-require_once(__DIR__ . "/AbstractTransformer.php");
-require_once(__DIR__ . '/../Model/Product.php');
-require_once(__DIR__ . '/../Model/Label.php');
-
-use Model\Label;
+use ES\APIv2Client\Model\Label;
 
 class LabelTransformer extends AbstractTransformer
 {
+    /**
+     * @param array $labels
+     *
+     * @return array
+     */
     public static function doFromArray(array $labels): array
     {
         $response = array();

@@ -1,0 +1,10 @@
+{
+  "name": "es/apiv2-client",
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "autoload": {
+    "psr-4": {
+      "ES\\APIv2Client\\": ""
+    }
+  }
+}

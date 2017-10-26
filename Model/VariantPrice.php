@@ -1,8 +1,6 @@
 <?php
 
-namespace Model;
-
-require_once(__DIR__ . '/Price.php');
+namespace ES\APIv2Client\Model;
 
 class VariantPrice extends Price
 {
@@ -19,7 +17,7 @@ class VariantPrice extends Price
      * @param SupplierProfile $supplierProfile
      * @param int $fromQuantity
      */
-    public function __construct(int $id, $calculationValue, float $reducedValue, $value, SupplierProfile $supplierProfile, int $fromQuantity)
+    public function __construct($id, $calculationValue, $reducedValue, $value, $supplierProfile, $fromQuantity)
     {
         parent::__construct($id, $calculationValue, $reducedValue, $value, $supplierProfile);
 
@@ -29,7 +27,7 @@ class VariantPrice extends Price
     /**
      * @return int
      */
-    public function getFromQuantity(): int
+    public function getFromQuantity()
     {
         return $this->fromQuantity;
     }

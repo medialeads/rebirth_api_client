@@ -1,19 +1,27 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class MarkingPosition
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $slug;
 
     /**
@@ -22,7 +30,7 @@ class MarkingPosition
      * @param string $name
      * @param string $slug
      */
-    public function __construct(int $id, string $projectId, string $name, string $slug)
+    public function __construct($id, $projectId, $name, $slug)
     {
         $this->id = $id;
         $this->projectId = $projectId;
@@ -33,7 +41,7 @@ class MarkingPosition
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -41,7 +49,7 @@ class MarkingPosition
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -49,7 +57,7 @@ class MarkingPosition
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -57,7 +65,7 @@ class MarkingPosition
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }

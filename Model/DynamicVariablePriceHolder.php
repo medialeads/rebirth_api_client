@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class DynamicVariablePriceHolder
 {
@@ -48,7 +48,7 @@ class DynamicVariablePriceHolder
      * @param array $dynamicVariablePrices
      * @param SupplierProfile $supplierProfile
      */
-    public function __construct(int $id, $condition, bool $totalPrice, string $projectId, array $markingFees, array $dynamicVariablePrices, SupplierProfile $supplierProfile)
+    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $dynamicVariablePrices, $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -78,7 +78,7 @@ class DynamicVariablePriceHolder
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -94,7 +94,7 @@ class DynamicVariablePriceHolder
     /**
      * @return bool
      */
-    public function isTotalPrice(): bool
+    public function isTotalPrice()
     {
         return $this->totalPrice;
     }
@@ -102,7 +102,7 @@ class DynamicVariablePriceHolder
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -110,7 +110,7 @@ class DynamicVariablePriceHolder
     /**
      * @return array
      */
-    public function getMarkingFees(): array
+    public function getMarkingFees()
     {
         return $this->markingFees;
     }
@@ -118,7 +118,7 @@ class DynamicVariablePriceHolder
     /**
      * @return array
      */
-    public function getDynamicVariablePrices(): array
+    public function getDynamicVariablePrices()
     {
         return $this->dynamicVariablePrices;
     }
@@ -126,7 +126,7 @@ class DynamicVariablePriceHolder
     /**
      * @return SupplierProfile
      */
-    public function getSupplierProfile(): SupplierProfile
+    public function getSupplierProfile()
     {
         return $this->supplierProfile;
     }

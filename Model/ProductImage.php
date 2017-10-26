@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class ProductImage extends AbstractImage
 {
@@ -9,7 +9,7 @@ class ProductImage extends AbstractImage
      * @param string $originalFilename
      * @param string $url
      */
-    public function __construct(int $id, string $originalFilename, string $url)
+    public function __construct($id, $originalFilename, $url)
     {
         parent::__construct($id, $originalFilename, $url);
     }

@@ -1,9 +1,14 @@
 <?php
 
-namespace Transformer;
+namespace ES\APIv2Client\Transformer;
 
 abstract class AbstractTransformer
 {
+    /**
+     * @param $array
+     *
+     * @return array|mixed|null
+     */
     public final static function fromArray($array)
     {
         if (null === $array) {

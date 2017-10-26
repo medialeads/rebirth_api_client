@@ -1,61 +1,97 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Product
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var \DateTimeInterface */
+    /**
+     * @var \DateTimeInterface
+     */
     private $lastIndexedAt;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $projectKey;
 
-    /** @var string */
+    /**
+     * @var null|string
+     */
     private $countryOfOrigin;
 
-    /** @var int */
+    /**
+     * @var int
+     */
     private $mainProductImageId;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $variants;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $unionCustomsCode;
 
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $mainCategoryId;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $labels;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $productImages;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $visibleOn;
 
-    /** @var  int */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $mainVariantId;
 
-    /** @var  Supplier */
+    /**
+     * @var Supplier
+     */
     private $supplier;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $categories;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $supplierBaseReference;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $internalReference;
 
-    /** @var  Brand */
+    /**
+     * @var Brand
+     */
     private $brand;
 
     /**
@@ -78,7 +114,7 @@ class Product
      * @param string $internalReference
      * @param Brand $brand
      */
-    public function __construct(int $id, \DateTimeInterface $lastIndexedAt, string $projectKey, $countryOfOrigin, int $mainProductImageId, array $variants, $unionCustomsCode, int $mainCategoryId, array $labels, array $productImages, array $visibleOn, string $projectId, int $mainVariantId, Supplier $supplier, array $categories, string $supplierBaseReference, string $internalReference, Brand $brand)
+    public function __construct($id, $lastIndexedAt, $projectKey, $countryOfOrigin, $mainProductImageId, $variants, $unionCustomsCode, $mainCategoryId, $labels, $productImages, $visibleOn, $projectId, $mainVariantId, $supplier, $categories, $supplierBaseReference, $internalReference, $brand)
     {
         foreach ($categories as $category) {
             if (!$category instanceof Category) {
@@ -129,7 +165,7 @@ class Product
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -137,7 +173,7 @@ class Product
     /**
      * @return \DateTimeInterface
      */
-    public function getLastIndexedAt(): \DateTimeInterface
+    public function getLastIndexedAt()
     {
         return $this->lastIndexedAt;
     }
@@ -145,7 +181,7 @@ class Product
     /**
      * @return string
      */
-    public function getProjectKey(): string
+    public function getProjectKey()
     {
         return $this->projectKey;
     }
@@ -161,7 +197,7 @@ class Product
     /**
      * @return int
      */
-    public function getMainProductImageId(): int
+    public function getMainProductImageId()
     {
         return $this->mainProductImageId;
     }
@@ -169,7 +205,7 @@ class Product
     /**
      * @return array
      */
-    public function getVariants(): array
+    public function getVariants()
     {
         return $this->variants;
     }
@@ -185,7 +221,7 @@ class Product
     /**
      * @return int
      */
-    public function getMainCategoryId(): int
+    public function getMainCategoryId()
     {
         return $this->mainCategoryId;
 
@@ -194,7 +230,7 @@ class Product
     /**
      * @return array
      */
-    public function getLabels(): array
+    public function getLabels()
     {
         return $this->labels;
     }
@@ -202,7 +238,7 @@ class Product
     /**
      * @return array
      */
-    public function getProductImages(): array
+    public function getProductImages()
     {
         return $this->productImages;
     }
@@ -210,7 +246,7 @@ class Product
     /**
      * @return array
      */
-    public function getVisibleOn(): array
+    public function getVisibleOn()
     {
         return $this->visibleOn;
     }
@@ -218,7 +254,7 @@ class Product
     /**
      * @return int
      */
-    public function getProjectId(): int
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -226,7 +262,7 @@ class Product
     /**
      * @return int
      */
-    public function getMainVariantId(): int
+    public function getMainVariantId()
     {
         return $this->mainVariantId;
     }
@@ -234,7 +270,7 @@ class Product
     /**
      * @return Supplier
      */
-    public function getSupplier(): Supplier
+    public function getSupplier()
     {
         return $this->supplier;
     }
@@ -242,7 +278,7 @@ class Product
     /**
      * @return array
      */
-    public function getCategories(): array
+    public function getCategories()
     {
         return $this->categories;
     }
@@ -250,7 +286,7 @@ class Product
     /**
      * @return string
      */
-    public function getSupplierBaseReference(): string
+    public function getSupplierBaseReference()
     {
         return $this->supplierBaseReference;
     }
@@ -258,7 +294,7 @@ class Product
     /**
      * @return string
      */
-    public function getInternalReference(): string
+    public function getInternalReference()
     {
         return $this->internalReference;
     }
@@ -266,7 +302,7 @@ class Product
     /**
      * @return mixed
      */
-    public function getBrand(): mixed
+    public function getBrand()
     {
         return $this->brand;
     }

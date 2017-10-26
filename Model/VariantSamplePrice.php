@@ -1,8 +1,6 @@
 <?php
 
-namespace Model;
-
-require_once(__DIR__ . '/Price.php');
+namespace ES\APIv2Client\Model;
 
 class VariantSamplePrice extends Price
 {
@@ -13,7 +11,7 @@ class VariantSamplePrice extends Price
      * @param mixed $value
      * @param SupplierProfile $supplierProfile
      */
-    public function __construct($id, $calculationValue, $reducedValue, $value, SupplierProfile $supplierProfile)
+    public function __construct($id, $calculationValue, $reducedValue, $value, $supplierProfile)
     {
         parent::__construct($id, $calculationValue, $reducedValue, $value, $supplierProfile);
     }

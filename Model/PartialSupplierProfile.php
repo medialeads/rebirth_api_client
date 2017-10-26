@@ -1,22 +1,24 @@
 <?php
 
-namespace Model;
-
-require_once('SupplierProfileInterface.php');
+namespace ES\APIv2Client\Model;
 
 class PartialSupplierProfile implements SupplierProfileInterface
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $countryCode;
 
     /**
      * @param int $id
      * @param string $countryCode
      */
-    public function __construct(int $id, string $countryCode)
+    public function __construct($id, $countryCode)
     {
         $this->id = $id;
         $this->countryCode = $countryCode;
@@ -25,7 +27,7 @@ class PartialSupplierProfile implements SupplierProfileInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -33,7 +35,7 @@ class PartialSupplierProfile implements SupplierProfileInterface
     /**
      * @return string
      */
-    public function getCountryCode(): string
+    public function getCountryCode()
     {
         return $this->countryCode;
     }

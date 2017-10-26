@@ -1,99 +1,159 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 use Helper\VariantHelper;
 
 class Variant
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $subPackagingInformation;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $variantMarkings;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $supplierProfiles;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $description;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $markingAdditionalInformation;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $supplierReference;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $netWeight;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $mainVariantImageId;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $subSubPackagingSize;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $variantMinimumQuantities;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $variantPrices;
 
-    /** @var  */
+    /**
+     * @var
+     */
     private $stock;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $grossWeight;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $packagingInformation;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $slug;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $subPackagingSize;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $variantImages;
 
-    /** @var  string */
+    /**
+     * @var null|string
+     */
     private $packagingGrossWeight;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $packagingSize;
 
-    /** @var  int|null */
+    /**
+     * @var int|null
+     */
     private $europeanArticleNumbering;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $variantSamplePrices;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $size;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $variantExternalLinks;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var  array */
+    /**
+     * @var
+     */
     private $variantListPrices;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $attributes;
 
-    /** @var  string|null */
+    /**
+     * @var null|string
+     */
     private $subSubPackagingInformation;
 
-    /** @var  bool */
+    /**
+     * @var bool
+     */
     private $mandatoryMarking;
 
     /**
@@ -128,7 +188,7 @@ class Variant
      * @param string|null $subSubPackagingInformation
      * @param bool $mandatoryMarking
      */
-    public function __construct(int $id, $subPackagingInformation, array $variantMarkings, array $supplierProfiles, string $description, $markingAdditionalInformation, string $supplierReference, string $netWeight, $mainVariantImageId, $subSubPackagingSize, array $variantMinimumQuantities, string $projectId, array $variantPrices, $stock, string $grossWeight, string $packagingInformation, string $slug, $subPackagingSize, array $variantImages, $packagingGrossWeight, $packagingSize, $europeanArticleNumbering, array $variantSamplePrices, string $size, array $variantExternalLinks, string $name, array $variantListPrices, array $attributes, $subSubPackagingInformation, bool $mandatoryMarking)
+    public function __construct($id, $subPackagingInformation, $variantMarkings, $supplierProfiles, $description, $markingAdditionalInformation, $supplierReference, $netWeight, $mainVariantImageId, $subSubPackagingSize, $variantMinimumQuantities, $projectId, $variantPrices, $stock, $grossWeight, $packagingInformation, $slug, $subPackagingSize, $variantImages, $packagingGrossWeight, $packagingSize, $europeanArticleNumbering, $variantSamplePrices, $size, $variantExternalLinks, $name, $variantListPrices, $attributes, $subSubPackagingInformation, $mandatoryMarking)
     {
         foreach ($variantMarkings as $variantMarking) {
             if (!$variantMarking instanceof VariantMarking) {
@@ -203,7 +263,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantMarkings(): array
+    public function getVariantMarkings()
     {
         return $this->variantMarkings;
     }
@@ -211,7 +271,7 @@ class Variant
     /**
      * @return array
      */
-    public function getSupplierProfiles(): array
+    public function getSupplierProfiles()
     {
         return $this->supplierProfiles;
     }
@@ -219,7 +279,7 @@ class Variant
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
@@ -235,7 +295,7 @@ class Variant
     /**
      * @return string
      */
-    public function getSupplierReference(): string
+    public function getSupplierReference()
     {
         return $this->supplierReference;
     }
@@ -243,7 +303,7 @@ class Variant
     /**
      * @return string
      */
-    public function getNetWeight(): string
+    public function getNetWeight()
     {
         return $this->netWeight;
     }
@@ -267,7 +327,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantMinimumQuantities(): array
+    public function getVariantMinimumQuantities()
     {
         return $this->variantMinimumQuantities;
     }
@@ -275,7 +335,7 @@ class Variant
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -283,7 +343,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantPrices(): array
+    public function getVariantPrices()
     {
         return $this->variantPrices;
     }
@@ -291,7 +351,7 @@ class Variant
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -307,7 +367,7 @@ class Variant
     /**
      * @return string
      */
-    public function getGrossWeight(): string
+    public function getGrossWeight()
     {
         return $this->grossWeight;
     }
@@ -315,7 +375,7 @@ class Variant
     /**
      * @return string
      */
-    public function getPackagingInformation(): string
+    public function getPackagingInformation()
     {
         return $this->packagingInformation;
     }
@@ -323,7 +383,7 @@ class Variant
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }
@@ -331,7 +391,7 @@ class Variant
     /**
      * @return string
      */
-    public function getSubPackagingSize(): string
+    public function getSubPackagingSize()
     {
         return $this->subPackagingSize;
     }
@@ -339,7 +399,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantImages(): array
+    public function getVariantImages()
     {
         return $this->variantImages;
     }
@@ -371,7 +431,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantSamplePrices(): array
+    public function getVariantSamplePrices()
     {
         return $this->variantSamplePrices;
     }
@@ -379,7 +439,7 @@ class Variant
     /**
      * @return string
      */
-    public function getSize(): string
+    public function getSize()
     {
         return $this->size;
     }
@@ -387,7 +447,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantExternalLinks(): array
+    public function getVariantExternalLinks()
     {
         return $this->variantExternalLinks;
     }
@@ -395,7 +455,7 @@ class Variant
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -403,7 +463,7 @@ class Variant
     /**
      * @return array
      */
-    public function getVariantListPrices(): array
+    public function getVariantListPrices()
     {
         return $this->variantListPrices;
     }
@@ -411,7 +471,7 @@ class Variant
     /**
      * @return array
      */
-    public function getAttributes(): array
+    public function getAttributes()
     {
         return $this->attributes;
     }
@@ -427,7 +487,7 @@ class Variant
     /**
      * @return bool
      */
-    public function isMandatoryMarking(): bool
+    public function isMandatoryMarking()
     {
         return $this->mandatoryMarking;
     }

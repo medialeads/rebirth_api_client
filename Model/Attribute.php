@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Attribute
 {
@@ -38,7 +38,7 @@ class Attribute
      * @param string $value
      * @param string $slug
      */
-    public function __construct(string $projectId, AttributeGroup $attributeGroup, int $parentId, array $hierarchy, int $id, string $type, string $value, string $slug)
+    public function __construct($projectId, $attributeGroup, $parentId, $hierarchy, $id, $type, $value, $slug)
     {
         $this->projectId = $projectId;
         $this->attributeGroup = $attributeGroup;
@@ -53,7 +53,7 @@ class Attribute
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -61,7 +61,7 @@ class Attribute
     /**
      * @return AttributeGroup
      */
-    public function getAttributeGroup(): AttributeGroup
+    public function getAttributeGroup()
     {
         return $this->attributeGroup;
     }
@@ -69,7 +69,7 @@ class Attribute
     /**
      * @return int
      */
-    public function getParentId(): int
+    public function getParentId()
     {
         return $this->parentId;
     }
@@ -77,7 +77,7 @@ class Attribute
     /**
      * @return array
      */
-    public function getHierarchy(): array
+    public function getHierarchy()
     {
         return $this->hierarchy;
     }
@@ -85,7 +85,7 @@ class Attribute
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -93,7 +93,7 @@ class Attribute
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -101,7 +101,7 @@ class Attribute
     /**
      * @return string
      */
-    public function getValue(): string
+    public function getValue()
     {
         return $this->value;
     }
@@ -109,7 +109,7 @@ class Attribute
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }

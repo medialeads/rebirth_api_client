@@ -1,28 +1,42 @@
 <?php
 
-namespace Model;
+namespace ES\APIv2Client\Model;
 
 class Marking
 {
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $fullHierarchyName;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $parentId;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $hierarchy;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $slug;
 
     /**
@@ -34,7 +48,7 @@ class Marking
      * @param int $id
      * @param string $slug
      */
-    public function __construct(int $id, string $fullHierarchyName, string $projectId, int $parentId, array $hierarchy, string $name, string $slug)
+    public function __construct($id, $fullHierarchyName, $projectId, $parentId, $hierarchy, $name, $slug)
     {
         $this->id = $id;
         $this->fullHierarchyName = $fullHierarchyName;
@@ -47,7 +61,7 @@ class Marking
     /**
      * @return string
      */
-    public function getFullHierarchyName(): string
+    public function getFullHierarchyName()
     {
         return $this->fullHierarchyName;
     }
@@ -55,7 +69,7 @@ class Marking
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -63,7 +77,7 @@ class Marking
     /**
      * @return int
      */
-    public function getParentId(): int
+    public function getParentId()
     {
         return $this->parentId;
     }
@@ -71,7 +85,7 @@ class Marking
     /**
      * @return array
      */
-    public function getHierarchy(): array
+    public function getHierarchy()
     {
         return $this->hierarchy;
     }
@@ -79,7 +93,7 @@ class Marking
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -87,7 +101,7 @@ class Marking
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -95,7 +109,7 @@ class Marking
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }
