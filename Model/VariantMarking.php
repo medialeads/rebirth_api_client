@@ -2,6 +2,8 @@
 
 namespace ES\APIv2Client\Model;
 
+use ES\APIv2Client\Helper\VariantMarkingHelper;
+
 class VariantMarking
 {
     /**
@@ -639,5 +641,10 @@ class VariantMarking
     public function getMaximumSquaredSize()
     {
         return $this->maximumSquaredSize;
+    }
+
+    public function getCalculatedPrice(SupplierProfile $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
+    {
+        return VariantMarkingHelper::getCalculatedPrice($this, $supplierProfile, $quantity, $variantMarkingModel);
     }
 }

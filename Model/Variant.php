@@ -492,8 +492,8 @@ class Variant
         return $this->mandatoryMarking;
     }
 
-    public function getCalculatedPrice()
+    public function getCalculatedPrice(SupplierProfile $supplierProfile, $quantity, array $variantMarkingModels = array())
     {
-        return VariantHelper::getCalculatedPrice($this);
+        return VariantHelper::getCalculatedPrice($this, $supplierProfile, $quantity, $variantMarkingModels);
     }
 }

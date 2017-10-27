@@ -8,6 +8,7 @@ class DynamicVariablePrice extends Price
      * @var int
      */
     private $fromQuantity;
+
     /**
      * @param string $id
      * @param float $calculationValue

@@ -17,7 +17,7 @@ class StaticVariablePriceTransformer extends AbstractTransformer
         foreach ($staticVariablePrices as $staticVariablePrice) {
             $supplierProfile = SupplierProfileTransformer::fromArray($staticVariablePrice['supplier_profile']);
 
-            $response[] = new StaticVariablePrice($staticVariablePrice['id'], $staticVariablePrice['calculation_value'], $staticVariablePrice['reduced_value'], $staticVariablePrice['value'], $supplierProfile);
+            $response[] = new StaticVariablePrice($staticVariablePrice['id'], $staticVariablePrice['calculation_value'], $staticVariablePrice['reduced_value'], $staticVariablePrice['from_quantity'], $staticVariablePrice['value'], $supplierProfile);
         }
 
         return $response;
