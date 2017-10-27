@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class VariantListPrice extends Price
 {
     /**
-     * @param int $id
+     * @param string $id
      * @param mixed $calculationValue
      * @param float $reducedValue
      * @param mixed $value

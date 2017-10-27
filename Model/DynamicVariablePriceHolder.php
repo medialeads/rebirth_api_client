@@ -5,12 +5,12 @@ namespace ES\APIv2Client\Model;
 class DynamicVariablePriceHolder
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
     /**
-     * @var
+     * @var string
      */
     private $condition;
 
@@ -35,20 +35,20 @@ class DynamicVariablePriceHolder
     private $dynamicVariablePrices;
 
     /**
-     * @var SupplierProfile
+     * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param int $id
-     * @param $condition
+     * @param string $id
+     * @param null|string $condition
      * @param bool $totalPrice
      * @param string $projectId
      * @param array $markingFees
      * @param array $dynamicVariablePrices
-     * @param SupplierProfile $supplierProfile
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $dynamicVariablePrices, $supplierProfile)
+    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $dynamicVariablePrices, SupplierProfileInterface $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -62,9 +62,9 @@ class DynamicVariablePriceHolder
             }
         }
 
-        if (!$supplierProfile instanceof SupplierProfile)
+        if (!$supplierProfile instanceof SupplierProfileInterface)
         {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
 
         $this->id = $id;
@@ -76,7 +76,7 @@ class DynamicVariablePriceHolder
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -84,7 +84,7 @@ class DynamicVariablePriceHolder
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
     public function getCondition()
     {
@@ -124,7 +124,7 @@ class DynamicVariablePriceHolder
     }
 
     /**
-     * @return SupplierProfile
+     * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {

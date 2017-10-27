@@ -5,13 +5,13 @@ namespace ES\APIv2Client\Model;
 class VariantSamplePrice extends Price
 {
     /**
-     * @param int $id
-     * @param mixed $calculationValue
+     * @param string $id
+     * @param float $calculationValue
      * @param float $reducedValue
-     * @param mixed $value
-     * @param SupplierProfile $supplierProfile
+     * @param float $value
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $calculationValue, $reducedValue, $value, $supplierProfile)
+    public function __construct($id, $calculationValue, $reducedValue, $value, SupplierProfileInterface $supplierProfile)
     {
         parent::__construct($id, $calculationValue, $reducedValue, $value, $supplierProfile);
     }

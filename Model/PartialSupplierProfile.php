@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class PartialSupplierProfile implements SupplierProfileInterface
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -15,7 +15,7 @@ class PartialSupplierProfile implements SupplierProfileInterface
     private $countryCode;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $countryCode
      */
     public function __construct($id, $countryCode)
@@ -25,7 +25,7 @@ class PartialSupplierProfile implements SupplierProfileInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

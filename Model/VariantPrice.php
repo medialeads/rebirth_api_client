@@ -10,14 +10,14 @@ class VariantPrice extends Price
     private $fromQuantity;
 
     /**
-     * @param int $id
-     * @param mixed $calculationValue
+     * @param string $id
+     * @param float $calculationValue
      * @param float $reducedValue
-     * @param mixed $value
-     * @param SupplierProfile $supplierProfile
+     * @param float $value
+     * @param SupplierProfileInterface $supplierProfile
      * @param int $fromQuantity
      */
-    public function __construct($id, $calculationValue, $reducedValue, $value, $supplierProfile, $fromQuantity)
+    public function __construct($id, $calculationValue, $reducedValue, $value, SupplierProfileInterface $supplierProfile, $fromQuantity)
     {
         parent::__construct($id, $calculationValue, $reducedValue, $value, $supplierProfile);
 

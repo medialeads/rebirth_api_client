@@ -5,12 +5,12 @@ namespace ES\APIv2Client\Model;
 class StaticVariablePriceHolder
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
     /**
-     * @var
+     * @var string
      */
     private $condition;
 
@@ -20,7 +20,7 @@ class StaticVariablePriceHolder
     private $totalPrice;
 
     /**
-     * @var int
+     * @var string
      */
     private $projectId;
 
@@ -35,20 +35,20 @@ class StaticVariablePriceHolder
     private $staticVariablePrices;
 
     /**
-     * @var SupplierProfile
+     * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param $id
-     * @param $condition
-     * @param $totalPrice
-     * @param $projectId
-     * @param $markingFees
-     * @param $staticVariablePrices
-     * @param $supplierProfile
+     * @param string $id
+     * @param string $condition
+     * @param bool $totalPrice
+     * @param string $projectId
+     * @param array $markingFees
+     * @param array $staticVariablePrices
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $staticVariablePrices, $supplierProfile)
+    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $staticVariablePrices, SupplierProfileInterface $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -62,9 +62,9 @@ class StaticVariablePriceHolder
             }
         }
 
-        if (!$supplierProfile instanceof SupplierProfile)
+        if (!$supplierProfile instanceof SupplierProfileInterface)
         {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
 
         $this->id = $id;
@@ -76,7 +76,7 @@ class StaticVariablePriceHolder
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -84,7 +84,7 @@ class StaticVariablePriceHolder
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCondition()
     {
@@ -124,7 +124,7 @@ class StaticVariablePriceHolder
     }
 
     /**
-     * @return SupplierProfile
+     * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {

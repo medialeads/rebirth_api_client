@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class VariantExternalLink
 {
     /**
-     * @var  int
+     * @var string
      */
     private $id;
 
@@ -25,7 +25,7 @@ class VariantExternalLink
     private $url;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $projectId
      * @param string $type
      * @param string $url
@@ -39,7 +39,7 @@ class VariantExternalLink
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

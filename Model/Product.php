@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class Product
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -25,7 +25,7 @@ class Product
     private $countryOfOrigin;
 
     /**
-     * @var int
+     * @var null|string
      */
     private $mainProductImageId;
 
@@ -40,7 +40,7 @@ class Product
     private $unionCustomsCode;
 
     /**
-     * @var int
+     * @var null|string
      */
     private $mainCategoryId;
 
@@ -65,7 +65,7 @@ class Product
     private $projectId;
 
     /**
-     * @var int
+     * @var null|string
      */
     private $mainVariantId;
 
@@ -95,39 +95,31 @@ class Product
     private $brand;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param \DateTimeInterface $lastIndexedAt
      * @param string $projectKey
-     * @param string|null $countryOfOrigin
-     * @param int $mainProductImageId
+     * @param null|string $countryOfOrigin
+     * @param null|string $mainProductImageId
      * @param array $variants
-     * @param string|null $unionCustomsCode
-     * @param int $mainCategoryId
+     * @param null|string $unionCustomsCode
+     * @param null|string $mainCategoryId
      * @param array $labels
      * @param array $productImages
      * @param array $visibleOn
      * @param string $projectId
-     * @param int $mainVariantId
+     * @param null|string $mainVariantId
      * @param Supplier $supplier
      * @param array $categories
      * @param string $supplierBaseReference
      * @param string $internalReference
      * @param Brand $brand
      */
-    public function __construct($id, $lastIndexedAt, $projectKey, $countryOfOrigin, $mainProductImageId, $variants, $unionCustomsCode, $mainCategoryId, $labels, $productImages, $visibleOn, $projectId, $mainVariantId, $supplier, $categories, $supplierBaseReference, $internalReference, $brand)
+    public function __construct($id, \DateTimeInterface $lastIndexedAt, $projectKey, $countryOfOrigin, $mainProductImageId, $variants, $unionCustomsCode, $mainCategoryId, $labels, $productImages, $visibleOn, $projectId, $mainVariantId, Supplier $supplier, $categories, $supplierBaseReference, $internalReference, Brand $brand)
     {
-        foreach ($categories as $category) {
-            if (!$category instanceof Category) {
-               throw new \InvalidArgumentException();
+        foreach ($variants as $variant) {
+            if (!$variant instanceof Variant) {
+                throw new \InvalidArgumentException();
             }
-        }
-
-        if (!$supplier instanceof Supplier) {
-            throw new \InvalidArgumentException();
-        }
-
-        if (!$brand instanceof Brand) {
-            throw new \InvalidArgumentException();
         }
 
         foreach ($labels as $label) {
@@ -136,10 +128,25 @@ class Product
             }
         }
 
-        foreach ($variants as $variant) {
-            if (!$variant instanceof Variant) {
+        foreach ($productImages as $productImage) {
+            if (!$productImage instanceof ProductImage) {
                 throw new \InvalidArgumentException();
             }
+        }
+
+        if (!$supplier instanceof Supplier) {
+            throw new \InvalidArgumentException();
+        }
+
+
+        foreach ($categories as $category) {
+            if (!$category instanceof Category) {
+                throw new \InvalidArgumentException();
+            }
+        }
+
+        if (!$brand instanceof Brand) {
+            throw new \InvalidArgumentException();
         }
 
         $this->id = $id;
@@ -163,7 +170,7 @@ class Product
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -187,7 +194,7 @@ class Product
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getCountryOfOrigin()
     {
@@ -195,7 +202,7 @@ class Product
     }
 
     /**
-     * @return int
+     * @return null|string
      */
     public function getMainProductImageId()
     {
@@ -211,7 +218,7 @@ class Product
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getUnionCustomsCode()
     {
@@ -219,7 +226,7 @@ class Product
     }
 
     /**
-     * @return int
+     * @return null|string
      */
     public function getMainCategoryId()
     {
@@ -260,7 +267,7 @@ class Product
     }
 
     /**
-     * @return int
+     * @return null|string
      */
     public function getMainVariantId()
     {
@@ -300,7 +307,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return Brand
      */
     public function getBrand()
     {

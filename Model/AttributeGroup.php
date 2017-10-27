@@ -4,22 +4,30 @@ namespace ES\APIv2Client\Model;
 
 class AttributeGroup
 {
-    /** @var  int */
+    /**
+     * @var string
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $projectId;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $slug;
 
     /**
+     * @param string $id
      * @param string $projectId
      * @param string $name
-     * @param int $id
      * @param string $slug
      */
     public function __construct($id, $projectId, $name, $slug)
@@ -28,6 +36,14 @@ class AttributeGroup
         $this->projectId = $projectId;
         $this->name = $name;
         $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -44,14 +60,6 @@ class AttributeGroup
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

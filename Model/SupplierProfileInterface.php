@@ -6,7 +6,7 @@ interface SupplierProfileInterface
 {
 
     /**
-     * @return int
+     * @return string
      */
     public function getId();
 

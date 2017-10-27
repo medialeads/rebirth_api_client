@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class Supplier
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -40,16 +40,22 @@ class Supplier
     private $slug;
 
     /**
+     * @param string $id
      * @param string $projectId
-     * @param string|null $vatIdentificationNumber
+     * @param null|string $vatIdentificationNumber
      * @param array $supplierProfiles
      * @param string $name
-     * @param int $id
      * @param string $legalName
      * @param string $slug
      */
     public function __construct($id, $projectId, $vatIdentificationNumber, $supplierProfiles, $name, $legalName, $slug)
     {
+        foreach ($supplierProfiles as $supplierProfile) {
+            if(!$supplierProfile instanceof SupplierProfileInterface) {
+                throw new \InvalidArgumentException();
+            }
+        }
+
         $this->id = $id;
         $this->projectId = $projectId;
         $this->vatIdentificationNumber = $vatIdentificationNumber;
@@ -60,7 +66,7 @@ class Supplier
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -76,7 +82,7 @@ class Supplier
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getVatIdentificationNumber()
     {

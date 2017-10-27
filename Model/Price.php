@@ -5,12 +5,12 @@ namespace ES\APIv2Client\Model;
 class Price
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
     /**
-     * @var mixed
+     * @var float
      */
     private $calculationValue;
 
@@ -20,25 +20,25 @@ class Price
     private $reducedValue;
 
     /**
-     * @var mixed
+     * @var float
      */
     private $value;
 
     /**
-     * @var SupplierProfile
+     * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param mixed $calculationValue
+     * @param string $id
+     * @param float $calculationValue
      * @param float $reducedValue
-     * @param int $id
-     * @param mixed $value
-     * @param SupplierProfile $supplierProfile
+     * @param float $value
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $calculationValue, $reducedValue, $value, $supplierProfile)
+    public function __construct($id, $calculationValue, $reducedValue, $value, SupplierProfileInterface $supplierProfile)
     {
-        if ($supplierProfile instanceof SupplierProfile) {
+        if ($supplierProfile instanceof SupplierProfileInterface) {
             throw new \InvalidArgumentException();
         }
 
@@ -50,7 +50,7 @@ class Price
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -58,7 +58,7 @@ class Price
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getCalculationValue()
     {
@@ -66,7 +66,7 @@ class Price
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getReducedValue()
     {
@@ -74,7 +74,7 @@ class Price
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getValue()
     {
@@ -82,7 +82,7 @@ class Price
     }
 
     /**
-     * @return SupplierProfile
+     * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {

@@ -4,42 +4,62 @@ namespace ES\APIv2Client\Model;
 
 class Attribute
 {
-    /** @var  string */
-    private $projectId;
-
-    /** @var  AttributeGroup */
-    private $attributeGroup;
-
-    /** @var  int */
-    private $parentId;
-
-    /** @var  array */
-    private $hierarchy;
-
-    /** @var  int */
+    /**
+     * @var string
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
+    private $projectId;
+
+    /**
+     * @var AttributeGroup
+     */
+    private $attributeGroup;
+
+    /**
+     * @var string
+     */
+    private $parentId;
+
+    /**
+     * @var array
+     */
+    private $hierarchy;
+
+    /**
+     * @var string
+     */
     private $type;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $value;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $slug;
 
     /**
+     * @param string $id
      * @param string $projectId
      * @param AttributeGroup $attributeGroup
-     * @param int $parentId
+     * @param string $parentId
      * @param array $hierarchy
-     * @param int $id
      * @param string $type
      * @param string $value
      * @param string $slug
      */
-    public function __construct($projectId, $attributeGroup, $parentId, $hierarchy, $id, $type, $value, $slug)
+    public function __construct($id, $projectId, AttributeGroup $attributeGroup, $parentId, $hierarchy, $type, $value, $slug)
     {
+        if (!$attributeGroup instanceof AttributeGroup) {
+            throw new \InvalidArgumentException();
+        }
+
         $this->projectId = $projectId;
         $this->attributeGroup = $attributeGroup;
         $this->parentId = $parentId;
@@ -48,6 +68,14 @@ class Attribute
         $this->type = $type;
         $this->value = $value;
         $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -67,7 +95,7 @@ class Attribute
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getParentId()
     {
@@ -80,14 +108,6 @@ class Attribute
     public function getHierarchy()
     {
         return $this->hierarchy;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

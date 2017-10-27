@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class MarkingPosition
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -25,7 +25,7 @@ class MarkingPosition
     private $slug;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $projectId
      * @param string $name
      * @param string $slug
@@ -36,6 +36,14 @@ class MarkingPosition
         $this->projectId = $projectId;
         $this->name = $name;
         $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -52,14 +60,6 @@ class MarkingPosition
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

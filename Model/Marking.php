@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class Marking
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -20,7 +20,7 @@ class Marking
     private $projectId;
 
     /**
-     * @var int
+     * @var null|string
      */
     private $parentId;
 
@@ -40,12 +40,12 @@ class Marking
     private $slug;
 
     /**
+     * @param string $id
      * @param string $fullHierarchyName
      * @param string $projectId
-     * @param int $parentId
+     * @param null|string $parentId
      * @param array $hierarchy
      * @param string $name
-     * @param int $id
      * @param string $slug
      */
     public function __construct($id, $fullHierarchyName, $projectId, $parentId, $hierarchy, $name, $slug)
@@ -56,6 +56,14 @@ class Marking
         $this->hierarchy = $hierarchy;
         $this->name = $name;
         $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -75,7 +83,7 @@ class Marking
     }
 
     /**
-     * @return int
+     * @return null|string
      */
     public function getParentId()
     {
@@ -96,14 +104,6 @@ class Marking
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

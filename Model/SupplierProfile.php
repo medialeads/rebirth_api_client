@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class SupplierProfile implements SupplierProfileInterface
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -40,11 +40,11 @@ class SupplierProfile implements SupplierProfileInterface
     private $status;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $countryCode
      * @param string $projectId
      * @param string $name
-     * @param string|null $association
+     * @param null|string $association
      * @param bool $displayPrices
      * @param string $status
      */
@@ -84,7 +84,7 @@ class SupplierProfile implements SupplierProfileInterface
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
     public function getAssociation()
     {
@@ -92,7 +92,7 @@ class SupplierProfile implements SupplierProfileInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

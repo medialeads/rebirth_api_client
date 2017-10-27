@@ -5,12 +5,12 @@ namespace ES\APIv2Client\Model;
 class VariantMinimumQuantity
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $projectId;
 
@@ -20,20 +20,20 @@ class VariantMinimumQuantity
     private $value;
 
     /**
-     * @var SupplierProfile
+     * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param int $id
-     * @param string|null $projectId
+     * @param string $id
+     * @param null|string $projectId
      * @param int $value
-     * @param SupplierProfile $supplierProfile
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $projectId, $value, $supplierProfile)
+    public function __construct($id, $projectId, $value, SupplierProfileInterface $supplierProfile)
     {
 
-        if (!$supplierProfile instanceof SupplierProfile) {
+        if (!$supplierProfile instanceof SupplierProfileInterface) {
             throw new \InvalidArgumentException();
         }
 
@@ -52,7 +52,7 @@ class VariantMinimumQuantity
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getProjectId()
     {
@@ -68,7 +68,7 @@ class VariantMinimumQuantity
     }
 
     /**
-     * @return SupplierProfile
+     * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {

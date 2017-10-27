@@ -4,18 +4,24 @@ namespace ES\APIv2Client\Model;
 
 abstract class AbstractImage
 {
-    /** @var  int */
+    /**
+     * @var string
+     */
     private $id;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $originalFilename;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $url;
 
     /**
+     * @param string $id
      * @param string $originalFilename
-     * @param int $id
      * @param string $url
      */
     public function __construct($id, $originalFilename, $url)
@@ -26,7 +32,7 @@ abstract class AbstractImage
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

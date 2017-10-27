@@ -5,12 +5,12 @@ namespace ES\APIv2Client\Model;
 class StaticFixedPrice
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
     /**
-     * @var
+     * @var string
      */
     private $condition;
 
@@ -40,27 +40,27 @@ class StaticFixedPrice
     private $reducedValue;
 
     /**
-     * @var string
+     * @var float
      */
     private $value;
 
     /**
-     * @var SupplierProfile
+     * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param int $id
-     * @param $condition
+     * @param string $id
+     * @param string $condition
      * @param string $calculationValue
      * @param bool $totalPrice
      * @param string $projectId
      * @param array $markingFees
      * @param string $reducedValue
-     * @param $value
-     * @param SupplierProfile $supplierProfile
+     * @param float $value
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $condition, $calculationValue, $totalPrice, $projectId, $markingFees, $reducedValue, $value, $supplierProfile)
+    public function __construct($id, $condition, $calculationValue, $totalPrice, $projectId, $markingFees, $reducedValue, $value, SupplierProfileInterface $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -68,7 +68,7 @@ class StaticFixedPrice
             }
         }
 
-        if (!$supplierProfile instanceof SupplierProfile) {
+        if (!$supplierProfile instanceof SupplierProfileInterface) {
             throw new \InvalidArgumentException();
         }
 
@@ -84,7 +84,7 @@ class StaticFixedPrice
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -92,7 +92,7 @@ class StaticFixedPrice
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCondition()
     {
@@ -132,7 +132,7 @@ class StaticFixedPrice
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getReducedValue()
     {
@@ -140,7 +140,7 @@ class StaticFixedPrice
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getValue()
     {
@@ -148,7 +148,7 @@ class StaticFixedPrice
     }
 
     /**
-     * @return SupplierProfile
+     * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {

@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class SupplierMarking
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -29,6 +29,13 @@ class SupplierMarking
      */
     private $comment;
 
+    /**
+     * @param string $id
+     * @param null|string $nameComplement
+     * @param string $code
+     * @param string $projectId
+     * @param null|string $comment
+     */
     public function __construct($id, $nameComplement, $code, $projectId, $comment)
     {
         $this->id = $id;
@@ -39,7 +46,7 @@ class SupplierMarking
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

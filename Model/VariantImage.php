@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class VariantImage extends AbstractImage
 {
     /**
-     * @param int $id
+     * @param string $id
      * @param string $originalFilename
      * @param string $url
      */

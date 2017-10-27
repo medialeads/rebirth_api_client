@@ -7,7 +7,7 @@ use Helper\VariantHelper;
 class Variant
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -72,7 +72,7 @@ class Variant
     private $variantPrices;
 
     /**
-     * @var
+     * @var string
      */
     private $stock;
 
@@ -157,27 +157,27 @@ class Variant
     private $mandatoryMarking;
 
     /**
-     * @param int $id
-     * @param string|null $subPackagingInformation
+     * @param string $id
+     * @param null|string $subPackagingInformation
      * @param array $variantMarkings
      * @param array $supplierProfiles
      * @param string $description
-     * @param string|null $markingAdditionalInformation
+     * @param null|string $markingAdditionalInformation
      * @param string $supplierReference
      * @param string $netWeight
      * @param int|null $mainVariantImageId
-     * @param string|null $subSubPackagingSize
+     * @param null|string $subSubPackagingSize
      * @param array $variantMinimumQuantities
      * @param string $projectId
      * @param array $variantPrices
-     * @param $stock
+     * @param string $stock
      * @param string $grossWeight
      * @param string $packagingInformation
      * @param string $slug
-     * @param string|null $subPackagingSize
+     * @param null|string $subPackagingSize
      * @param array $variantImages
-     * @param string|null $packagingGrossWeight
-     * @param string|null $packagingSize
+     * @param null|string $packagingGrossWeight
+     * @param null|string $packagingSize
      * @param int|null $europeanArticleNumbering
      * @param array $variantSamplePrices
      * @param string $size
@@ -185,7 +185,7 @@ class Variant
      * @param string $name
      * @param array $variantListPrices
      * @param array $attributes
-     * @param string|null $subSubPackagingInformation
+     * @param null|string $subSubPackagingInformation
      * @param bool $mandatoryMarking
      */
     public function __construct($id, $subPackagingInformation, $variantMarkings, $supplierProfiles, $description, $markingAdditionalInformation, $supplierReference, $netWeight, $mainVariantImageId, $subSubPackagingSize, $variantMinimumQuantities, $projectId, $variantPrices, $stock, $grossWeight, $packagingInformation, $slug, $subPackagingSize, $variantImages, $packagingGrossWeight, $packagingSize, $europeanArticleNumbering, $variantSamplePrices, $size, $variantExternalLinks, $name, $variantListPrices, $attributes, $subSubPackagingInformation, $mandatoryMarking)
@@ -197,7 +197,7 @@ class Variant
         }
 
         foreach ($supplierProfiles as $supplierProfile) {
-            if (!$supplierProfile instanceof SupplierProfile) {
+            if (!$supplierProfile instanceof SupplierProfileInterface) {
                 throw new \InvalidArgumentException();
             }
         }
@@ -208,14 +208,14 @@ class Variant
             }
         }
 
-        foreach ($attributes as $attribute) {
-            if (!$attribute instanceof Attribute) {
+        foreach ($variantExternalLinks as $variantExternalLink) {
+            if (!$variantExternalLink instanceof VariantExternalLink) {
                 throw new \InvalidArgumentException();
             }
         }
 
-        foreach ($variantExternalLinks as $variantExternalLink) {
-            if (!$variantExternalLink instanceof VariantExternalLink) {
+        foreach ($attributes as $attribute) {
+            if (!$attribute instanceof Attribute) {
                 throw new \InvalidArgumentException();
             }
         }
@@ -253,7 +253,15 @@ class Variant
     }
 
     /**
-     * @return string|null
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return null|string
      */
     public function getSubPackagingInformation()
     {
@@ -285,7 +293,7 @@ class Variant
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getMarkingAdditionalInformation()
     {
@@ -317,7 +325,7 @@ class Variant
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getSubSubPackagingSize()
     {
@@ -346,14 +354,6 @@ class Variant
     public function getVariantPrices()
     {
         return $this->variantPrices;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -405,7 +405,7 @@ class Variant
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getPackagingGrossWeight()
     {
@@ -413,7 +413,7 @@ class Variant
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getPackagingSize()
     {
@@ -477,7 +477,7 @@ class Variant
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getSubSubPackagingInformation()
     {

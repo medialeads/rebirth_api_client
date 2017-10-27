@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class VariantMarking
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -200,7 +200,7 @@ class VariantMarking
     private $maximumSquaredSize;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param bool $freeEntrySquaredSize
      * @param string $type
      * @param float|null $minimumLength
@@ -242,28 +242,20 @@ class VariantMarking
      */
     public function __construct($id, $freeEntrySquaredSize, $type, $minimumLength, $minimumDiameter, $numberOfPositions, $freeEntryNumberOfLogos, $maximumDiameter, $diameter, $projectId, $freeEntryLength, $staticVariablePriceHolders, $minimumNumberOfColors, $freeEntryDiameter, $staticFixedPrices, $fullColor, $markingPosition, $freeEntryNumberOfColors, $maximumNumberOfPositions, $freeEntryNumberOfPositions, $maximumQuantity, $minimumNumberOfLogos, $length, $minimumWidth, $minimumSquaredSize, $dynamicVariablePriceHolders, $numberOfColors, $supplierMarking, $marking, $maximumLength, $squaredSize, $width, $maximumNumberOfLogos, $comment, $maximumWidth, $minimumQuantity, $maximumNumberOfColors, $dynamicFixedPrices, $maximumSquaredSize)
     {
-        if ($type === "supplier") {
-            if (!$supplierMarking instanceof SupplierMarking) {
-                throw new \UnexpectedValueException('Type is "supplier", variable $supplierMarking must be instance of SupplierMarking ');
+        foreach ($staticVariablePriceHolders as $staticVariablePriceHolder)
+        {
+            if (!$staticVariablePriceHolder instanceof StaticVariablePriceHolder) {
+                throw new \InvalidArgumentException();
             }
-        } else {
-            if ($supplierMarking instanceof SupplierMarking) {
-                throw new \UnexpectedValueException('Type is "simple", variable $supplierMarking must be null');
-            }
-        }
-
-
-        if (!$marking instanceof Marking) {
-            throw new \InvalidArgumentException();
         }
 
         if (!$markingPosition instanceof MarkingPosition && null !== $markingPosition) {
             throw new \InvalidArgumentException();
         }
 
-        foreach ($staticVariablePriceHolders as $staticVariablePriceHolder)
+        foreach ($staticFixedPrices as $staticFixedPrice)
         {
-            if (!$staticVariablePriceHolder instanceof StaticVariablePriceHolder) {
+            if (!$staticFixedPrice instanceof StaticFixedPrice) {
                 throw new \InvalidArgumentException();
             }
         }
@@ -275,9 +267,23 @@ class VariantMarking
             }
         }
 
-        foreach ($staticFixedPrices as $staticFixedPrice)
+        if ($type === "supplier") {
+            if (!$supplierMarking instanceof SupplierMarking) {
+                throw new \UnexpectedValueException('Type is "supplier", variable $supplierMarking must be instance of SupplierMarking ');
+            }
+        } else {
+            if ($supplierMarking instanceof SupplierMarking) {
+                throw new \UnexpectedValueException('Type is "simple", variable $supplierMarking must be null');
+            }
+        }
+
+        if (!$marking instanceof Marking) {
+            throw new \InvalidArgumentException();
+        }
+
+        foreach ($dynamicFixedPrices as $dynamicFixedPrice)
         {
-            if (!$staticFixedPrice instanceof StaticFixedPrice) {
+            if (!$dynamicFixedPrice instanceof DynamicFixedPrice) {
                 throw new \InvalidArgumentException();
             }
         }
@@ -324,9 +330,9 @@ class VariantMarking
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -334,7 +340,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFreeEntrySquaredSize(): bool
+    public function isFreeEntrySquaredSize()
     {
         return $this->freeEntrySquaredSize;
     }
@@ -342,7 +348,7 @@ class VariantMarking
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -374,7 +380,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFreeEntryNumberOfLogos(): bool
+    public function isFreeEntryNumberOfLogos()
     {
         return $this->freeEntryNumberOfLogos;
     }
@@ -398,7 +404,7 @@ class VariantMarking
     /**
      * @return string
      */
-    public function getProjectId(): string
+    public function getProjectId()
     {
         return $this->projectId;
     }
@@ -406,7 +412,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFreeEntryLength(): bool
+    public function isFreeEntryLength()
     {
         return $this->freeEntryLength;
     }
@@ -414,7 +420,7 @@ class VariantMarking
     /**
      * @return array
      */
-    public function getStaticVariablePriceHolders(): array
+    public function getStaticVariablePriceHolders()
     {
         return $this->staticVariablePriceHolders;
     }
@@ -430,7 +436,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFreeEntryDiameter(): bool
+    public function isFreeEntryDiameter()
     {
         return $this->freeEntryDiameter;
     }
@@ -438,7 +444,7 @@ class VariantMarking
     /**
      * @return array
      */
-    public function getStaticFixedPrices(): array
+    public function getStaticFixedPrices()
     {
         return $this->staticFixedPrices;
     }
@@ -446,7 +452,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFullColor(): bool
+    public function isFullColor()
     {
         return $this->fullColor;
     }
@@ -454,7 +460,7 @@ class VariantMarking
     /**
      * @return MarkingPosition
      */
-    public function getMarkingPosition(): MarkingPosition
+    public function getMarkingPosition()
     {
         return $this->markingPosition;
     }
@@ -462,7 +468,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFreeEntryNumberOfColors(): bool
+    public function isFreeEntryNumberOfColors()
     {
         return $this->freeEntryNumberOfColors;
     }
@@ -478,7 +484,7 @@ class VariantMarking
     /**
      * @return bool
      */
-    public function isFreeEntryNumberOfPositions(): bool
+    public function isFreeEntryNumberOfPositions()
     {
         return $this->freeEntryNumberOfPositions;
     }
@@ -526,7 +532,7 @@ class VariantMarking
     /**
      * @return array
      */
-    public function getDynamicVariablePriceHolders(): array
+    public function getDynamicVariablePriceHolders()
     {
         return $this->dynamicVariablePriceHolders;
     }
@@ -542,7 +548,7 @@ class VariantMarking
     /**
      * @return SupplierMarking
      */
-    public function getSupplierMarking(): SupplierMarking
+    public function getSupplierMarking()
     {
         return $this->supplierMarking;
     }
@@ -550,7 +556,7 @@ class VariantMarking
     /**
      * @return Marking
      */
-    public function getMarking(): Marking
+    public function getMarking()
     {
         return $this->marking;
     }
@@ -590,7 +596,7 @@ class VariantMarking
     /**
      * @return string
      */
-    public function getComment(): string
+    public function getComment()
     {
         return $this->comment;
     }
@@ -622,7 +628,7 @@ class VariantMarking
     /**
      * @return array
      */
-    public function getDynamicFixedPrices(): array
+    public function getDynamicFixedPrices()
     {
         return $this->dynamicFixedPrices;
     }

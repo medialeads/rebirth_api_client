@@ -5,12 +5,12 @@ namespace ES\APIv2Client\Model;
 class DynamicFixedPrice
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
     /**
-     * @var
+     * @var null|string
      */
     private $condition;
 
@@ -45,12 +45,12 @@ class DynamicFixedPrice
     private $value;
 
     /**
-     * @var SupplierProfile
+     * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param $condition
      * @param string $calculationValue
      * @param bool $totalPrice
@@ -58,9 +58,9 @@ class DynamicFixedPrice
      * @param array $markingFees
      * @param string $reducedValue
      * @param $value
-     * @param SupplierProfile $supplierProfile
+     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $condition, $calculationValue, $totalPrice, $projectId, $markingFees, $reducedValue, $value, $supplierProfile)
+    public function __construct($id, $condition, $calculationValue, $totalPrice, $projectId, $markingFees, $reducedValue, $value, SupplierProfileInterface $supplierProfile)
     {
         foreach ($markingFees as $markingFee) {
             if (!$markingFee instanceof MarkingFee) {
@@ -68,7 +68,7 @@ class DynamicFixedPrice
             }
         }
 
-        if (!$supplierProfile instanceof SupplierProfile) {
+        if (!$supplierProfile instanceof SupplierProfileInterface) {
             throw new \InvalidArgumentException();
         }
 
@@ -84,7 +84,7 @@ class DynamicFixedPrice
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -92,7 +92,7 @@ class DynamicFixedPrice
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCondition()
     {
@@ -148,7 +148,7 @@ class DynamicFixedPrice
     }
 
     /**
-     * @return SupplierProfile
+     * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {

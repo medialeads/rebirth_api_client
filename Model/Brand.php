@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class Brand
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -30,7 +30,7 @@ class Brand
     private $slug;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $projectId
      * @param string $name
      * @param string $suffix
@@ -46,7 +46,7 @@ class Brand
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

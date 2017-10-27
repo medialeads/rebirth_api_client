@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class Category
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -20,7 +20,7 @@ class Category
     private $projectId;
 
     /**
-     * @var int|null
+     * @var null|string
      */
     private $parentId;
 
@@ -36,10 +36,10 @@ class Category
 
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $fullHierarchyName
      * @param string $projectId
-     * @param int|null $parentId
+     * @param null|string $parentId
      * @param string $name
      * @param string $slug
      */
@@ -54,7 +54,7 @@ class Category
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -78,7 +78,7 @@ class Category
     }
 
     /**
-     * @return int|null
+     * @return null|string
      */
     public function getParentId()
     {

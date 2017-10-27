@@ -5,7 +5,7 @@ namespace ES\APIv2Client\Model;
 class MarkingFee
 {
     /**
-     * @var int
+     * @var string
      */
     private $id;
 
@@ -25,7 +25,7 @@ class MarkingFee
     private $slug;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $projectId
      * @param string $name
      * @param string $slug
@@ -39,7 +39,7 @@ class MarkingFee
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

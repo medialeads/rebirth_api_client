@@ -21,6 +21,9 @@ class Client
         $this->key = $key;
     }
 
+    /**
+     * @return array|mixed|null
+     */
     public function search()
     {
         $ch = curl_init(self::URL);
