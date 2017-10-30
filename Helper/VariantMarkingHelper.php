@@ -39,15 +39,15 @@ class VariantMarkingHelper
 
         $isTotalPrice = true;
 
-        foreach (array_merge($classVariantMarking->getDynamicFixedPrices()->filter(function (DynamicFixedPrice $variantSimpleMarkingDynamicFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        foreach (array_merge(array_filter($classVariantMarking->getDynamicFixedPrices(), (function (DynamicFixedPrice $variantSimpleMarkingDynamicFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingDynamicFixedPrice->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingDynamicFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingDynamicFixedPrice->getCondition(), $variantMarkingOptionsValues));
-        })->toArray(), $classVariantMarking->getDynamicFixedPrices()->filter(function (StaticFixedPrice $variantSimpleMarkingStaticFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        })), array_filter($classVariantMarking->getDynamicFixedPrices(), (function (StaticFixedPrice $variantSimpleMarkingStaticFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingStaticFixedPrice->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingStaticFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingStaticFixedPrice->getCondition(), $variantMarkingOptionsValues));
-        })->toArray()) as $variantSimpleMarkingFixedPrice) {
+        }))) as $variantSimpleMarkingFixedPrice) {
             if ($variantSimpleMarkingFixedPrice instanceof DynamicFixedPrice) {
                 $value = floatval($expressionLanguage->evaluate($variantSimpleMarkingFixedPrice->getCalculationValue(), $variantMarkingOptionsValues));
             } elseif ($variantSimpleMarkingFixedPrice instanceof StaticFixedPrice) {
@@ -67,23 +67,23 @@ class VariantMarkingHelper
             $isTotalPrice = $isTotalPrice && $variantSimpleMarkingFixedPrice->isTotalPrice();
         }
 
-        foreach (array_merge($classVariantMarking->getDynamicVariablePriceHolders()->filter(function (DynamicVariablePriceHolder $variantSimpleMarkingDynamicVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        foreach (array_merge(array_filter($classVariantMarking->getDynamicVariablePriceHolders(), (function (DynamicVariablePriceHolder $variantSimpleMarkingDynamicVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingDynamicVariablePriceHolder->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingDynamicVariablePriceHolder->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingDynamicVariablePriceHolder->getCondition(), $variantMarkingOptionsValues));
-        })->toArray(), $classVariantMarking->getStaticVariablePriceHolders()->filter(function (StaticVariablePriceHolder $variantSimpleMarkingStaticVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        })),array_filter($classVariantMarking->getStaticVariablePriceHolders(), (function (StaticVariablePriceHolder $variantSimpleMarkingStaticVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingStaticVariablePriceHolder->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingStaticVariablePriceHolder->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingStaticVariablePriceHolder->getCondition(), $variantMarkingOptionsValues));
-        })->toArray()) as $variantSimpleMarkingVariablePriceHolder) {
+        }))) as $variantSimpleMarkingVariablePriceHolder) {
             $value = null;
 
             if ($variantSimpleMarkingVariablePriceHolder instanceof DynamicVariablePriceHolder) {
                 $matchingVariantSimpleMarkingDynamicVariablePrice = null;
                 /* @var DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice */
-                foreach ($variantSimpleMarkingVariablePriceHolder->getDynamicVariablePrices()->filter(function (DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice) use ($quantity) {
+                foreach (array_filter($variantSimpleMarkingVariablePriceHolder->getDynamicVariablePrices(), (function (DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice) use ($quantity) {
                     return $variantSimpleMarkingDynamicVariablePrice->getFromQuantity() < $quantity;
-                }) as $variantSimpleMarkingDynamicVariablePrice) {
+                })) as $variantSimpleMarkingDynamicVariablePrice) {
                     if (!$matchingVariantSimpleMarkingDynamicVariablePrice instanceof DynamicVariablePrice || ($variantSimpleMarkingDynamicVariablePrice->getFromQuantity() > $matchingVariantSimpleMarkingDynamicVariablePrice->getFromQuantity())) {
                         $matchingVariantSimpleMarkingDynamicVariablePrice = $variantSimpleMarkingDynamicVariablePrice;
                     }
@@ -95,9 +95,9 @@ class VariantMarkingHelper
             } elseif ($variantSimpleMarkingVariablePriceHolder instanceof StaticVariablePriceHolder) {
                 $matchingVariantSimpleMarkingStaticVariablePrice = null;
                 /* @var StaticVariablePrice $variantSimpleMarkingStaticVariablePrice */
-                foreach ($variantSimpleMarkingVariablePriceHolder->getStaticVariablePrices()->filter(function (StaticVariablePrice $variantSimpleMarkingStaticVariablePrice) use ($quantity) {
+                foreach (array_filter($variantSimpleMarkingVariablePriceHolder->getStaticVariablePrices(), (function (StaticVariablePrice $variantSimpleMarkingStaticVariablePrice) use ($quantity) {
                     return $variantSimpleMarkingStaticVariablePrice->getFromQuantity() < $quantity;
-                }) as $variantSimpleMarkingStaticVariablePrice) {
+                })) as $variantSimpleMarkingStaticVariablePrice) {
                     if (!$matchingVariantSimpleMarkingStaticVariablePrice instanceof StaticVariablePrice || ($variantSimpleMarkingStaticVariablePrice->getFromQuantity() > $matchingVariantSimpleMarkingStaticVariablePrice->getFromQuantity())) {
                         $matchingVariantSimpleMarkingStaticVariablePrice = $variantSimpleMarkingStaticVariablePrice;
                     }

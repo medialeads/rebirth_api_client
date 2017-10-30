@@ -54,10 +54,10 @@ class VariantHelper
 
         $matchingVariantPrice = null;
         /* @var VariantPrice $variantPrice */
-        foreach ($variant->getVariantPrices()->filter(function (VariantPrice $variantPrice) use ($supplierProfile, $quantity) {
+        foreach (array_filter($variant->getVariantPrices(), (function (VariantPrice $variantPrice) use ($supplierProfile, $quantity) {
             return $variantPrice->getSupplierProfile() === $supplierProfile &&
                 $variantPrice->getFromQuantity() < $quantity;
-        }) as $variantPrice) {
+        })) as $variantPrice) {
             if (!$matchingVariantPrice instanceof VariantPrice || ($variantPrice->getFromQuantity() > $matchingVariantPrice->getFromQuantity())) {
                 $matchingVariantPrice = $variantPrice;
             }

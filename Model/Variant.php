@@ -2,7 +2,7 @@
 
 namespace ES\APIv2Client\Model;
 
-use Helper\VariantHelper;
+use ES\APIv2Client\Helper\VariantHelper;
 
 class Variant
 {
@@ -137,7 +137,7 @@ class Variant
     private $name;
 
     /**
-     * @var
+     * @var array
      */
     private $variantListPrices;
 
@@ -357,7 +357,7 @@ class Variant
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getStock()
     {

@@ -213,7 +213,7 @@ class VariantMarkingModel
     /**
      * @return bool
      */
-    public function isFullColor(): bool
+    public function isFullColor()
     {
         return $this->fullColor;
     }
@@ -223,7 +223,7 @@ class VariantMarkingModel
      *
      * @return $this
      */
-    public function setFullColor(bool $fullColor)
+    public function setFullColor($fullColor)
     {
         $this->fullColor = $fullColor;
 

@@ -643,7 +643,7 @@ class VariantMarking
         return $this->maximumSquaredSize;
     }
 
-    public function getCalculatedPrice(SupplierProfile $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
+    public function getCalculatedPrice(SupplierProfileInterface $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
     {
         return VariantMarkingHelper::getCalculatedPrice($this, $supplierProfile, $quantity, $variantMarkingModel);
     }
