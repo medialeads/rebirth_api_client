@@ -230,4 +230,47 @@ class VariantMarkingModel
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getOptionsValues()
+    {
+        $optionsValues = array();
+
+        if (null !== $this->length) {
+            $optionsValues['longueur'] = $this->length;
+        }
+
+        if (null !== $this->width) {
+            $optionsValues['largeur'] = $this->width;
+        }
+
+        if (null !== $this->squaredSize) {
+            $optionsValues['superficie'] = $this->squaredSize;
+        }
+
+        if (null !== $this->diameter) {
+            $optionsValues['diametre'] = $this->diameter;
+        }
+
+        if (null !== $this->numberOfColors) {
+            $optionsValues['nb_couleurs'] = $this->numberOfColors;
+        }
+
+        if (null !== $this->numberOfPositions) {
+            $optionsValues['nb_positions'] = $this->numberOfPositions;
+        }
+
+        if (null !== $this->numberOfLogos) {
+            $optionsValues['nb_logos'] = $this->numberOfLogos;
+        }
+
+        if (null !== $this->fullColor) {
+            $optionsValues['quadrichromie'] = $this->fullColor;
+        }
+
+        $optionsValues['quantite'] = null;
+
+        return $optionsValues;
+    }
 }

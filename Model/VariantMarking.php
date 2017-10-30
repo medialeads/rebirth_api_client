@@ -42,6 +42,11 @@ class VariantMarking
     private $freeEntryNumberOfLogos;
 
     /**
+     * @var int|null
+     */
+    private $numberOfLogos;
+
+    /**
      * @var float|null
      */
     private $maximumDiameter;
@@ -209,6 +214,7 @@ class VariantMarking
      * @param float|null $minimumDiameter
      * @param int|null $numberOfPositions
      * @param bool $freeEntryNumberOfLogos
+     * @param int|null $numberOfLogos
      * @param float|null $maximumDiameter
      * @param float|null $diameter
      * @param string $projectId
@@ -242,7 +248,7 @@ class VariantMarking
      * @param array $dynamicFixedPrices
      * @param float|null $maximumSquaredSize
      */
-    public function __construct($id, $freeEntrySquaredSize, $type, $minimumLength, $minimumDiameter, $numberOfPositions, $freeEntryNumberOfLogos, $maximumDiameter, $diameter, $projectId, $freeEntryLength, $staticVariablePriceHolders, $minimumNumberOfColors, $freeEntryDiameter, $staticFixedPrices, $fullColor, $markingPosition, $freeEntryNumberOfColors, $maximumNumberOfPositions, $freeEntryNumberOfPositions, $maximumQuantity, $minimumNumberOfLogos, $length, $minimumWidth, $minimumSquaredSize, $dynamicVariablePriceHolders, $numberOfColors, $supplierMarking, $marking, $maximumLength, $squaredSize, $width, $maximumNumberOfLogos, $comment, $maximumWidth, $minimumQuantity, $maximumNumberOfColors, $dynamicFixedPrices, $maximumSquaredSize)
+    public function __construct($id, $freeEntrySquaredSize, $type, $minimumLength, $minimumDiameter, $numberOfPositions, $freeEntryNumberOfLogos, $numberOfLogos, $maximumDiameter, $diameter, $projectId, $freeEntryLength, $staticVariablePriceHolders, $minimumNumberOfColors, $freeEntryDiameter, $staticFixedPrices, $fullColor, $markingPosition, $freeEntryNumberOfColors, $maximumNumberOfPositions, $freeEntryNumberOfPositions, $maximumQuantity, $minimumNumberOfLogos, $length, $minimumWidth, $minimumSquaredSize, $dynamicVariablePriceHolders, $numberOfColors, $supplierMarking, $marking, $maximumLength, $squaredSize, $width, $maximumNumberOfLogos, $comment, $maximumWidth, $minimumQuantity, $maximumNumberOfColors, $dynamicFixedPrices, $maximumSquaredSize)
     {
         foreach ($staticVariablePriceHolders as $staticVariablePriceHolder)
         {
@@ -297,6 +303,7 @@ class VariantMarking
         $this->minimumDiameter = $minimumDiameter;
         $this->numberOfPositions = $numberOfPositions;
         $this->freeEntryNumberOfLogos = $freeEntryNumberOfLogos;
+        $this->numberOfLogos = $numberOfLogos;
         $this->maximumDiameter =$maximumDiameter;
         $this->diameter = $diameter;
         $this->projectId = $projectId;
@@ -385,6 +392,14 @@ class VariantMarking
     public function isFreeEntryNumberOfLogos()
     {
         return $this->freeEntryNumberOfLogos;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getNumberOfLogos()
+    {
+        return $this->numberOfLogos;
     }
 
     /**
@@ -646,5 +661,49 @@ class VariantMarking
     public function getCalculatedPrice(SupplierProfileInterface $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
     {
         return VariantMarkingHelper::getCalculatedPrice($this, $supplierProfile, $quantity, $variantMarkingModel);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptionsValues()
+    {
+        $optionsValues = array();
+
+        if (null !== $this->length) {
+            $optionsValues['longueur'] = $this->length;
+        }
+
+        if (null !== $this->width) {
+            $optionsValues['largeur'] = $this->width;
+        }
+
+        if (null !== $this->squaredSize) {
+            $optionsValues['superficie'] = $this->squaredSize;
+        }
+
+        if (null !== $this->diameter) {
+            $optionsValues['diametre'] = $this->diameter;
+        }
+
+        if (null !== $this->numberOfColors) {
+            $optionsValues['nb_couleurs'] = $this->numberOfColors;
+        }
+
+        if (null !== $this->numberOfPositions) {
+            $optionsValues['nb_positions'] = $this->numberOfPositions;
+        }
+
+        if (null !== $this->numberOfLogos) {
+            $optionsValues['nb_logos'] = $this->numberOfLogos;
+        }
+
+        if (null !== $this->fullColor) {
+            $optionsValues['quadrichromie'] = $this->fullColor;
+        }
+
+        $optionsValues['quantite'] = null;
+
+        return $optionsValues;
     }
 }

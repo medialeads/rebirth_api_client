@@ -25,25 +25,26 @@ class VariantMarkingHelper
      *
      * @return CalculatedPrice
      */
-    public static function getCalculatedPrice(VariantMarking $classVariantMarking, SupplierProfileInterface $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
+    public static function getCalculatedPrice(SupplierProfileInterface $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
     {
         $variantMarking = $variantMarkingModel->getVariantMarking();
         if (!$variantMarking instanceof VariantMarking) {
             throw new \UnexpectedValueException($variantMarking, VariantMarking::class);
         }
 
-        $variantMarkingOptionsValues = (array) $variantMarking;
-
+        $variantMarkingOptionsValues = array_merge($variantMarking->getOptionsValues(), $variantMarkingModel->getOptionsValues(), array(
+            'quantite' => $quantity
+        ));
         $expressionLanguage = new ExpressionLanguage();
         $calculatedPrice = new VariantSimpleMarkingCalculatedPrice();
 
         $isTotalPrice = true;
 
-        foreach (array_merge(array_filter($classVariantMarking->getDynamicFixedPrices(), (function (DynamicFixedPrice $variantSimpleMarkingDynamicFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        foreach (array_merge(array_filter($variantMarking->getDynamicFixedPrices(), (function (DynamicFixedPrice $variantSimpleMarkingDynamicFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingDynamicFixedPrice->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingDynamicFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingDynamicFixedPrice->getCondition(), $variantMarkingOptionsValues));
-        })), array_filter($classVariantMarking->getDynamicFixedPrices(), (function (StaticFixedPrice $variantSimpleMarkingStaticFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        })), array_filter($variantMarking->getDynamicFixedPrices(), (function (StaticFixedPrice $variantSimpleMarkingStaticFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingStaticFixedPrice->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingStaticFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingStaticFixedPrice->getCondition(), $variantMarkingOptionsValues));
@@ -67,11 +68,11 @@ class VariantMarkingHelper
             $isTotalPrice = $isTotalPrice && $variantSimpleMarkingFixedPrice->isTotalPrice();
         }
 
-        foreach (array_merge(array_filter($classVariantMarking->getDynamicVariablePriceHolders(), (function (DynamicVariablePriceHolder $variantSimpleMarkingDynamicVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        foreach (array_merge(array_filter($variantMarking->getDynamicVariablePriceHolders(), (function (DynamicVariablePriceHolder $variantSimpleMarkingDynamicVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingDynamicVariablePriceHolder->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingDynamicVariablePriceHolder->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingDynamicVariablePriceHolder->getCondition(), $variantMarkingOptionsValues));
-        })), array_filter($classVariantMarking->getStaticVariablePriceHolders(), (function (StaticVariablePriceHolder $variantSimpleMarkingStaticVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        })), array_filter($variantMarking->getStaticVariablePriceHolders(), (function (StaticVariablePriceHolder $variantSimpleMarkingStaticVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingStaticVariablePriceHolder->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingStaticVariablePriceHolder->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingStaticVariablePriceHolder->getCondition(), $variantMarkingOptionsValues));
