@@ -11,7 +11,7 @@ class VariantImageTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $variantImages): array
+    public static function doFromArray($variantImages)
     {
         $response = array();
         foreach ($variantImages as $variantImage) {

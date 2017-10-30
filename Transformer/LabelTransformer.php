@@ -11,7 +11,7 @@ class LabelTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $labels): array
+    public static function doFromArray($labels)
     {
         $response = array();
         foreach ($labels as $label) {

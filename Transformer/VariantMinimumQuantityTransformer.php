@@ -11,7 +11,7 @@ class VariantMinimumQuantityTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $variantMinimumQuantities): array
+    public static function doFromArray($variantMinimumQuantities)
     {
         $response = array();
         foreach ($variantMinimumQuantities as $variantMinimumQuantity) {

@@ -37,5 +37,5 @@ abstract class AbstractTransformer
      * @param array $array
      * @return array
      */
-    abstract protected static function doFromArray(array $array): array;
+    abstract protected static function doFromArray($array);
 }

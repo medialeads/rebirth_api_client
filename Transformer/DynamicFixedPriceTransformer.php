@@ -11,7 +11,7 @@ class DynamicFixedPriceTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $dynamicFixedPrices): array
+    public static function doFromArray($dynamicFixedPrices)
     {
         $response = array();
         foreach ($dynamicFixedPrices as $dynamicFixedPrice) {

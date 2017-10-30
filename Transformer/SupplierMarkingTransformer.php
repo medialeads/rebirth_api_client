@@ -11,7 +11,7 @@ class SupplierMarkingTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $supplierMarkings): array
+    public static function doFromArray($supplierMarkings)
     {
         $response = array();
         foreach ($supplierMarkings as $supplierMarking) {

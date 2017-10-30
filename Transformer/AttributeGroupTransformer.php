@@ -11,7 +11,7 @@ class AttributeGroupTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $attributeGroups): array
+    public static function doFromArray($attributeGroups)
     {
         $response = array();
         foreach ($attributeGroups as $attributeGroup) {

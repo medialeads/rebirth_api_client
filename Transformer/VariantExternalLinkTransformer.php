@@ -11,7 +11,7 @@ class VariantExternalLinkTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $variantExternalLinks): array
+    public static function doFromArray($variantExternalLinks)
     {
         $response = array();
         foreach ($variantExternalLinks as $variantExternalLink) {

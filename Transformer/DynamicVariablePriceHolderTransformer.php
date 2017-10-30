@@ -11,7 +11,7 @@ class DynamicVariablePriceHolderTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $dynamicVariablePriceHolders): array
+    public static function doFromArray($dynamicVariablePriceHolders)
     {
         $response = array();
         foreach ($dynamicVariablePriceHolders as $dynamicVariablePriceHolder) {

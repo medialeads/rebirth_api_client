@@ -11,7 +11,7 @@ class CategoryTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $categories): array
+    public static function doFromArray($categories)
     {
         $response = array();
         foreach ($categories as $category) {

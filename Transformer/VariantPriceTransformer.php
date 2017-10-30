@@ -11,7 +11,7 @@ class VariantPriceTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $variantPrices): array
+    public static function doFromArray($variantPrices)
     {
         $response = array();
         foreach ($variantPrices as $variantPrice) {

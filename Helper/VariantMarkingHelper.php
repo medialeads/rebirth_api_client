@@ -71,7 +71,7 @@ class VariantMarkingHelper
             return $variantSimpleMarkingDynamicVariablePriceHolder->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingDynamicVariablePriceHolder->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingDynamicVariablePriceHolder->getCondition(), $variantMarkingOptionsValues));
-        })),array_filter($classVariantMarking->getStaticVariablePriceHolders(), (function (StaticVariablePriceHolder $variantSimpleMarkingStaticVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        })), array_filter($classVariantMarking->getStaticVariablePriceHolders(), (function (StaticVariablePriceHolder $variantSimpleMarkingStaticVariablePriceHolder) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingStaticVariablePriceHolder->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingStaticVariablePriceHolder->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingStaticVariablePriceHolder->getCondition(), $variantMarkingOptionsValues));

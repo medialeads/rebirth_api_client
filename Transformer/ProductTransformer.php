@@ -11,7 +11,7 @@ class ProductTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $products): array
+    public static function doFromArray($products)
     {
         $response = array();
         foreach ($products as $product) {

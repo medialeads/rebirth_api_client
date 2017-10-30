@@ -11,7 +11,7 @@ class VariantMarkingTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $variantMarkings): array
+    public static function doFromArray($variantMarkings)
     {
         $response = array();
         foreach ($variantMarkings as $variantMarking) {

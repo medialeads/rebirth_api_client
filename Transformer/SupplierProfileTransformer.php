@@ -17,7 +17,7 @@ class SupplierProfileTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $supplierProfiles): array
+    public static function doFromArray($supplierProfiles)
     {
         $response = array();
         foreach ($supplierProfiles as $supplierProfile) {

@@ -11,7 +11,7 @@ class MarkingPositionTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $markingPositions): array
+    public static function doFromArray($markingPositions)
     {
         $response = array();
         foreach ($markingPositions as $markingPosition) {

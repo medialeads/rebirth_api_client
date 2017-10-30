@@ -11,7 +11,7 @@ class BrandTransformer extends AbstractTransformer
      *
      * @return array
      */
-    public static function doFromArray(array $brands): array
+    public static function doFromArray($brands)
     {
         $response = array();
         foreach ($brands as $brand) {
