@@ -15,11 +15,10 @@ class StaticVariablePrice extends Price
      * @param float $reducedValue
      * @param int $fromQuantity
      * @param mixed $value
-     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $calculationValue, $reducedValue, $fromQuantity, $value, SupplierProfileInterface $supplierProfile)
+    public function __construct($id, $calculationValue, $reducedValue, $fromQuantity, $value)
     {
-        parent::__construct($id, $calculationValue, $reducedValue, $value, $supplierProfile);
+        parent::__construct($id, $calculationValue, $reducedValue, $value);
 
         $this->fromQuantity = $fromQuantity;
     }
@@ -27,7 +26,7 @@ class StaticVariablePrice extends Price
     /**
      * @return int
      */
-    public function getFromQuantity(): int
+    public function getFromQuantity()
     {
         return $this->fromQuantity;
     }

@@ -15,6 +15,7 @@ class MarkingTransformer extends AbstractTransformer
     {
         $response = array();
         foreach ($markings as $marking) {
+            $hierarchy = null;
             foreach ($marking['hierarchy'] as $hierarchy) {
                 if (isset($hierarchy['id']) && $hierarchy['id'] = $marking['parent_id']) {
                     $parent = $hierarchy;

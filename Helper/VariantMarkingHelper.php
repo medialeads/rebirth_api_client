@@ -18,7 +18,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 class VariantMarkingHelper
 {
     /**
-     * @param VariantMarking $classVariantMarking
      * @param SupplierProfileInterface $supplierProfile
      * @param int $quantity
      * @param VariantMarkingModel $variantMarkingModel
@@ -44,7 +43,7 @@ class VariantMarkingHelper
             return $variantSimpleMarkingDynamicFixedPrice->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingDynamicFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingDynamicFixedPrice->getCondition(), $variantMarkingOptionsValues));
-        })), array_filter($variantMarking->getDynamicFixedPrices(), (function (StaticFixedPrice $variantSimpleMarkingStaticFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
+        })), array_filter($variantMarking->getStaticFixedPrices(), (function (StaticFixedPrice $variantSimpleMarkingStaticFixedPrice) use ($supplierProfile, $expressionLanguage, $variantMarkingOptionsValues) {
             return $variantSimpleMarkingStaticFixedPrice->getSupplierProfile() === $supplierProfile &&
                 (null === $variantSimpleMarkingStaticFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($variantSimpleMarkingStaticFixedPrice->getCondition(), $variantMarkingOptionsValues));

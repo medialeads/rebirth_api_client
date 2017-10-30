@@ -660,7 +660,7 @@ class VariantMarking
 
     public function getCalculatedPrice(SupplierProfileInterface $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
     {
-        return VariantMarkingHelper::getCalculatedPrice($this, $supplierProfile, $quantity, $variantMarkingModel);
+        return VariantMarkingHelper::getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModel);
     }
 
     /**

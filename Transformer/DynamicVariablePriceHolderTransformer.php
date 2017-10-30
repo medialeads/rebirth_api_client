@@ -18,10 +18,7 @@ class DynamicVariablePriceHolderTransformer extends AbstractTransformer
 
             $markingFees = MarkingFeeTransformer::fromArray($dynamicVariablePriceHolder['marking_fees']);
 
-            $dynamicVariablePrices = array();
-            foreach ($dynamicVariablePriceHolder['static_variable_prices'] as $dynamicVariablePrice) {
-                $dynamicVariablePrices[] = StaticFixedPriceTransformer::fromArray($dynamicVariablePrice);
-            }
+            $dynamicVariablePrices = DynamicVariablePriceTransformer::fromArray($dynamicVariablePriceHolder['dynamic_variable_prices']);
 
             $supplierProfile = SupplierProfileTransformer::fromArray($dynamicVariablePriceHolder['supplier_profile']);
 

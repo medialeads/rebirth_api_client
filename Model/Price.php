@@ -25,28 +25,17 @@ class Price
     private $value;
 
     /**
-     * @var SupplierProfileInterface
-     */
-    private $supplierProfile;
-
-    /**
      * @param string $id
      * @param float $calculationValue
      * @param float $reducedValue
      * @param float $value
-     * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $calculationValue, $reducedValue, $value, SupplierProfileInterface $supplierProfile)
+    public function __construct($id, $calculationValue, $reducedValue, $value)
     {
-        if ($supplierProfile instanceof SupplierProfileInterface) {
-            throw new \InvalidArgumentException();
-        }
-
         $this->id = $id;
         $this->calculationValue = $calculationValue;
         $this->reducedValue = $reducedValue;
         $this->value = $value;
-        $this->supplierProfile = $supplierProfile;
     }
 
     /**
@@ -79,13 +68,5 @@ class Price
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * @return SupplierProfileInterface
-     */
-    public function getSupplierProfile()
-    {
-        return $this->supplierProfile;
     }
 }

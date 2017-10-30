@@ -112,9 +112,9 @@ class Product
      * @param array $categories
      * @param string $supplierBaseReference
      * @param string $internalReference
-     * @param Brand $brand
+     * @param Brand|null $brand
      */
-    public function __construct($id, \DateTimeInterface $lastIndexedAt, $projectKey, $countryOfOrigin, $mainProductImageId, $variants, $unionCustomsCode, $mainCategoryId, $labels, $productImages, $visibleOn, $projectId, $mainVariantId, Supplier $supplier, $categories, $supplierBaseReference, $internalReference, Brand $brand)
+    public function __construct($id, \DateTimeInterface $lastIndexedAt, $projectKey, $countryOfOrigin, $mainProductImageId, $variants, $unionCustomsCode, $mainCategoryId, $labels, $productImages, $visibleOn, $projectId, $mainVariantId, Supplier $supplier, $categories, $supplierBaseReference, $internalReference, $brand)
     {
         foreach ($variants as $variant) {
             if (!$variant instanceof Variant) {
@@ -143,10 +143,6 @@ class Product
             if (!$category instanceof Category) {
                 throw new \InvalidArgumentException();
             }
-        }
-
-        if (!$brand instanceof Brand) {
-            throw new \InvalidArgumentException();
         }
 
         $this->id = $id;

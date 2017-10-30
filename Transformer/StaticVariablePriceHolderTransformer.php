@@ -17,7 +17,7 @@ class StaticVariablePriceHolderTransformer extends AbstractTransformer
         foreach ($staticVariablePriceHolders as $staticVariablePriceHolder) {
             $markingFees = MarkingFeeTransformer::fromArray($staticVariablePriceHolder['marking_fees']);
 
-            $staticVariablePrices[] = StaticVariablePriceTransformer::fromArray($staticVariablePriceHolder['static_variable_prices']);
+            $staticVariablePrices = StaticVariablePriceTransformer::fromArray($staticVariablePriceHolder['static_variable_prices']);
 
             $supplierProfile = SupplierProfileTransformer::fromArray($staticVariablePriceHolder['supplier_profile']);
 

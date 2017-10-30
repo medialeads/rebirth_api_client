@@ -12,11 +12,6 @@ class VariantExternalLink
     /**
      * @var string
      */
-    private $projectId;
-
-    /**
-     * @var string
-     */
     private $type;
 
     /**
@@ -26,14 +21,12 @@ class VariantExternalLink
 
     /**
      * @param string $id
-     * @param string $projectId
      * @param string $type
      * @param string $url
      */
-    public function __construct($id, $projectId, $type, $url)
+    public function __construct($id, $type, $url)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->type = $type;
         $this->url = $url;
     }
@@ -44,14 +37,6 @@ class VariantExternalLink
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
     }
 
     /**

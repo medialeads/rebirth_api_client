@@ -10,6 +10,11 @@ class VariantPrice extends Price
     private $fromQuantity;
 
     /**
+     * @var SupplierProfileInterface
+     */
+    private $supplierProfile;
+
+    /**
      * @param string $id
      * @param float $calculationValue
      * @param float $reducedValue
@@ -19,9 +24,10 @@ class VariantPrice extends Price
      */
     public function __construct($id, $calculationValue, $reducedValue, $value, SupplierProfileInterface $supplierProfile, $fromQuantity)
     {
-        parent::__construct($id, $calculationValue, $reducedValue, $value, $supplierProfile);
+        parent::__construct($id, $calculationValue, $reducedValue, $value);
 
         $this->fromQuantity = $fromQuantity;
+        $this->supplierProfile = $supplierProfile;
     }
 
     /**
@@ -30,5 +36,13 @@ class VariantPrice extends Price
     public function getFromQuantity()
     {
         return $this->fromQuantity;
+    }
+
+    /**
+     * @return SupplierProfileInterface
+     */
+    public function getSupplierProfile()
+    {
+        return $this->supplierProfile;
     }
 }

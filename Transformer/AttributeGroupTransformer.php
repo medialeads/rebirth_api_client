@@ -2,7 +2,7 @@
 
 namespace ES\APIv2Client\Transformer;
 
-use ES\Apiv2Client\Model\AttributeGroup;
+use ES\APIv2Client\Model\AttributeGroup;
 
 class AttributeGroupTransformer extends AbstractTransformer
 {
