@@ -6,8 +6,6 @@ use ES\APIv2Client\Model\Product;
 
 require_once __DIR__.'/vendor/autoload.php';
 
-
-var_dump(get_loaded_extensions()); die();
 $client = new Client("lol");
 $products = $client->search();
 foreach ($products as $product) {
