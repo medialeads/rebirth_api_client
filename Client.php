@@ -64,8 +64,11 @@ class Client
     {
         /** @var SupplierProfile $supplierProfile */
         $supplierProfile = $variant->getSupplierProfiles()[0];
-        $quantity = 2;
+        $quantity = 50000;
         /** @var VariantMarking $variantMarking */
+        if (empty($variant->getVariantMarkings())) {
+            return;
+        }
         $variantMarking = $variant->getVariantMarkings()[0];
         $variantMarkingModel = new VariantMarkingModel();
         $variantMarkingModel->setVariantMarking($variantMarking);
@@ -79,6 +82,7 @@ class Client
         $variantMarkingModel->setNumberOfPositions($variantMarking->getNumberOfPositions());
         $variantMarkingModels = array($variantMarkingModel);
 
-        return $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
+
+        return var_dump($variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels)->getValue());
     }
 }
