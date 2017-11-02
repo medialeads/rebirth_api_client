@@ -11,10 +11,10 @@ class DynamicVariablePrice extends Price
 
     /**
      * @param string $id
-     * @param float $calculationValue
-     * @param float $reducedValue
+     * @param float|string $calculationValue
+     * @param float|string $reducedValue
      * @param int $fromQuantity
-     * @param mixed $value
+     * @param float|string $value
      */
     public function __construct($id, $calculationValue, $reducedValue, $fromQuantity, $value)
     {

@@ -82,7 +82,7 @@ class VariantMarkingHelper
                 $matchingVariantSimpleMarkingDynamicVariablePrice = null;
                 /* @var DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice */
                 foreach (array_filter($variantSimpleMarkingVariablePriceHolder->getDynamicVariablePrices(), (function (DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice) use ($quantity) {
-                    return $variantSimpleMarkingDynamicVariablePrice->getFromQuantity() < $quantity;
+                    return $variantSimpleMarkingDynamicVariablePrice->getFromQuantity() <= $quantity;
                 })) as $variantSimpleMarkingDynamicVariablePrice) {
                     if (!$matchingVariantSimpleMarkingDynamicVariablePrice instanceof DynamicVariablePrice || ($variantSimpleMarkingDynamicVariablePrice->getFromQuantity() > $matchingVariantSimpleMarkingDynamicVariablePrice->getFromQuantity())) {
                         $matchingVariantSimpleMarkingDynamicVariablePrice = $variantSimpleMarkingDynamicVariablePrice;
@@ -96,7 +96,7 @@ class VariantMarkingHelper
                 $matchingVariantSimpleMarkingStaticVariablePrice = null;
                 /* @var StaticVariablePrice $variantSimpleMarkingStaticVariablePrice */
                 foreach (array_filter($variantSimpleMarkingVariablePriceHolder->getStaticVariablePrices(), (function (StaticVariablePrice $variantSimpleMarkingStaticVariablePrice) use ($quantity) {
-                    return $variantSimpleMarkingStaticVariablePrice->getFromQuantity() < $quantity;
+                    return $variantSimpleMarkingStaticVariablePrice->getFromQuantity() <= $quantity;
                 })) as $variantSimpleMarkingStaticVariablePrice) {
                     if (!$matchingVariantSimpleMarkingStaticVariablePrice instanceof StaticVariablePrice || ($variantSimpleMarkingStaticVariablePrice->getFromQuantity() > $matchingVariantSimpleMarkingStaticVariablePrice->getFromQuantity())) {
                         $matchingVariantSimpleMarkingStaticVariablePrice = $variantSimpleMarkingStaticVariablePrice;

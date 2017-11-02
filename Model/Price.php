@@ -10,25 +10,25 @@ class Price
     private $id;
 
     /**
-     * @var float
+     * @var float|string
      */
     private $calculationValue;
 
     /**
-     * @var float
+     * @var float|string
      */
     private $reducedValue;
 
     /**
-     * @var float
+     * @var float|string
      */
     private $value;
 
     /**
      * @param string $id
-     * @param float $calculationValue
-     * @param float $reducedValue
-     * @param float $value
+     * @param float|string $calculationValue
+     * @param float|string $reducedValue
+     * @param float|string $value
      */
     public function __construct($id, $calculationValue, $reducedValue, $value)
     {
@@ -47,7 +47,7 @@ class Price
     }
 
     /**
-     * @return float
+     * @return float|string
      */
     public function getCalculationValue()
     {
@@ -55,7 +55,7 @@ class Price
     }
 
     /**
-     * @return float
+     * @return float|string
      */
     public function getReducedValue()
     {
@@ -63,7 +63,7 @@ class Price
     }
 
     /**
-     * @return float
+     * @return float|string
      */
     public function getValue()
     {

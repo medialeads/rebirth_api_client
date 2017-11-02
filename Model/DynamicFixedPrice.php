@@ -15,7 +15,7 @@ class DynamicFixedPrice
     private $condition;
 
     /**
-     * @var string
+     * @var float|string
      */
     private $calculationValue;
 
@@ -35,12 +35,12 @@ class DynamicFixedPrice
     private $markingFees;
 
     /**
-     * @var string
+     * @var float|string
      */
     private $reducedValue;
 
     /**
-     * @var string
+     * @var float|string
      */
     private $value;
 
@@ -52,7 +52,7 @@ class DynamicFixedPrice
     /**
      * @param string $id
      * @param $condition
-     * @param string $calculationValue
+     * @param float|string $calculationValue
      * @param bool $totalPrice
      * @param string $projectId
      * @param array $markingFees
@@ -100,7 +100,7 @@ class DynamicFixedPrice
     }
 
     /**
-     * @return string
+     * @return float|string
      */
     public function getCalculationValue()
     {
@@ -132,7 +132,7 @@ class DynamicFixedPrice
     }
 
     /**
-     * @return string
+     * @return float|string
      */
     public function getReducedValue()
     {
@@ -140,7 +140,7 @@ class DynamicFixedPrice
     }
 
     /**
-     * @return string
+     * @return float|string
      */
     public function getValue()
     {
