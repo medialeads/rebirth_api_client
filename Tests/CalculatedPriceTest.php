@@ -13,6 +13,8 @@ use ES\APIv2Client\Model\StaticFixedPrice;
 use ES\APIv2Client\Model\Marking;
 use ES\APIv2Client\Model\MarkingPosition;
 use ES\APIv2Client\Model\DynamicFixedPrice;
+use ES\APIv2Client\Model\StaticVariablePriceHolder;
+use ES\APIv2Client\Model\StaticVariablePrice;
 
 class CalculatedPriceTest extends TestCase
 {
@@ -93,5 +95,28 @@ class CalculatedPriceTest extends TestCase
 
         $calculatedPrice = $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
         $this->assertEquals(23, $calculatedPrice->getValue());
+
+        /**
+         *
+         * TEST 4 with StaticVariablePrices, DynamicFixedPrices, StaticFixedPrices, VariantPrices
+         *
+         */
+        $staticVariablePrices = array(new StaticVariablePrice('1', 5, 2, 2, 5));
+        $staticVariablePrices[] = new StaticVariablePrice('2', 10, 5, 1, 10);
+        $staticVariablePriceHolders = array(new StaticVariablePriceHolder('1', 'nb_couleurs>=0', false, '', array(), $staticVariablePrices, $supplierProfile));
+        $variantMarkings = array(new VariantMarking('1', true, '',null, null, 5, false, 5, null, null, '', false, $staticVariablePriceHolders, null, false, $staticFixedPrices, true, $markingPosition, false, 5, false, 50000, 1, null, null, null, $dynamicVariablePriceHolder, 1, array(), $marking, null, null, null, null, '', null, 2, null, $dynamicFixedPrices, null));
+        $variant = new Variant('1', '', $variantMarkings, $supplierProfiles, '', '', '', '', '', '','2', '', $variantPrices, '', '', '', '', '', array(), '','', '', array(), '', array(), 'name', array(), array(), '', false);
+        $quantity = 2;
+
+        $variantMarking = $variant->getVariantMarkings()[0];
+        $variantMarkingModel->setVariantMarking($variantMarking);
+        $variantMarkingModels = array($variantMarkingModel);
+
+        $calculatedPrice = $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
+        $this->assertEquals(43, $calculatedPrice->getValue());
+
+        $quantity = 4;
+        $calculatedPrice = $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
+        $this->assertEquals(61, $calculatedPrice->getValue());
     }
 }
