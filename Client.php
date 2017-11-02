@@ -128,33 +128,33 @@ class Client
         return $products;
     }
 
-    /**
-     * @param Variant $variant
-     * @return CalculatedPrice
-     */
-    public function price($variant)
-    {
-        /** @var SupplierProfile $supplierProfile */
-        $supplierProfile = $variant->getSupplierProfiles()[0];
-        $quantity = 50000;
-        /** @var VariantMarking $variantMarking */
-        if (empty($variant->getVariantMarkings())) {
-            return;
-        }
-        $variantMarking = $variant->getVariantMarkings()[0];
-        $variantMarkingModel = new VariantMarkingModel();
-        $variantMarkingModel->setVariantMarking($variantMarking);
-        $variantMarkingModel->setDiameter($variantMarking->getDiameter());
-        $variantMarkingModel->setFullColor($variantMarking->isFullColor());
-        $variantMarkingModel->setLength($variantMarking->getLength());
-        $variantMarkingModel->setWidth($variantMarking->getWidth());
-        $variantMarkingModel->setSquaredSize($variantMarking->getSquaredSize());
-        $variantMarkingModel->setNumberOfColors($variantMarking->getNumberOfColors());
-        $variantMarkingModel->setNumberOfLogos($variantMarking->getNumberOfLogos());
-        $variantMarkingModel->setNumberOfPositions($variantMarking->getNumberOfPositions());
-        $variantMarkingModels = array($variantMarkingModel);
-
-
-        return var_dump($variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels)->getValue());
-    }
+//    /**
+//     * @param Variant $variant
+//     * @return CalculatedPrice
+//     */
+//    public function price($variant)
+//    {
+//        /** @var SupplierProfile $supplierProfile */
+//        $supplierProfile = $variant->getSupplierProfiles()[0];
+//        $quantity = 50000;
+//        /** @var VariantMarking $variantMarking */
+//        if (empty($variant->getVariantMarkings())) {
+//            return;
+//        }
+//        $variantMarking = $variant->getVariantMarkings()[0];
+//        $variantMarkingModel = new VariantMarkingModel();
+//        $variantMarkingModel->setVariantMarking($variantMarking);
+//        $variantMarkingModel->setDiameter($variantMarking->getDiameter());
+//        $variantMarkingModel->setFullColor($variantMarking->isFullColor());
+//        $variantMarkingModel->setLength($variantMarking->getLength());
+//        $variantMarkingModel->setWidth($variantMarking->getWidth());
+//        $variantMarkingModel->setSquaredSize($variantMarking->getSquaredSize());
+//        $variantMarkingModel->setNumberOfColors($variantMarking->getNumberOfColors());
+//        $variantMarkingModel->setNumberOfLogos($variantMarking->getNumberOfLogos());
+//        $variantMarkingModel->setNumberOfPositions($variantMarking->getNumberOfPositions());
+//        $variantMarkingModels = array($variantMarkingModel);
+//
+//
+//        return $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels)->getValue();
+//    }
 }
