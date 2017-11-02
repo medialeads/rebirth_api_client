@@ -15,15 +15,17 @@ use ES\APIv2Client\Model\MarkingPosition;
 use ES\APIv2Client\Model\DynamicFixedPrice;
 use ES\APIv2Client\Model\StaticVariablePriceHolder;
 use ES\APIv2Client\Model\StaticVariablePrice;
+use ES\APIv2Client\Model\DynamicVariablePrice;
+use ES\APIv2Client\Model\DynamicVariablePriceHolder;
 
 class CalculatedPriceTest extends TestCase
 {
     public function test() {
 
         /**
-         *
+         * ------------------------------
          * TEST 1 with VariantPrices only
-         *
+         * ------------------------------
          */
         $supplierProfiles = array(new SupplierProfile('1', 'FR', '', 'name', '', true, ''));
         $variantPrices = array(new VariantPrice('1', '2', '1', '0.5', reset($supplierProfiles), '100'));
@@ -47,9 +49,9 @@ class CalculatedPriceTest extends TestCase
         $this->assertEquals(1000, $calculatedPrice->getValue());
 
         /**
-         *
+         * --------------------------------------------
          * TEST 2 with StaticFixedPrices, VariantPrices
-         *
+         * --------------------------------------------
          */
         $markingPosition = new MarkingPosition('1', '', 'name', 'name');
         $marking = new Marking('1', 'hierarchy > hierarchy', '', '', array(), 'name', 'name');
@@ -80,9 +82,9 @@ class CalculatedPriceTest extends TestCase
         $this->assertEquals(18, $calculatedPrice->getValue());
 
         /**
-         *
+         * ----------------------------------------------------------------
          * TEST 3 with DynamicFixedPrices, StaticFixedPrices, VariantPrices
-         *
+         * ----------------------------------------------------------------
          */
         $dynamicFixedPrices = array(new DynamicFixedPrice('1', 'nb_couleurs>0',5,true,'',array(),3,5, $supplierProfile));
         $variantMarkings = array(new VariantMarking('1', true, '',null, null, 5, false, 5, null, null, '', false, $staticVariablePriceHolders, null, false, $staticFixedPrices, true, $markingPosition, false, 5, false, 50000, 1, null, null, null, $dynamicVariablePriceHolder, 1, array(), $marking, null, null, null, null, '', null, 2, null, $dynamicFixedPrices, null));
@@ -97,11 +99,11 @@ class CalculatedPriceTest extends TestCase
         $this->assertEquals(23, $calculatedPrice->getValue());
 
         /**
-         *
+         * --------------------------------------------------------------------------------------
          * TEST 4 with StaticVariablePrices, DynamicFixedPrices, StaticFixedPrices, VariantPrices
-         *
+         * --------------------------------------------------------------------------------------
          */
-        $staticVariablePrices = array(new StaticVariablePrice('1', 5, 2, 2, 5));
+        $staticVariablePrices = array(new StaticVariablePrice('1', 5, 2, 3, 5));
         $staticVariablePrices[] = new StaticVariablePrice('2', 10, 5, 1, 10);
         $staticVariablePriceHolders = array(new StaticVariablePriceHolder('1', 'nb_couleurs>=0', false, '', array(), $staticVariablePrices, $supplierProfile));
         $variantMarkings = array(new VariantMarking('1', true, '',null, null, 5, false, 5, null, null, '', false, $staticVariablePriceHolders, null, false, $staticFixedPrices, true, $markingPosition, false, 5, false, 50000, 1, null, null, null, $dynamicVariablePriceHolder, 1, array(), $marking, null, null, null, null, '', null, 2, null, $dynamicFixedPrices, null));
@@ -118,5 +120,28 @@ class CalculatedPriceTest extends TestCase
         $quantity = 4;
         $calculatedPrice = $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
         $this->assertEquals(61, $calculatedPrice->getValue());
+
+        /**
+         * -------------------------------------------------------------------------------------------------------------
+         * TEST 5 with DynamicVariablePrices, StaticVariablePrices, DynamicFixedPrices, StaticFixedPrices, VariantPrices
+         * -------------------------------------------------------------------------------------------------------------
+         */
+        $dynamicVariablePrices = array(new DynamicVariablePrice('1', 5, 2.5, 3, 5));
+        $dynamicVariablePrices[] = new DynamicVariablePrice('2', 10, 5, 1, 10);
+        $dynamicVariablePriceHolders = array(new DynamicVariablePriceHolder('1', 'nb_couleurs==1', false, '', array(), $dynamicVariablePrices, $supplierProfile));
+        $variantMarkings = array(new VariantMarking('1', true, '',null, null, 5, false, 5, null, null, '', false, $staticVariablePriceHolders, null, false, $staticFixedPrices, true, $markingPosition, false, 5, false, 50000, 1, null, null, null, $dynamicVariablePriceHolders, 1, array(), $marking, null, null, null, null, '', null, 2, null, $dynamicFixedPrices, null));
+        $variant = new Variant('1', '', $variantMarkings, $supplierProfiles, '', '', '', '', '', '','2', '', $variantPrices, '', '', '', '', '', array(), '','', '', array(), '', array(), 'name', array(), array(), '', false);
+        $quantity = 2;
+
+        $variantMarking = $variant->getVariantMarkings()[0];
+        $variantMarkingModel->setVariantMarking($variantMarking);
+        $variantMarkingModels = array($variantMarkingModel);
+
+        $calculatedPrice = $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
+        $this->assertEquals(53, $calculatedPrice->getValue());
+
+        $quantity = 4;
+        $calculatedPrice = $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels);
+        $this->assertEquals(66, $calculatedPrice->getValue());
     }
 }
