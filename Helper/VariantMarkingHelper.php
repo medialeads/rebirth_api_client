@@ -80,7 +80,7 @@ class VariantMarkingHelper
 
             if ($variantSimpleMarkingVariablePriceHolder instanceof DynamicVariablePriceHolder) {
                 $matchingVariantSimpleMarkingDynamicVariablePrice = null;
-                /* @var DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice */
+                /** @var DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice */
                 foreach (array_filter($variantSimpleMarkingVariablePriceHolder->getDynamicVariablePrices(), (function (DynamicVariablePrice $variantSimpleMarkingDynamicVariablePrice) use ($quantity) {
                     return $variantSimpleMarkingDynamicVariablePrice->getFromQuantity() <= $quantity;
                 })) as $variantSimpleMarkingDynamicVariablePrice) {
@@ -94,7 +94,7 @@ class VariantMarkingHelper
                 }
             } elseif ($variantSimpleMarkingVariablePriceHolder instanceof StaticVariablePriceHolder) {
                 $matchingVariantSimpleMarkingStaticVariablePrice = null;
-                /* @var StaticVariablePrice $variantSimpleMarkingStaticVariablePrice */
+                /** @var StaticVariablePrice $variantSimpleMarkingStaticVariablePrice */
                 foreach (array_filter($variantSimpleMarkingVariablePriceHolder->getStaticVariablePrices(), (function (StaticVariablePrice $variantSimpleMarkingStaticVariablePrice) use ($quantity) {
                     return $variantSimpleMarkingStaticVariablePrice->getFromQuantity() <= $quantity;
                 })) as $variantSimpleMarkingStaticVariablePrice) {
