@@ -2,11 +2,6 @@
 
 namespace ES\APIv2Client;
 
-use ES\APIv2Client\Model\CalculatedPrice;
-use ES\APIv2Client\Model\SupplierProfile;
-use ES\APIv2Client\Model\Variant;
-use ES\APIv2Client\Model\VariantMarking;
-use ES\APIv2Client\Model\VariantMarkingModel;
 use ES\APIv2Client\Transformer\ProductTransformer;
 
 class Client
@@ -21,16 +16,16 @@ class Client
     /**
      * @var string
      */
-    private $countryCode;
+    private $lang;
 
     /**
      * @param string $key
      * @param string $countryCode
      */
-    public function __construct($key, $countryCode)
+    public function __construct($key, $lang)
     {
         $this->key = $key;
-        $this->countryCode = $countryCode;
+        $this->lang = $lang;
     }
 
     /**
@@ -47,7 +42,7 @@ class Client
         $params = array(
             'page' => $page,
             'offset' => $offset,
-            'lang' => 'fr',
+            'lang' => $this->lang,
             'limit' => $limit,
             'sort_direction' => $sort_direction,
             'context' => array(
@@ -73,11 +68,11 @@ class Client
         $params = array(
             'page' => $page,
             'offset' => $offset,
-            'lang' => 'fr',
+            'lang' => $this->lang,
             'limit' => $limit,
             'sort_direction' => $sort_direction,
             'context' => array(
-                'country_code' => $this->countryCode
+                'country_code' => 'FR'
             ),
             'search_handlers' => array(
                 array(

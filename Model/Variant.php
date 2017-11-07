@@ -32,6 +32,11 @@ class Variant
     private $description;
 
     /**
+     * @var string
+     */
+    private $rawDescription;
+
+    /**
      * @var null|string
      */
     private $markingAdditionalInformation;
@@ -162,6 +167,7 @@ class Variant
      * @param array $variantMarkings
      * @param array $supplierProfiles
      * @param string $description
+     * @param string $rawDescription
      * @param null|string $markingAdditionalInformation
      * @param string $supplierReference
      * @param string $netWeight
@@ -188,7 +194,7 @@ class Variant
      * @param null|string $subSubPackagingInformation
      * @param bool $mandatoryMarking
      */
-    public function __construct($id, $subPackagingInformation, $variantMarkings, $supplierProfiles, $description, $markingAdditionalInformation, $supplierReference, $netWeight, $mainVariantImageId, $subSubPackagingSize, $variantMinimumQuantities, $projectId, $variantPrices, $stock, $grossWeight, $packagingInformation, $slug, $subPackagingSize, $variantImages, $packagingGrossWeight, $packagingSize, $europeanArticleNumbering, $variantSamplePrices, $size, $variantExternalLinks, $name, $variantListPrices, $attributes, $subSubPackagingInformation, $mandatoryMarking)
+    public function __construct($id, $subPackagingInformation, $variantMarkings, $supplierProfiles, $description, $rawDescription, $markingAdditionalInformation, $supplierReference, $netWeight, $mainVariantImageId, $subSubPackagingSize, $variantMinimumQuantities, $projectId, $variantPrices, $stock, $grossWeight, $packagingInformation, $slug, $subPackagingSize, $variantImages, $packagingGrossWeight, $packagingSize, $europeanArticleNumbering, $variantSamplePrices, $size, $variantExternalLinks, $name, $variantListPrices, $attributes, $subSubPackagingInformation, $mandatoryMarking)
     {
         foreach ($variantMarkings as $variantMarking) {
             if (!$variantMarking instanceof VariantMarking) {
@@ -224,6 +230,7 @@ class Variant
         $this->variantMarkings = $variantMarkings;
         $this->supplierProfiles = $supplierProfiles;
         $this->description = $description;
+        $this->rawDescription = $rawDescription;
         $this->markingAdditionalInformation = $markingAdditionalInformation;
         $this->supplierReference = $supplierReference;
         $this->netWeight = $netWeight;
@@ -290,6 +297,14 @@ class Variant
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawDescription()
+    {
+        return $this->rawDescription;
     }
 
     /**
