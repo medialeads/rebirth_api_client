@@ -1,4 +1,5 @@
 # EUROPEAN SOURCING API V2 CLIENT
+PHP > 5.6, PHP 7
 
 Once you have an access token to the European Sourcing API you can use 
 this API Client to make your calls and easily transform your JSON data 
