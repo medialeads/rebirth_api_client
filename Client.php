@@ -55,7 +55,7 @@ class Client
     }
 
     /**
-     * @param $string
+     * @param string $query
      * @param int $page
      * @param int $offset
      * @param int $limit
@@ -63,7 +63,7 @@ class Client
      *
      * @return array|mixed|null
      */
-    public function searchProductsByQuery($string, $page = 1, $offset = 0, $limit = 20, $sort_direction = 'asc')
+    public function searchProductsByQuery($query, $page = 1, $offset = 0, $limit = 20, $sort_direction = 'asc')
     {
         $params = array(
             'page' => $page,
@@ -76,7 +76,7 @@ class Client
             ),
             'search_handlers' => array(
                 array(
-                    'query' => $string
+                    'query' => $query
                 )
             )
         );
@@ -85,7 +85,7 @@ class Client
     }
 
     /**
-     * @param array $params
+     * @param array[] $params
      *
      * @return array|mixed|null
      */
