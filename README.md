@@ -27,6 +27,7 @@ $products = $client->searchProductsByQuery($query = "stylo", $page = 1, $offset 
 The second method is the `searchProductsBy()` method. It is the same as the previous one,
 but takes the `$handlers` argument instead of `$query`. All other arguments are the same as in
 `searchProductsByQuery()`.  
+  
 If you have seen how the API works, you should know the POST parameters takes a 
 search_handlers array.  
 Be careful ! `$handlers` is an array of handlers, and a handler is an array. $handlers must be 
