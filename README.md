@@ -45,21 +45,29 @@ Please check the API documentation or demo to have a full preview of all filters
 
 ## Complex Use
 
-The API Client implements Transformer classes you can statically call to transform an array into a Product,
-Variant, Supplier, etc... object. Everything inside your array will be transformed.  
-Consider you have an array which should be a Product object and inside of it, you have all variants
-as arrays. Using the Product transformer will also convert every variant inside as Variant objects.
+The API Client implements Transformer classes you can statically call to transform an array 
+into a Product, Variant, Supplier, etc... object. Everything inside your array will be 
+transformed.  
+Consider you have an array which should be a Product object and inside of it, you have all 
+variants
+as arrays. Using the Product transformer will also convert every variant inside as Variant 
+objects.
   
-In the example below, we consider you have performed a custom request to the API. Your response
-contains a `products` key. We put that in `$products`.
+In the example below, we consider you have performed a custom request to the API. Your 
+response contains a `products` key. We put that in `$products`.
 ```php
 $productsAsObjects = ProductTransformer::fromArray($products);
 ```
-Here, `$productsAsObjects` contains an array of Product objects (even if there is only one).  
+Here, `$productsAsObjects` contains an array of Product objects (even if there is only one).
+Variants, SupplierProfile and all others have also been transformed from arrays to objects 
+thank to this simple call.
   
-For better support, `$products` can be an array of arrays (the products), or a simple array (the product).
+For better support, `$products` can be an array of arrays (the products), or a simple array 
+(the product).
   
-You can use any Transformer you need as above. One is calling all necessary others. So when you
-call the ProductTransformer, all other transformers are called inside of it (such as VariantTransformer, which is also calling others).
+You can use any Transformer you need as above. One is calling all necessary others. So when 
+you
+call the ProductTransformer, all other transformers are called inside of it (such as 
+VariantTransformer, which is also calling others).
   
 You can find the complete list of Transformers inside the `Transformer` folder.
