@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\VariantImage;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantImageTransformer extends AbstractTransformer
 {
     /**

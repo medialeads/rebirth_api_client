@@ -4,6 +4,9 @@ namespace ES\APIv2Client;
 
 use ES\APIv2Client\Transformer\ProductTransformer;
 
+/**
+ * @author Dagan MENEZ
+ */
 class Client
 {
     const URL = "http://apiv2.europeansourcing.com/api/search";
@@ -20,7 +23,7 @@ class Client
 
     /**
      * @param string $key
-     * @param string $countryCode
+     * @param string $lang
      */
     public function __construct($key, $lang)
     {

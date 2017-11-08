@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\VariantMinimumQuantity;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantMinimumQuantityTransformer extends AbstractTransformer
 {
     /**

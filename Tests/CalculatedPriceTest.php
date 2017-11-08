@@ -18,6 +18,9 @@ use ES\APIv2Client\Model\StaticVariablePrice;
 use ES\APIv2Client\Model\DynamicVariablePrice;
 use ES\APIv2Client\Model\DynamicVariablePriceHolder;
 
+/**
+ * @author Dagan MENEZ
+ */
 class CalculatedPriceTest extends TestCase
 {
     public function test() {

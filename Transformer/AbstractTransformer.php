@@ -2,6 +2,9 @@
 
 namespace ES\APIv2Client\Transformer;
 
+/**
+ * @author Dagan MENEZ
+ */
 abstract class AbstractTransformer
 {
     /**

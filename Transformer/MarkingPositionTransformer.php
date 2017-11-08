@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\MarkingPosition;
 
+/**
+ * @author Dagan MENEZ
+ */
 class MarkingPositionTransformer extends AbstractTransformer
 {
     /**

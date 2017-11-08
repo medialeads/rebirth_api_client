@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\Brand;
 
+/**
+ * @author Dagan MENEZ
+ */
 class BrandTransformer extends AbstractTransformer
 {
     /**

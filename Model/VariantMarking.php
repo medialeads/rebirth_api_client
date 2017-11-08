@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Model;
 
 use ES\APIv2Client\Helper\VariantMarkingHelper;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantMarking
 {
     /**

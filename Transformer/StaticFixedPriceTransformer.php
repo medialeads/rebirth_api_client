@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\StaticFixedPrice;
 
+/**
+ * @author Dagan MENEZ
+ */
 class StaticFixedPriceTransformer extends AbstractTransformer
 {
     /**

@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\DynamicVariablePrice;
 
+/**
+ * @author Dagan MENEZ
+ */
 class DynamicVariablePriceTransformer extends AbstractTransformer
 {
     /**

@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\Product;
 
+/**
+ * @author Dagan MENEZ
+ */
 class ProductTransformer extends AbstractTransformer
 {
     /**

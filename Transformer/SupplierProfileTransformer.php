@@ -5,6 +5,9 @@ namespace ES\APIv2Client\Transformer;
 use ES\APIv2Client\Model\SupplierProfile;
 use ES\APIv2Client\Model\PartialSupplierProfile;
 
+/**
+ * @author Dagan MENEZ
+ */
 class SupplierProfileTransformer extends AbstractTransformer
 {
     /**

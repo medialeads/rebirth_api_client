@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\VariantExternalLink;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantExternalLinkTransformer extends AbstractTransformer
 {
     /**

@@ -15,6 +15,9 @@ use ES\APIv2Client\Model\VariantMarkingModel;
 use ES\APIv2Client\Model\VariantSimpleMarkingCalculatedPrice;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantMarkingHelper
 {
     /**

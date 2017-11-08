@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\Category;
 
+/**
+ * @author Dagan MENEZ
+ */
 class CategoryTransformer extends AbstractTransformer
 {
     /**

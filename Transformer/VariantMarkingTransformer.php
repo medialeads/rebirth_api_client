@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\VariantMarking;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantMarkingTransformer extends AbstractTransformer
 {
     /**

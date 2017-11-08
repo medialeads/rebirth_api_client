@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\Label;
 
+/**
+ * @author Dagan MENEZ
+ */
 class LabelTransformer extends AbstractTransformer
 {
     /**

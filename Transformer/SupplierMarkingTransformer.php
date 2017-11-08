@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\SupplierMarking;
 
+/**
+ * @author Dagan MENEZ
+ */
 class SupplierMarkingTransformer extends AbstractTransformer
 {
     /**

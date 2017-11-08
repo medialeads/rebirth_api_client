@@ -10,6 +10,9 @@ use ES\APIv2Client\Model\VariantMarkingModel;
 use ES\APIv2Client\Model\VariantPrice;
 use ES\APIv2Client\Model\VariantSimpleMarkingCalculatedPrice;
 
+/**
+ * @author Dagan MENEZ
+ */
 class VariantHelper
 {
     public static function getCalculatedPrice(Variant $variant, SupplierProfileInterface $supplierProfile, $quantity, array $variantMarkingModels = array())

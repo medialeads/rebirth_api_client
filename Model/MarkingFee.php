@@ -2,6 +2,9 @@
 
 namespace ES\APIv2Client\Model;
 
+/**
+ * @author Dagan MENEZ
+ */
 class MarkingFee
 {
     /**

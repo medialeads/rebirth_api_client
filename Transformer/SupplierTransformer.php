@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\Supplier;
 
+/**
+ * @author Dagan MENEZ
+ */
 class SupplierTransformer extends AbstractTransformer
 {
     /**

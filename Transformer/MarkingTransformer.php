@@ -4,6 +4,9 @@ namespace ES\APIv2Client\Transformer;
 
 use ES\APIv2Client\Model\Marking;
 
+/**
+ * @author Dagan MENEZ
+ */
 class MarkingTransformer extends AbstractTransformer
 {
     /**
