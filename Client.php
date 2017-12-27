@@ -48,9 +48,6 @@ class Client
             'lang' => $this->lang,
             'limit' => $limit,
             'sort_direction' => $sort_direction,
-            'context' => array(
-                'country_code' => $this->countryCode
-            ),
             'search_handlers' => $handlers
         );
 
@@ -74,9 +71,6 @@ class Client
             'lang' => $this->lang,
             'limit' => $limit,
             'sort_direction' => $sort_direction,
-            'context' => array(
-                'country_code' => 'FR'
-            ),
             'search_handlers' => array(
                 array(
                     'query' => $query

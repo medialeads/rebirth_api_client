@@ -46,7 +46,7 @@ class Category
      * @param string $name
      * @param string $slug
      */
-    public function __construct($id, $fullHierarchyName, $projectId, $parentId, $name, $slug)
+    public function __construct($id, $fullHierarchyName, $projectId, $parentId, $name, $slug, $synonyms)
     {
         $this->id = $id;
         $this->fullHierarchyName = $fullHierarchyName;

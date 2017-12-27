@@ -18,8 +18,11 @@ class CategoryTransformer extends AbstractTransformer
     {
         $response = array();
         foreach ($categories as $category) {
+            if (isset($category['synonyms'])) {
+                $synonyms = SynonymTransformer::fromArray($category['synonyms']);
+            }
 
-            $response[] = new Category($category['id'], $category['full_hierarchy_name'], $category['project_id'], $category['parent_id'], $category['name'], $category['slug']);
+            $response[] = new Category($category['id'], $category['full_hierarchy_name'], $category['project_id'], $category['parent_id'], $category['name'], $category['slug'], $synonyms);
         }
 
         return $response;

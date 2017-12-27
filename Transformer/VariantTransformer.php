@@ -36,7 +36,13 @@ class VariantTransformer extends AbstractTransformer
 
             $variantMarkings = VariantMarkingTransformer::fromArray($variant['variant_markings']);
 
-            $response[] = new Variant($variant['id'], $variant['sub_packaging_information'], $variantMarkings, $supplierProfiles, $variant['description'], $variant['raw_description'], $variant['marking_additional_information'], $variant['supplier_reference'], $variant['net_weight'], $variant['main_variant_image_id'], $variant['sub_sub_packaging_size'], $variantMinimumQuantities, $variant['project_id'], $variantPrices, $variant['stock'], $variant['gross_weight'], $variant['packaging_information'], $variant['slug'], $variant['sub_packaging_size'], $variantImages, $variant['packaging_gross_weight'], $variant['packaging_size'], $variant['european_article_numbering'], $variantSamplePrices, $variant['size'], $variantExternalLinks, $variant['name'], $variantListPrices, $attributes, $variant['sub_sub_packaging_information'], $variant['mandatory_marking']);
+            $keywords = KeywordTransformer::fromArray($variant['keywords']);
+
+            $variantPackaging = VariantPackagingTransformer::fromArray($variant['variant_packaging']);
+
+            $variantSizes = VariantSizeTransformer::fromArray($variant['variant_sizes']);
+
+            $response[] = new Variant($variant['id'], $variantMarkings, $supplierProfiles, $variant['description'], $variant['raw_description'], $variant['marking_additional_information'], $variant['supplier_reference'], $variant['net_weight'], $variant['main_variant_image_id'], $variantMinimumQuantities, $variant['project_id'], $variantPrices, $variant['stock'], $variant['gross_weight'], $variant['slug'], $variantImages, $variant['european_article_numbering'], $variantSamplePrices, $variantExternalLinks, $variant['name'], $variantListPrices, $attributes, $variant['mandatory_marking'], $keywords, $variantPackaging, $variantSizes);
         }
 
         return $response;
