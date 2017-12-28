@@ -28,17 +28,23 @@ class AttributeGroup
     private $slug;
 
     /**
+     * @var string
+     */
+    private $additionalTextDataType;
+
+    /**
      * @param string $id
      * @param string $projectId
      * @param string $name
      * @param string $slug
      */
-    public function __construct($id, $projectId, $name, $slug)
+    public function __construct($id, $projectId, $name, $slug, $additionalTextDataType)
     {
         $this->id = $id;
         $this->projectId = $projectId;
         $this->name = $name;
         $this->slug = $slug;
+        $this->additionalTextDataType = $additionalTextDataType;
     }
 
     /**
@@ -71,5 +77,13 @@ class AttributeGroup
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalTextDataType()
+    {
+        return $this->additionalTextDataType;
     }
 }

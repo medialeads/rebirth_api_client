@@ -48,6 +48,11 @@ class Attribute
     private $slug;
 
     /**
+     * @var string
+     */
+    private $additionalTextData;
+
+    /**
      * @param string $id
      * @param string $projectId
      * @param AttributeGroup $attributeGroup
@@ -56,8 +61,9 @@ class Attribute
      * @param string $type
      * @param string $value
      * @param string $slug
+     * @param string $additionalTextData
      */
-    public function __construct($id, $projectId, AttributeGroup $attributeGroup, $parentId, $hierarchy, $type, $value, $slug)
+    public function __construct($id, $projectId, AttributeGroup $attributeGroup, $parentId, $hierarchy, $type, $value, $slug, $additionalTextData)
     {
         if (!$attributeGroup instanceof AttributeGroup) {
             throw new \InvalidArgumentException();
@@ -71,6 +77,7 @@ class Attribute
         $this->type = $type;
         $this->value = $value;
         $this->slug = $slug;
+        $this->additionalTextData = $additionalTextData;
     }
 
     /**
@@ -135,5 +142,13 @@ class Attribute
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalTextData()
+    {
+        return $this->additionalTextData;
     }
 }

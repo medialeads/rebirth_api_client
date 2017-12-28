@@ -21,7 +21,7 @@ class AttributeTransformer extends AbstractTransformer
             $attributeGroup = AttributeGroupTransformer::fromArray($attribute['attribute_group']);
             $hierarchy[] = array();
 
-            $response[] =  new Attribute($attribute['id'], $attribute['project_id'], $attributeGroup, $attribute['parent_id'], $hierarchy, $attribute['type'], $attribute['value'], $attribute['slug']);
+            $response[] =  new Attribute($attribute['id'], $attribute['project_id'], $attributeGroup, $attribute['parent_id'], $hierarchy, $attribute['type'], $attribute['value'], $attribute['slug'], $attribute['additional_text_data']);
         }
 
         return $response;

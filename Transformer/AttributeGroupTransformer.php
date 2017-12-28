@@ -18,7 +18,7 @@ class AttributeGroupTransformer extends AbstractTransformer
     {
         $response = array();
         foreach ($attributeGroups as $attributeGroup) {
-            $response[] = new AttributeGroup($attributeGroup['id'], $attributeGroup['project_id'], $attributeGroup['name'], $attributeGroup['slug']);
+            $response[] = new AttributeGroup($attributeGroup['id'], $attributeGroup['project_id'], $attributeGroup['name'], $attributeGroup['slug'], $attributeGroup['additional_text_data']);
         }
 
         return $response;
