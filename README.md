@@ -37,7 +37,7 @@ $client = new Client("token", 'lang', 'vX.X');
 
 $handlers = array(
     array(
-        'query' => 'watch'
+        'query' => 'watch',
         'stock_greater_than' => 5
     )
 );
