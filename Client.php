@@ -132,7 +132,8 @@ class Client
             throw new \InvalidArgumentException('The version provided is not a valid version.');
         }
 
-        if (intval(substr($version, 1,1)) > "1") {
+        preg_match('/^v([0-9]+)./', $version, $number);
+        if (intval($number[1]) > "1") {
             throw new \InvalidArgumentException("The API version provided is not supported by this API client. Please consider using another API version or update this API Client");
         }
     }

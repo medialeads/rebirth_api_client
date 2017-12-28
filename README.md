@@ -33,7 +33,7 @@ search_handlers array.
 Be careful ! `$handlers` is an array of handlers, and a handler is an array. `$handlers` must be 
 an array of arrays, even if there is only one search handler.
 ```php
-$client = new Client("token", 'lang');
+$client = new Client("token", 'lang', 'vX.X');
 
 $handlers = array(
     array(
