@@ -15,10 +15,10 @@ First, you have the `searchProductsByQuery()` method.
 With this, you can perform a simple request with only a query handler. Only the first argument is mandatory.
 
 ```php
-$client = new Client("token", 'lang');
+$client = new Client("token", 'lang', 'vX.X');
 
 // simple search with only query search handler
-$products = $client->searchProductsByQuery($query = "stylo", $page = 1, $offset = 0, $limit = 20, $sort_direction = 'asc');
+$products = $client->searchProductsByQuery($query = "stylo", $page = 1, $offset = 0, $limit = 52, $sort_direction = 'asc');
 
 // here, $products contains an array of Product objects, containing Variant objects, etc...
 ```
@@ -67,7 +67,7 @@ For better support, `$products` can be an array of arrays (the products), or a s
 (the product).
   
 You can use any Transformer you need as above. One is calling all necessary others. So when 
-youc all the ProductTransformer, all other transformers are called inside of it (such as 
+you call the ProductTransformer, all other transformers are called inside of it (such as 
 VariantTransformer, which is also calling others).
   
 You can find the complete list of Transformers inside the `Transformer` folder.

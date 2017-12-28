@@ -9,7 +9,7 @@ use ES\APIv2Client\Transformer\ProductTransformer;
  */
 class Client
 {
-    const URL = "http://apiv2.europeansourcing.com/api/search";
+    private $url;
 
     /**
      * @var string
@@ -24,11 +24,15 @@ class Client
     /**
      * @param string $key
      * @param string $lang
+     * @param string $version
      */
-    public function __construct($key, $lang)
+    public function __construct($key, $lang, $version)
     {
         $this->key = $key;
         $this->lang = $lang;
+        $this->url  = sprintf("http://apiv2.europeansourcing.com/api/%s/search", $version);
+
+        $this->checkVersion($version);
     }
 
     /**
@@ -40,7 +44,7 @@ class Client
      *
      * @return array|mixed|null
      */
-    public function searchProductsBy($handlers, $page = 1, $offset = 0, $limit = 20, $sort_direction = 'asc')
+    public function searchProductsBy($handlers, $page = 1, $offset = 0, $limit = 52, $sort_direction = 'asc')
     {
         $params = array(
             'page' => $page,
@@ -63,7 +67,7 @@ class Client
      *
      * @return array|mixed|null
      */
-    public function searchProductsByQuery($query, $page = 1, $offset = 0, $limit = 20, $sort_direction = 'asc')
+    public function searchProductsByQuery($query, $page = 1, $offset = 0, $limit = 52, $sort_direction = 'asc')
     {
         $params = array(
             'page' => $page,
@@ -88,7 +92,7 @@ class Client
      */
     private function searchRequest($params)
     {
-        $ch = curl_init(self::URL);
+        $ch = curl_init($this->url);
         $param = json_encode($params);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/ld+json',
@@ -118,6 +122,19 @@ class Client
         $products = ProductTransformer::fromArray($data['products']);
 
         return $products;
+    }
+
+    /**
+     * @param string $version
+     */
+    private function checkVersion($version) {
+        if (substr($version, 0,1) !== "v") {
+            throw new \InvalidArgumentException('The version provided is not a valid version.');
+        }
+
+        if (intval(substr($version, 1,1)) > "1") {
+            throw new \InvalidArgumentException("The API version provided is not supported by this API client. Please consider using another API version or update this API Client");
+        }
     }
 
 //    /**
