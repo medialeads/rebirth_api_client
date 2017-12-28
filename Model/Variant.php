@@ -45,7 +45,7 @@ class Variant
     private $supplierReference;
 
     /**
-     * @var string
+     * @var float
      */
     private $netWeight;
 
@@ -75,7 +75,7 @@ class Variant
     private $stock;
 
     /**
-     * @var string
+     * @var float
      */
     private $grossWeight;
 
@@ -147,13 +147,13 @@ class Variant
      * @param string $rawDescription
      * @param null|string $markingAdditionalInformation
      * @param string $supplierReference
-     * @param string $netWeight
+     * @param float $netWeight
      * @param int|null $mainVariantImageId
      * @param VariantMinimumQuantity[] $variantMinimumQuantities
      * @param string $projectId
      * @param VariantPrice[] $variantPrices
      * @param string $stock
-     * @param string $grossWeight
+     * @param float $grossWeight
      * @param string $slug
      * @param VariantImage[] $variantImages
      * @param int|null $europeanArticleNumbering
@@ -300,7 +300,7 @@ class Variant
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getNetWeight()
     {
@@ -348,7 +348,7 @@ class Variant
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getGrossWeight()
     {
