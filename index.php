@@ -1,13 +1,6 @@
 <?php
 
-namespace ES\APIv2Client;
+require __DIR__ . '/vendor/autoload.php';
 
-require_once __DIR__.'/vendor/autoload.php';
-
-$client = new Client("7hQ87N5c2Ts5XKlEYGRihrPc0FMaYmm0", 'fr', 'v1.0');
-$handlers = array(
-    array(
-        'query' => 'sac'
-    )
-);
-$products = $client->searchProductsBy($handlers);
+$client = new \ES\RebirthApiClient\Client('DFL7E0Lls1kPeck1YWLQG1NR6ZO9BlnN');
+$client->search();

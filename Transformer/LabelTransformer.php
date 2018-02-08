@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Label;
+use ES\RebirthApiClient\Model\Label;
 
-/**
- * @author Dagan MENEZ
- */
-class LabelTransformer extends AbstractTransformer
+class LabelTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $labels
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($labels)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($labels as $label) {
-            $response[] = new Label($label['id'], $label['project_id'], $label['name'], $label['slug']);
-        }
+        return sprintf('Label_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return Label
+     */
+    protected function transform(array $data)
+    {
+        return new Label($data['id'], $data['name'], $data['slug']);
     }
 }

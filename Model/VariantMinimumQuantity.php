@@ -1,21 +1,13 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantMinimumQuantity
+class VariantMinimumQuantity implements ModelInterface
 {
     /**
      * @var string
      */
     private $id;
-
-    /**
-     * @var null|string
-     */
-    private $projectId;
 
     /**
      * @var int
@@ -29,37 +21,22 @@ class VariantMinimumQuantity
 
     /**
      * @param string $id
-     * @param null|string $projectId
      * @param int $value
      * @param SupplierProfileInterface $supplierProfile
      */
-    public function __construct($id, $projectId, $value, SupplierProfileInterface $supplierProfile)
+    public function __construct($id, $value, SupplierProfileInterface $supplierProfile)
     {
-
-        if (!$supplierProfile instanceof SupplierProfileInterface) {
-            throw new \InvalidArgumentException();
-        }
-
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->value = $value;
         $this->supplierProfile = $supplierProfile;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
     }
 
     /**

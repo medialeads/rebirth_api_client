@@ -1,21 +1,13 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class MarkingFee
+class MarkingFee implements ModelInterface
 {
     /**
      * @var string
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $projectId;
 
     /**
      * @var string
@@ -29,14 +21,12 @@ class MarkingFee
 
     /**
      * @param string $id
-     * @param string $projectId
      * @param string $name
      * @param string $slug
      */
-    public function __construct($id, $projectId, $name, $slug)
+    public function __construct($id, $name, $slug)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->name = $name;
         $this->slug = $slug;
     }
@@ -47,14 +37,6 @@ class MarkingFee
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
     }
 
     /**
@@ -72,6 +54,4 @@ class MarkingFee
     {
         return $this->slug;
     }
-
-
 }

@@ -1,29 +1,31 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\DynamicFixedPrice;
+use ES\RebirthApiClient\Model\DynamicFixedPrice;
 
-/**
- * @author Dagan MENEZ
- */
-class DynamicFixedPriceTransformer extends AbstractTransformer
+class DynamicFixedPriceTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $dynamicFixedPrices
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($dynamicFixedPrices)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($dynamicFixedPrices as $dynamicFixedPrice) {
-            $supplierProfile = SupplierProfileTransformer::fromArray($dynamicFixedPrice['supplier_profile']);
-            $markingFees = MarkingFeeTransformer::fromArray($dynamicFixedPrice['marking_fees']);
+        return sprintf('DynamicFixedPrice_%s', $data['id']);
+    }
 
-            $response[] =  new DynamicFixedPrice($dynamicFixedPrice['id'], $dynamicFixedPrice['condition'], $dynamicFixedPrice['calculation_value'], $dynamicFixedPrice['total_price'], $dynamicFixedPrice['project_id'],  $markingFees, $dynamicFixedPrice['reduced_value'], $dynamicFixedPrice['value'], $supplierProfile);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return DynamicFixedPrice
+     */
+    protected function transform(array $data)
+    {
+        return new DynamicFixedPrice($data['id'], $data['condition'], $data['value'], $data['reduced_value'],
+            $data['calculation_value'], $data['total_price'],
+            PartialSupplierProfileTransformer::create()->transformOne($data['supplier_profile']),
+            MarkingFeeTransformer::create()->transformMultiple($data['marking_fees']));
     }
 }

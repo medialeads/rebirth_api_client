@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantExternalLink
+class VariantExternalLink implements ModelInterface
 {
     /**
      * @var string
@@ -57,6 +54,4 @@ class VariantExternalLink
     {
         return $this->url;
     }
-
-
 }

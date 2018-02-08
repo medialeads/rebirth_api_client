@@ -1,34 +1,46 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantMarking;
+use ES\RebirthApiClient\Model\VariantMarking;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantMarkingTransformer extends AbstractTransformer
+class VariantMarkingTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantMarkings
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantMarkings)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantMarkings as $variantMarking) {
-            $staticVariablePriceHolders = StaticVariablePriceHolderTransformer::fromArray($variantMarking['static_variable_price_holders']);
-            $markingPosition = MarkingPositionTransformer::fromArray($variantMarking['marking_position']);
-            $dynamicVariablePriceHolders = DynamicVariablePriceHolderTransformer::fromArray($variantMarking['dynamic_variable_price_holders']);
-            $supplierMarking = SupplierMarkingTransformer::fromArray($variantMarking['supplier_marking']);
-            $marking = MarkingTransformer::fromArray($variantMarking['marking']);
-            $staticFixedPrices = StaticFixedPriceTransformer::fromArray($variantMarking['static_fixed_prices']);
-            $dynamicFixedPrices = DynamicFixedPriceTransformer::fromArray($variantMarking['dynamic_fixed_prices']);
+        return sprintf('VariantMarking_%s', $data['id']);
+    }
 
-            $response[] = new VariantMarking($variantMarking['id'], $variantMarking['free_entry_squared_size'], $variantMarking['type'], $variantMarking['minimum_length'], $variantMarking['minimum_diameter'], $variantMarking['number_of_positions'], $variantMarking['free_entry_number_of_logos'], $variantMarking['number_of_logos'], $variantMarking['maximum_diameter'], $variantMarking['diameter'], $variantMarking['project_id'], $variantMarking['free_entry_length'], $staticVariablePriceHolders, $variantMarking['minimum_number_of_colors'], $variantMarking['free_entry_diameter'], $staticFixedPrices, $variantMarking['full_color'], $markingPosition, $variantMarking['free_entry_number_of_colors'], $variantMarking['maximum_number_of_colors'], $variantMarking['free_entry_number_of_positions'], $variantMarking['maximum_quantity'], $variantMarking['minimum_number_of_logos'], $variantMarking['length'], $variantMarking['minimum_width'], $variantMarking['minimum_squared_size'], $dynamicVariablePriceHolders, $variantMarking['number_of_colors'], $supplierMarking, $marking, $variantMarking['maximum_length'], $variantMarking['squared_size'], $variantMarking['width'], $variantMarking['maximum_number_of_logos'], $variantMarking['comment'], $variantMarking['maximum_width'], $variantMarking['minimum_quantity'], $variantMarking['maximum_number_of_colors'], $dynamicFixedPrices, $variantMarking['maximum_squared_size']);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantMarking
+     */
+    protected function transform(array $data)
+    {
+        return new VariantMarking($data['id'], $data['key'], $data['type'], $data['length'], $data['minimum_length'],
+            $data['maximum_length'], $data['free_entry_length'], $data['width'], $data['minimum_width'],
+            $data['maximum_width'], $data['free_entry_width'], $data['squared_size'], $data['minimum_squared_size'],
+            $data['maximum_squared_size'], $data['free_entry_squared_size'], $data['diameter'],
+            $data['minimum_diameter'], $data['maximum_diameter'], $data['free_entry_diameter'],
+            $data['number_of_colors'], $data['minimum_number_of_colors'], $data['maximum_number_of_colors'],
+            $data['free_entry_number_of_colors'], $data['number_of_positions'], $data['minimum_number_of_positions'],
+            $data['maximum_number_of_positions'], $data['free_entry_number_of_positions'], $data['number_of_logos'],
+            $data['minimum_number_of_logos'], $data['maximum_number_of_logos'], $data['free_entry_number_of_logos'],
+            $data['full_color'], $data['minimum_quantity'], $data['maximum_quantity'], $data['comment'],
+            $data['use_only_variant_prices'],
+            MarkingPositionTransformer::create()->transformOne($data['marking_position']),
+            SupplierMarkingTransformer::create()->transformOne($data['supplier_marking']),
+            MarkingTransformer::create()->transformOne($data['marking']),
+            PartialSupplierProfileTransformer::create()->transformMultiple($data['supplier_profiles']),
+            DynamicFixedPriceTransformer::create()->transformMultiple($data['dynamic_fixed_prices']),
+            DynamicVariablePriceHolderTransformer::create()->transformMultiple($data['dynamic_variable_price_holders']),
+            StaticFixedPriceTransformer::create()->transformMultiple($data['static_fixed_prices']),
+            StaticVariablePriceHolderTransformer::create()->transformMultiple($data['static_variable_price_holders']));
     }
 }

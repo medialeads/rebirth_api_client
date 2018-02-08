@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class Brand
+class Brand implements ModelInterface
 {
     /**
      * @var string
@@ -15,15 +12,10 @@ class Brand
     /**
      * @var string
      */
-    private $projectId;
-
-    /**
-     * @var string
-     */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $suffix;
 
@@ -34,15 +26,13 @@ class Brand
 
     /**
      * @param string $id
-     * @param string $projectId
      * @param string $name
-     * @param string $suffix
+     * @param string|null $suffix
      * @param string $slug
      */
-    public function __construct($id, $projectId, $name, $suffix, $slug)
+    public function __construct($id, $name, $suffix, $slug)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->name = $name;
         $this->suffix = $suffix;
         $this->slug = $slug;
@@ -59,21 +49,13 @@ class Brand
     /**
      * @return string
      */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSuffix()
     {

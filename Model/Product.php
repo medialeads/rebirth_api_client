@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class Product
+class Product implements ModelInterface
 {
     /**
      * @var string
@@ -13,74 +10,9 @@ class Product
     private $id;
 
     /**
-     * @var \DateTimeInterface
-     */
-    private $lastIndexedAt;
-
-    /**
      * @var string
      */
-    private $projectKey;
-
-    /**
-     * @var null|string
-     */
-    private $countryOfOrigin;
-
-    /**
-     * @var null|string
-     */
-    private $mainProductImageId;
-
-    /**
-     * @var array
-     */
-    private $variants;
-
-    /**
-     * @var null|string
-     */
-    private $unionCustomsCode;
-
-    /**
-     * @var null|string
-     */
-    private $mainCategoryId;
-
-    /**
-     * @var array
-     */
-    private $labels;
-
-    /**
-     * @var array
-     */
-    private $productImages;
-
-    /**
-     * @var array
-     */
-    private $visibleOn;
-
-    /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var null|string
-     */
-    private $mainVariantId;
-
-    /**
-     * @var Supplier
-     */
-    private $supplier;
-
-    /**
-     * @var array
-     */
-    private $categories;
+    private $internalReference;
 
     /**
      * @var string
@@ -88,84 +20,102 @@ class Product
     private $supplierBaseReference;
 
     /**
-     * @var string
+     * @var \DateTime
      */
-    private $internalReference;
+    private $lastIndexedAt;
 
     /**
-     * @var Brand
+     * @var string|null
+     */
+    private $countryOfOrigin;
+
+    /**
+     * @var string|null
+     */
+    private $unionCustomsCode;
+
+    /**
+     * @var Supplier
+     */
+    private $supplier;
+
+    /**
+     * @var Brand|null
      */
     private $brand;
 
     /**
-     * @param string $id
-     * @param \DateTimeInterface $lastIndexedAt
-     * @param string $projectKey
-     * @param null|string $countryOfOrigin
-     * @param null|string $mainProductImageId
-     * @param array $variants
-     * @param null|string $unionCustomsCode
-     * @param null|string $mainCategoryId
-     * @param array $labels
-     * @param array $productImages
-     * @param array $visibleOn
-     * @param string $projectId
-     * @param null|string $mainVariantId
-     * @param Supplier $supplier
-     * @param array $categories
-     * @param string $supplierBaseReference
-     * @param string $internalReference
-     * @param Brand|null $brand
+     * @var Variant
      */
-    public function __construct($id, \DateTimeInterface $lastIndexedAt, $projectKey, $countryOfOrigin, $mainProductImageId, $variants, $unionCustomsCode, $mainCategoryId, $labels, $productImages, $visibleOn, $projectId, $mainVariantId, Supplier $supplier, $categories, $supplierBaseReference, $internalReference, $brand)
+    private $mainVariant;
+
+    /**
+     * @var Category|null
+     */
+    private $mainCategory;
+
+    /**
+     * @var ProductImage|null
+     */
+    private $mainProductImage;
+
+    /**
+     * @var Variant[]
+     */
+    private $variants;
+
+    /**
+     * @var Category[]
+     */
+    private $categories;
+
+    /**
+     * @var ProductImage[]
+     */
+    private $productImages;
+
+    /**
+     * @var Label[]
+     */
+    private $labels;
+
+    /**
+     * @param string $id
+     * @param string $internalReference
+     * @param string $supplierBaseReference
+     * @param \DateTime $lastIndexedAt
+     * @param string|null $countryOfOrigin
+     * @param string|null $unionCustomsCode
+     * @param Supplier $supplier
+     * @param Brand|null $brand
+     * @param Variant $mainVariant
+     * @param Category|null $mainCategory
+     * @param ProductImage|null $mainProductImage
+     * @param Variant[] $variants
+     * @param Category[] $categories
+     * @param ProductImage[] $productImages
+     * @param Label[] $labels
+     */
+    public function __construct($id, $internalReference, $supplierBaseReference, \DateTime $lastIndexedAt,
+        $countryOfOrigin, $unionCustomsCode, Supplier $supplier, Brand $brand = null, Variant $mainVariant,
+        Category $mainCategory = null, ProductImage $mainProductImage = null, array $variants, array $categories,
+        array $productImages, array $labels)
     {
-        foreach ($variants as $variant) {
-            if (!$variant instanceof Variant) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($labels as $label) {
-            if (!$label instanceof Label) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($productImages as $productImage) {
-            if (!$productImage instanceof ProductImage) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        if (!$supplier instanceof Supplier) {
-            throw new \InvalidArgumentException();
-        }
-
-
-        foreach ($categories as $category) {
-            if (!$category instanceof Category) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
         $this->id = $id;
-        $this->lastIndexedAt = $lastIndexedAt;
-        $this->projectKey = $projectKey;
-        $this->countryOfOrigin = $countryOfOrigin;
-        $this->mainProductImageId = $mainProductImageId;
-        $this->variants = $variants;
-        $this->unionCustomsCode = $unionCustomsCode;
-        $this->mainCategoryId = $mainCategoryId;
-        $this->labels = $labels;
-        $this->productImages = $productImages;
-        $this->visibleOn = $visibleOn;
-        $this->projectId = $projectId;
-        $this->mainVariantId = $mainVariantId;
-        $this->supplier = $supplier;
-        $this->categories = $categories;
-        $this->supplierBaseReference = $supplierBaseReference;
         $this->internalReference = $internalReference;
+        $this->supplierBaseReference = $supplierBaseReference;
+        $this->lastIndexedAt = $lastIndexedAt;
+        $this->countryOfOrigin = $countryOfOrigin;
+        $this->unionCustomsCode = $unionCustomsCode;
+        $this->supplier = $supplier;
         $this->brand = $brand;
+        $this->mainVariant = $mainVariant;
+        $this->mainCategory = $mainCategory;
+        $this->mainProductImage = $mainProductImage;
+        $this->variants = $variants;
+        $this->categories = $categories;
+        $this->productImages = $productImages;
+        $this->labels = $labels;
     }
 
     /**
@@ -177,116 +127,11 @@ class Product
     }
 
     /**
-     * @return \DateTimeInterface
-     */
-    public function getLastIndexedAt()
-    {
-        return $this->lastIndexedAt;
-    }
-
-    /**
      * @return string
      */
-    public function getProjectKey()
+    public function getInternalReference()
     {
-        return $this->projectKey;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getCountryOfOrigin()
-    {
-        return $this->countryOfOrigin;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getMainProductImageId()
-    {
-        return $this->mainProductImageId;
-    }
-
-    /**
-     * @return array
-     */
-    public function getVariants()
-    {
-        return $this->variants;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getUnionCustomsCode()
-    {
-        return $this->unionCustomsCode;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getMainCategoryId()
-    {
-        return $this->mainCategoryId;
-
-    }
-
-    /**
-     * @return array
-     */
-    public function getLabels()
-    {
-        return $this->labels;
-    }
-
-    /**
-     * @return array
-     */
-    public function getProductImages()
-    {
-        return $this->productImages;
-    }
-
-    /**
-     * @return array
-     */
-    public function getVisibleOn()
-    {
-        return $this->visibleOn;
-    }
-
-    /**
-     * @return int
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getMainVariantId()
-    {
-        return $this->mainVariantId;
-    }
-
-    /**
-     * @return Supplier
-     */
-    public function getSupplier()
-    {
-        return $this->supplier;
-    }
-
-    /**
-     * @return array
-     */
-    public function getCategories()
-    {
-        return $this->categories;
+        return $this->internalReference;
     }
 
     /**
@@ -298,18 +143,98 @@ class Product
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getInternalReference()
+    public function getLastIndexedAt()
     {
-        return $this->internalReference;
+        return $this->lastIndexedAt;
     }
 
     /**
-     * @return Brand
+     * @return string|null
+     */
+    public function getCountryOfOrigin()
+    {
+        return $this->countryOfOrigin;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnionCustomsCode()
+    {
+        return $this->unionCustomsCode;
+    }
+
+    /**
+     * @return Supplier
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+
+    /**
+     * @return Brand|null
      */
     public function getBrand()
     {
         return $this->brand;
+    }
+
+    /**
+     * @return Variant
+     */
+    public function getMainVariant()
+    {
+        return $this->mainVariant;
+    }
+
+    /**
+     * @return Category|null
+     */
+    public function getMainCategory()
+    {
+        return $this->mainCategory;
+    }
+
+    /**
+     * @return ProductImage|null
+     */
+    public function getMainProductImage()
+    {
+        return $this->mainProductImage;
+    }
+
+    /**
+     * @return Variant[]
+     */
+    public function getVariants()
+    {
+        return $this->variants;
+    }
+
+    /**
+     * @return Category[]
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @return ProductImage[]
+     */
+    public function getProductImages()
+    {
+        return $this->productImages;
+    }
+
+    /**
+     * @return Label[]
+     */
+    public function getLabels()
+    {
+        return $this->labels;
     }
 }

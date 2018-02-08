@@ -1,12 +1,24 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantImage extends AbstractImage
+class VariantImage implements ModelInterface
 {
+    /**
+     * @var string
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $originalFilename;
+
+    /**
+     * @var string
+     */
+    private $url;
+
     /**
      * @param string $id
      * @param string $originalFilename
@@ -14,6 +26,32 @@ class VariantImage extends AbstractImage
      */
     public function __construct($id, $originalFilename, $url)
     {
-        parent::__construct($id, $originalFilename, $url);
+        $this->id = $id;
+        $this->originalFilename = $originalFilename;
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginalFilename()
+    {
+        return $this->originalFilename;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

@@ -1,34 +1,51 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Product;
+use ES\RebirthApiClient\Model\Product;
 
-/**
- * @author Dagan MENEZ
- */
-class ProductTransformer extends AbstractTransformer
+class ProductTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $products
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($products)
+    public function getId(array $data)
     {
-        $response = array();
-        foreach ($products as $product) {
-            $supplier = SupplierTransformer::fromArray($product['supplier']);
-            $lastIndexedAt = new \DateTime($product['last_indexed_at']);
-            $labels = LabelTransformer::fromArray($product['labels']);
-            $variants = VariantTransformer::fromArray($product['variants']);
-            $productImages = ProductImageTransformer::fromArray($product['product_images']);
-            $categories = CategoryTransformer::fromArray($product['categories']);
-            $brand = BrandTransformer::fromArray($product['brand']);
+        return sprintf('Product_%s', $data['id']);
+    }
 
-            $response[] = new Product($product['id'], $lastIndexedAt, $product['project_key'], $product['country_of_origin'], $product['main_product_image_id'], $variants, $product['union_customs_code'], $product['main_category_id'], $labels, $productImages, $product['visible_on'], $product['project_id'], $product['main_variant_id'], $supplier, $categories, $product['supplier_base_reference'], $product['internal_reference'], $brand);
+    /**
+     * @param array $data
+     *
+     * @return Product
+     */
+    public function transform(array $data)
+    {
+        $mainVariant = null;
+        $variants = VariantTransformer::create()->transformMultiple($data['variants']);
+        if (!empty($variants)) {
+            $mainVariant = $variants[$data['main_variant_id']];
         }
 
-        return $response;
+        $mainCategory = null;
+        $categories = CategoryTransformer::create()->transformMultiple($data['categories']);
+        if (!empty($categories)) {
+            $mainCategory = $categories[$data['main_category_id']];
+        }
+
+        $mainProductImage = null;
+        $productImages = ProductImageTransformer::create()->transformMultiple($data['product_images']);
+        if (!empty($productImages)) {
+            $mainProductImage = $productImages[$data['main_product_image']];
+        }
+
+        return new Product($data['id'], $data['internal_reference'], $data['supplier_base_reference'],
+            new \DateTime($data['last_indexed_at']), $data['country_of_origin'], $data['union_customs_code'],
+            SupplierTransformer::create()->transformOne($data['supplier']),
+            BrandTransformer::create()->transformOne($data['brand']), $mainVariant, $mainCategory, $mainProductImage,
+            $variants, $categories, $productImages, LabelTransformer::create()->transformMultiple($data['labels']));
     }
+
 }

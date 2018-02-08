@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class DynamicVariablePriceHolder
+class DynamicVariablePriceHolder implements ModelInterface
 {
     /**
      * @var string
@@ -13,7 +10,7 @@ class DynamicVariablePriceHolder
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $condition;
 
@@ -23,59 +20,37 @@ class DynamicVariablePriceHolder
     private $totalPrice;
 
     /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var array
-     */
-    private $markingFees;
-
-    /**
-     * @var array
-     */
-    private $dynamicVariablePrices;
-
-    /**
      * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param string $id
-     * @param null|string $condition
-     * @param bool $totalPrice
-     * @param string $projectId
-     * @param array $markingFees
-     * @param array $dynamicVariablePrices
-     * @param SupplierProfileInterface $supplierProfile
+     * @var DynamicVariablePrice[]
      */
-    public function __construct($id, $condition, $totalPrice, $projectId, $markingFees, $dynamicVariablePrices, SupplierProfileInterface $supplierProfile)
+    private $dynamicVariablePrices;
+
+    /**
+     * @var MarkingFee[]
+     */
+    private $markingFees;
+
+    /**
+     * @param string $id
+     * @param string|null $condition
+     * @param bool $totalPrice
+     * @param SupplierProfileInterface $supplierProfile
+     * @param DynamicVariablePrice[] $dynamicVariablePrices
+     * @param MarkingFee[] $markingFees
+     */
+    public function __construct($id, $condition, $totalPrice, SupplierProfileInterface $supplierProfile,
+        array $dynamicVariablePrices, array $markingFees)
     {
-        foreach ($markingFees as $markingFee) {
-            if (!$markingFee instanceof MarkingFee) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($dynamicVariablePrices as $dynamicVariablePrice) {
-            if (!$dynamicVariablePrice instanceof DynamicVariablePrice) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        if (!$supplierProfile instanceof SupplierProfileInterface)
-        {
-            throw new \InvalidArgumentException();
-        }
-
         $this->id = $id;
         $this->condition = $condition;
         $this->totalPrice = $totalPrice;
-        $this->markingFees = $markingFees;
-        $this->dynamicVariablePrices = $dynamicVariablePrices;
         $this->supplierProfile = $supplierProfile;
+        $this->dynamicVariablePrices = $dynamicVariablePrices;
+        $this->markingFees = $markingFees;
     }
 
     /**
@@ -87,7 +62,7 @@ class DynamicVariablePriceHolder
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCondition()
     {
@@ -103,23 +78,15 @@ class DynamicVariablePriceHolder
     }
 
     /**
-     * @return string
+     * @return SupplierProfileInterface
      */
-    public function getProjectId()
+    public function getSupplierProfile()
     {
-        return $this->projectId;
+        return $this->supplierProfile;
     }
 
     /**
-     * @return array
-     */
-    public function getMarkingFees()
-    {
-        return $this->markingFees;
-    }
-
-    /**
-     * @return array
+     * @return DynamicVariablePrice[]
      */
     public function getDynamicVariablePrices()
     {
@@ -127,10 +94,10 @@ class DynamicVariablePriceHolder
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return MarkingFee[]
      */
-    public function getSupplierProfile()
+    public function getMarkingFees()
     {
-        return $this->supplierProfile;
+        return $this->markingFees;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-class VariantPackaging
+class VariantPackaging implements ModelInterface
 {
     /**
      * @var string
@@ -10,29 +10,24 @@ class VariantPackaging
     private $id;
 
     /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var null|VariantPackaging
-     */
-    private $parent;
-
-    /**
-     * @var string
+     * @var string|null
      */
     private $type;
 
     /**
-     * @var integer
+     * @var int|null
      */
     private $innerQuantity;
 
     /**
-     * @var float
+     * @var float|null
      */
     private $weight;
+
+    /**
+     * @var VariantPackaging|null
+     */
+    private $parent;
 
     /**
      * @var VariantPackagingSize[]
@@ -41,21 +36,20 @@ class VariantPackaging
 
     /**
      * @param string $id
-     * @param string $projectId
-     * @param null|VariantPackaging $parent
-     * @param string $type
-     * @param integer $innerQuantity
-     * @param float $weight
+     * @param string|null $type
+     * @param int|null $innerQuantity
+     * @param float|null $weight
+     * @param VariantPackaging|null $parent
      * @param VariantPackagingSize[] $variantPackagingSizes
      */
-    public function __construct($id, $projectId, $parent, $type, $innerQuantity, $weight, $variantPackagingSizes)
+    public function __construct($id, $type, $innerQuantity, $weight, VariantPackaging $parent = null,
+        array $variantPackagingSizes)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
-        $this->parent = $parent;
         $this->type = $type;
         $this->innerQuantity = $innerQuantity;
         $this->weight = $weight;
+        $this->parent = $parent;
         $this->variantPackagingSizes = $variantPackagingSizes;
     }
 
@@ -68,23 +62,7 @@ class VariantPackaging
     }
 
     /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return null|VariantPackaging
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @return string
+     * @return string|null
      */
     public function getType()
     {
@@ -92,7 +70,7 @@ class VariantPackaging
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getInnerQuantity()
     {
@@ -100,11 +78,19 @@ class VariantPackaging
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getWeight()
     {
         return $this->weight;
+    }
+
+    /**
+     * @return VariantPackaging|null
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**

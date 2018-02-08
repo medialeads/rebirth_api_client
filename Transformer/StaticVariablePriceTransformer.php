@@ -1,26 +1,29 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\StaticVariablePrice;
+use ES\RebirthApiClient\Model\StaticVariablePrice;
 
-/**
- * @author Dagan MENEZ
- */
-class StaticVariablePriceTransformer extends AbstractTransformer
+class StaticVariablePriceTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $staticVariablePrices
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($staticVariablePrices)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($staticVariablePrices as $staticVariablePrice) {
-            $response[] = new StaticVariablePrice($staticVariablePrice['id'], $staticVariablePrice['calculation_value'], $staticVariablePrice['reduced_value'], $staticVariablePrice['from_quantity'], $staticVariablePrice['value']);
-        }
+        return sprintf('StaticVariablePrice_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return StaticVariablePrice
+     */
+    protected function transform(array $data)
+    {
+        return new StaticVariablePrice($data['id'], $data['from_quantity'], $data['value'], $data['reduced_value'],
+            $data['calculation_value']);
     }
 }

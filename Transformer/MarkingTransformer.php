@@ -1,32 +1,62 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Marking;
+use ES\RebirthApiClient\Model\Marking;
 
-/**
- * @author Dagan MENEZ
- */
-class MarkingTransformer extends AbstractTransformer
+class MarkingTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $markings
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($markings)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($markings as $marking) {
-            $hierarchy = null;
-            foreach ($marking['hierarchy'] as $hierarchy) {
-                if (isset($hierarchy['id']) && $hierarchy['id'] = $marking['parent_id']) {
-                    $parent = $hierarchy;
-                }
+        return sprintf('Marking_%s', $data['id']);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Marking
+     */
+    protected function transform(array $data)
+    {
+        $parent = null;
+        $parentId = $data['parent_id'];
+        if (null !== $parentId) {
+            $hierarchyIndexedById = array_combine(array_map(function ($row) {
+                return $row['id'];
+            }, $data['hierarchy']), $data['hierarchy']);
+            $parentsDataStack = array();
+            while (null !== $parentId) {
+                $parentData = $hierarchyIndexedById[$parentId];
+                $parentsDataStack[] = $parentData;
+                $parentId = $parentData['parent_id'];
             }
-            $response[] = new Marking($marking['id'], $marking['full_hierarchy_name'], $marking['project_id'], $marking['parent_id'], $hierarchy, $marking['name'], $marking['slug']);
+
+            $parentData = array_pop($parentsDataStack);
+            $parent = $this->createMarking($parentData, null);
+
+            $parentsCount = count($parentsDataStack);
+            for ($i = $parentsCount - 1; $i >= 0; $i--) {
+                $parentData = $parentsDataStack[$i];
+                $parent = $this->createMarking($parentData, $parent);
+            }
         }
 
-        return $response;
+        return $this->createMarking($data, $parent);
+    }
+
+    /**
+     * @param array $data
+     * @param Marking|null $parent
+     *
+     * @return Marking
+     */
+    private function createMarking(array $data, Marking $parent = null)
+    {
+        return new Marking($data['id'], $data['name'], $data['full_hierarchy_name'], $data['slug'], $parent);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-class VariantSize
+class VariantSize implements ModelInterface
 {
     /**
      * @var string
@@ -10,12 +10,7 @@ class VariantSize
     private $id;
 
     /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var string
+     * @var string|null
      */
     private $type;
 
@@ -26,14 +21,12 @@ class VariantSize
 
     /**
      * @param string $id
-     * @param string $projectId
-     * @param string $type
+     * @param string|null $type
      * @param float $value
      */
-    public function __construct($id, $projectId, $type, $value)
+    public function __construct($id, $type, $value)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->type = $type;
         $this->value = $value;
     }
@@ -47,15 +40,7 @@ class VariantSize
     }
 
     /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return string
+     * @return string|null
      */
     public function getType()
     {

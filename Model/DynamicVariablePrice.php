@@ -1,29 +1,56 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class DynamicVariablePrice extends Price
+class DynamicVariablePrice implements ModelInterface
 {
+    /**
+     * @var string
+     */
+    private $id;
+
     /**
      * @var int
      */
     private $fromQuantity;
 
     /**
-     * @param string $id
-     * @param float|string $calculationValue
-     * @param float|string $reducedValue
-     * @param int $fromQuantity
-     * @param float|string $value
+     * @var string
      */
-    public function __construct($id, $calculationValue, $reducedValue, $fromQuantity, $value)
-    {
-        parent::__construct($id, $calculationValue, $reducedValue, $value);
+    private $value;
 
+    /**
+     * @var string|null
+     */
+    private $reducedValue;
+
+    /**
+     * @var string
+     */
+    private $calculationValue;
+
+    /**
+     * @param string $id
+     * @param int $fromQuantity
+     * @param string $value
+     * @param string|null $reducedValue
+     * @param string $calculationValue
+     */
+    public function __construct($id, $fromQuantity, $value, $reducedValue, $calculationValue)
+    {
+        $this->id = $id;
         $this->fromQuantity = $fromQuantity;
+        $this->value = $value;
+        $this->reducedValue = $reducedValue;
+        $this->calculationValue = $calculationValue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -32,5 +59,29 @@ class DynamicVariablePrice extends Price
     public function getFromQuantity()
     {
         return $this->fromQuantity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReducedValue()
+    {
+        return $this->reducedValue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCalculationValue()
+    {
+        return $this->calculationValue;
     }
 }

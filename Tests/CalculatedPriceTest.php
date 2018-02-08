@@ -1,22 +1,22 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use ES\APIv2Client\Model\Supplier;
-use ES\APIv2Client\Model\Product;
-use ES\APIv2Client\Model\Variant;
-use ES\APIv2Client\Model\VariantPrice;
-use ES\APIv2Client\Model\CalculatedPrice;
-use ES\APIv2Client\Model\SupplierProfile;
-use ES\APIv2Client\Model\VariantMarking;
-use ES\APIv2Client\Model\VariantMarkingModel;
-use ES\APIv2Client\Model\StaticFixedPrice;
-use ES\APIv2Client\Model\Marking;
-use ES\APIv2Client\Model\MarkingPosition;
-use ES\APIv2Client\Model\DynamicFixedPrice;
-use ES\APIv2Client\Model\StaticVariablePriceHolder;
-use ES\APIv2Client\Model\StaticVariablePrice;
-use ES\APIv2Client\Model\DynamicVariablePrice;
-use ES\APIv2Client\Model\DynamicVariablePriceHolder;
+use ES\RebirthApiClient\Model\Supplier;
+use ES\RebirthApiClient\Model\Product;
+use ES\RebirthApiClient\Model\Variant;
+use ES\RebirthApiClient\Model\VariantPrice;
+use ES\RebirthApiClient\Model\CalculatedPrice;
+use ES\RebirthApiClient\Model\SupplierProfile;
+use ES\RebirthApiClient\Model\VariantMarking;
+use ES\RebirthApiClient\Model\VariantMarkingModel;
+use ES\RebirthApiClient\Model\StaticFixedPrice;
+use ES\RebirthApiClient\Model\Marking;
+use ES\RebirthApiClient\Model\MarkingPosition;
+use ES\RebirthApiClient\Model\DynamicFixedPrice;
+use ES\RebirthApiClient\Model\StaticVariablePriceHolder;
+use ES\RebirthApiClient\Model\StaticVariablePrice;
+use ES\RebirthApiClient\Model\DynamicVariablePrice;
+use ES\RebirthApiClient\Model\DynamicVariablePriceHolder;
 
 /**
  * @author Dagan MENEZ

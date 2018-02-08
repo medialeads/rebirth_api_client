@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class Supplier
+class Supplier implements ModelInterface
 {
     /**
      * @var string
@@ -13,19 +10,9 @@ class Supplier
     private $id;
 
     /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var null|string
+     * @var string|null
      */
     private $vatIdentificationNumber;
-
-    /**
-     * @var array
-     */
-    private $supplierProfiles;
 
     /**
      * @var string
@@ -43,29 +30,26 @@ class Supplier
     private $slug;
 
     /**
+     * @var SupplierProfile[]
+     */
+    private $supplierProfiles;
+
+    /**
      * @param string $id
-     * @param string $projectId
-     * @param null|string $vatIdentificationNumber
-     * @param array $supplierProfiles
+     * @param string|null $vatIdentificationNumber
      * @param string $name
      * @param string $legalName
      * @param string $slug
+     * @param SupplierProfile[] $supplierProfiles
      */
-    public function __construct($id, $projectId, $vatIdentificationNumber, $supplierProfiles, $name, $legalName, $slug)
+    public function __construct($id, $vatIdentificationNumber, $name, $legalName, $slug, array $supplierProfiles)
     {
-        foreach ($supplierProfiles as $supplierProfile) {
-            if(!$supplierProfile instanceof SupplierProfileInterface) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->vatIdentificationNumber = $vatIdentificationNumber;
-        $this->supplierProfiles = $supplierProfiles;
         $this->name = $name;
         $this->legalName = $legalName;
         $this->slug = $slug;
+        $this->supplierProfiles = $supplierProfiles;
     }
 
     /**
@@ -77,27 +61,11 @@ class Supplier
     }
 
     /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return null|string
+     * @return string|null
      */
     public function getVatIdentificationNumber()
     {
         return $this->vatIdentificationNumber;
-    }
-
-    /**
-     * @return array
-     */
-    public function getSupplierProfiles()
-    {
-        return $this->supplierProfiles;
     }
 
     /**
@@ -122,5 +90,13 @@ class Supplier
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return SupplierProfile[]
+     */
+    public function getSupplierProfiles()
+    {
+        return $this->supplierProfiles;
     }
 }

@@ -1,36 +1,13 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class Attribute
+class Attribute implements ModelInterface
 {
     /**
      * @var string
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var AttributeGroup
-     */
-    private $attributeGroup;
-
-    /**
-     * @var string
-     */
-    private $parentId;
-
-    /**
-     * @var array
-     */
-    private $hierarchy;
 
     /**
      * @var string
@@ -45,39 +22,49 @@ class Attribute
     /**
      * @var string
      */
-    private $slug;
+    private $fullHierarchyValue;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $additionalTextData;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var Attribute|null
+     */
+    private $parent;
+
+    /**
+     * @var AttributeGroup
+     */
+    private $attributeGroup;
+
+    /**
      * @param string $id
-     * @param string $projectId
-     * @param AttributeGroup $attributeGroup
-     * @param string $parentId
-     * @param array $hierarchy
      * @param string $type
      * @param string $value
+     * @param string $fullHierarchyValue
+     * @param string|null $additionalTextData
      * @param string $slug
-     * @param string $additionalTextData
+     * @param Attribute|null $parent
+     * @param AttributeGroup $attributeGroup
      */
-    public function __construct($id, $projectId, AttributeGroup $attributeGroup, $parentId, $hierarchy, $type, $value, $slug, $additionalTextData)
+    public function __construct($id, $type, $value, $fullHierarchyValue, $additionalTextData, $slug,
+        Attribute $parent = null, AttributeGroup $attributeGroup)
     {
-        if (!$attributeGroup instanceof AttributeGroup) {
-            throw new \InvalidArgumentException();
-        }
-
-        $this->projectId = $projectId;
-        $this->attributeGroup = $attributeGroup;
-        $this->parentId = $parentId;
-        $this->hierarchy = $hierarchy;
         $this->id = $id;
         $this->type = $type;
         $this->value = $value;
-        $this->slug = $slug;
+        $this->fullHierarchyValue = $fullHierarchyValue;
         $this->additionalTextData = $additionalTextData;
+        $this->slug = $slug;
+        $this->parent = $parent;
+        $this->attributeGroup = $attributeGroup;
     }
 
     /**
@@ -86,38 +73,6 @@ class Attribute
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return AttributeGroup
-     */
-    public function getAttributeGroup()
-    {
-        return $this->attributeGroup;
-    }
-
-    /**
-     * @return string
-     */
-    public function getParentId()
-    {
-        return $this->parentId;
-    }
-
-    /**
-     * @return array
-     */
-    public function getHierarchy()
-    {
-        return $this->hierarchy;
     }
 
     /**
@@ -139,16 +94,40 @@ class Attribute
     /**
      * @return string
      */
+    public function getFullHierarchyValue()
+    {
+        return $this->fullHierarchyValue;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAdditionalTextData()
+    {
+        return $this->additionalTextData;
+    }
+
+    /**
+     * @return string
+     */
     public function getSlug()
     {
         return $this->slug;
     }
 
     /**
-     * @return string
+     * @return Attribute|null
      */
-    public function getAdditionalTextData()
+    public function getParent()
     {
-        return $this->additionalTextData;
+        return $this->parent;
+    }
+
+    /**
+     * @return AttributeGroup
+     */
+    public function getAttributeGroup()
+    {
+        return $this->attributeGroup;
     }
 }

@@ -1,26 +1,29 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\DynamicVariablePrice;
+use ES\RebirthApiClient\Model\DynamicVariablePrice;
 
-/**
- * @author Dagan MENEZ
- */
-class DynamicVariablePriceTransformer extends AbstractTransformer
+class DynamicVariablePriceTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $dynamicVariablePrices
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($dynamicVariablePrices)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($dynamicVariablePrices as $dynamicVariablePrice) {
-            $response[] =  new DynamicVariablePrice($dynamicVariablePrice['id'], $dynamicVariablePrice['calculation_value'], $dynamicVariablePrice['reduced_value'], $dynamicVariablePrice['from_quantity'], $dynamicVariablePrice['value']);
-        }
+        return sprintf('DynamicVariablePrice_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return DynamicVariablePrice
+     */
+    protected function transform(array $data)
+    {
+        return new DynamicVariablePrice($data['id'], $data['from_quantity'], $data['value'], $data['reduced_value'],
+            $data['calculation_value']);
     }
 }

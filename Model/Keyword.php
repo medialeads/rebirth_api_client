@@ -1,17 +1,13 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-class Keyword {
+class Keyword implements ModelInterface
+{
     /**
      * @var string
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $projectId;
 
     /**
      * @var string
@@ -24,15 +20,13 @@ class Keyword {
     private $slug;
 
     /**
-     * @param $id
-     * @param $projectId
-     * @param $value
-     * @param $slug
+     * @param string $id
+     * @param string $value
+     * @param string $slug
      */
-    public function __construct($id, $projectId, $value, $slug)
+    public function __construct($id, $value, $slug)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
         $this->value = $value;
         $this->slug = $slug;
     }
@@ -43,14 +37,6 @@ class Keyword {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
     }
 
     /**
@@ -68,6 +54,4 @@ class Keyword {
     {
         return $this->slug;
     }
-
-
 }

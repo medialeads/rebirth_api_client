@@ -1,19 +1,16 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Util\Model;
 
-/**
- * @author Dagan MENEZ
- */
 class CalculatedPrice
 {
     /**
-     * @var float
+     * @var float|null
      */
     private $value;
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getValue()
     {

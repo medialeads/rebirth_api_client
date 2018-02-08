@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\ProductImage;
+use ES\RebirthApiClient\Model\ProductImage;
 
-/**
- * @author Dagan MENEZ
- */
-class ProductImageTransformer extends AbstractTransformer
+class ProductImageTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $productImages
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($productImages)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($productImages as $productImage) {
-            $response[] = new ProductImage($productImage['id'], $productImage['original_filename'], $productImage['url']);
-        }
+        return sprintf('ProductImage_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return ProductImage
+     */
+    protected function transform(array $data)
+    {
+        return new ProductImage($data['id'], $data['original_filename'], $data['url']);
     }
 }

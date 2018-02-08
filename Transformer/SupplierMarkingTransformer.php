@@ -1,26 +1,27 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\SupplierMarking;
+use ES\RebirthApiClient\Model\SupplierMarking;
 
-/**
- * @author Dagan MENEZ
- */
-class SupplierMarkingTransformer extends AbstractTransformer
+class SupplierMarkingTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $supplierMarkings
-     *
-     * @return array
+     * @param array $data
+     * @return string
      */
-    public static function doFromArray($supplierMarkings)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($supplierMarkings as $supplierMarking) {
-            $response[] =  new SupplierMarking($supplierMarking['id'], $supplierMarking['name_complement'], $supplierMarking['code'], $supplierMarking['project_id'], $supplierMarking['comment']);
-        }
+        return sprintf('SupplierMarking_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return SupplierMarking
+     */
+    protected function transform(array $data)
+    {
+        return new SupplierMarking($data['id'], $data['code'], $data['name_complement'], $data['comment']);
     }
 }

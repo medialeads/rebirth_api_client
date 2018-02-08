@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class SupplierProfile implements SupplierProfileInterface
+class SupplierProfile implements ModelInterface, SupplierProfileInterface
 {
     /**
      * @var string
@@ -15,83 +12,30 @@ class SupplierProfile implements SupplierProfileInterface
     /**
      * @var string
      */
-    private $countryCode;
-
-    /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var string
-     */
     private $name;
 
     /**
-     * @var null|string
+     * @var string
+     */
+    private $countryCode;
+
+    /**
+     * @var string|null
      */
     private $association;
 
     /**
-     * @var bool
-     */
-    private $displayPrices;
-
-    /**
-     * @var string
-     */
-    private $status;
-
-    /**
      * @param string $id
-     * @param string $countryCode
-     * @param string $projectId
      * @param string $name
-     * @param null|string $association
-     * @param bool $displayPrices
-     * @param string $status
+     * @param string $countryCode
+     * @param string|null $association
      */
-    public function __construct($id, $countryCode, $projectId, $name, $association, $displayPrices, $status)
+    public function __construct($id, $name, $countryCode, $association)
     {
-        $this->countryCode = $countryCode;
-        $this->projectId = $projectId;
-        $this->name = $name;
-        $this->association = $association;
         $this->id = $id;
-        $this->displayPrices = $displayPrices;
-        $this->status = $status;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountryCode()
-    {
-        return $this->countryCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getAssociation()
-    {
-        return $this->association;
+        $this->name = $name;
+        $this->countryCode = $countryCode;
+        $this->association = $association;
     }
 
     /**
@@ -103,18 +47,26 @@ class SupplierProfile implements SupplierProfileInterface
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getDisplayPrices()
+    public function getName()
     {
-        return $this->displayPrices;
+        return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getStatus()
+    public function getCountryCode()
     {
-        return $this->status;
+        return $this->countryCode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAssociation()
+    {
+        return $this->association;
     }
 }

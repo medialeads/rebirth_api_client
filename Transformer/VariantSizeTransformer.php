@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantSize;
+use ES\RebirthApiClient\Model\VariantSize;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantSizeTransformer extends AbstractTransformer
+class VariantSizeTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantSizes
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantSizes)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantSizes as $variantSize) {
-            $response[] =  new VariantSize($variantSize['id'], $variantSize['calculation_value'], $variantSize['type'], $variantSize['value']);
-        }
+        return sprintf('VariantSize_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantSize
+     */
+    protected function transform(array $data)
+    {
+        return new VariantSize($data['id'], $data['type'], $data['value']);
     }
 }

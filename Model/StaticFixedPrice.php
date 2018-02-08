@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class StaticFixedPrice
+class StaticFixedPrice implements ModelInterface
 {
     /**
      * @var string
@@ -13,12 +10,22 @@ class StaticFixedPrice
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $condition;
 
     /**
-     * @var string
+     * @var float
+     */
+    private $value;
+
+    /**
+     * @var float|null
+     */
+    private $reducedValue;
+
+    /**
+     * @var float
      */
     private $calculationValue;
 
@@ -28,62 +35,36 @@ class StaticFixedPrice
     private $totalPrice;
 
     /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var array
-     */
-    private $markingFees;
-
-    /**
-     * @var string
-     */
-    private $reducedValue;
-
-    /**
-     * @var float
-     */
-    private $value;
-
-    /**
      * @var SupplierProfileInterface
      */
     private $supplierProfile;
 
     /**
-     * @param string $id
-     * @param string $condition
-     * @param string $calculationValue
-     * @param bool $totalPrice
-     * @param string $projectId
-     * @param array $markingFees
-     * @param string $reducedValue
-     * @param float $value
-     * @param SupplierProfileInterface $supplierProfile
+     * @var MarkingFee[]
      */
-    public function __construct($id, $condition, $calculationValue, $totalPrice, $projectId, $markingFees, $reducedValue, $value, SupplierProfileInterface $supplierProfile)
+    private $markingFees;
+
+    /**
+     * @param string $id
+     * @param string|null $condition
+     * @param float $value
+     * @param float|null $reducedValue
+     * @param float $calculationValue
+     * @param bool $totalPrice
+     * @param SupplierProfileInterface $supplierProfile
+     * @param MarkingFee[] $markingFees
+     */
+    public function __construct($id, $condition, $value, $reducedValue, $calculationValue, $totalPrice,
+        SupplierProfileInterface $supplierProfile, array $markingFees)
     {
-        foreach ($markingFees as $markingFee) {
-            if (!$markingFee instanceof MarkingFee) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        if (!$supplierProfile instanceof SupplierProfileInterface) {
-            throw new \InvalidArgumentException();
-        }
-
         $this->id = $id;
         $this->condition = $condition;
+        $this->value = $value;
+        $this->reducedValue = $reducedValue;
         $this->calculationValue = $calculationValue;
         $this->totalPrice = $totalPrice;
-        $this->projectId = $projectId;
-        $this->markingFees = $markingFees;
-        $this->reducedValue = $reducedValue;
-        $this->value = $value;
         $this->supplierProfile = $supplierProfile;
+        $this->markingFees = $markingFees;
     }
 
     /**
@@ -95,7 +76,7 @@ class StaticFixedPrice
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCondition()
     {
@@ -103,7 +84,23 @@ class StaticFixedPrice
     }
 
     /**
-     * @return string
+     * @return float
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getReducedValue()
+    {
+        return $this->reducedValue;
+    }
+
+    /**
+     * @return float
      */
     public function getCalculationValue()
     {
@@ -119,42 +116,18 @@ class StaticFixedPrice
     }
 
     /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMarkingFees()
-    {
-        return $this->markingFees;
-    }
-
-    /**
-     * @return float
-     */
-    public function getReducedValue()
-    {
-        return $this->reducedValue;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
      * @return SupplierProfileInterface
      */
     public function getSupplierProfile()
     {
         return $this->supplierProfile;
+    }
+
+    /**
+     * @return MarkingFee[]
+     */
+    public function getMarkingFees()
+    {
+        return $this->markingFees;
     }
 }

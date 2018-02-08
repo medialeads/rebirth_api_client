@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\MarkingFee;
+use ES\RebirthApiClient\Model\MarkingFee;
 
-/**
- * @author Dagan MENEZ
- */
-class MarkingFeeTransformer extends AbstractTransformer
+class MarkingFeeTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $markingFees
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($markingFees)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($markingFees as $markingFee) {
-            $response[] = new MarkingFee($markingFee['id'], $markingFee['project_id'], $markingFee['name'], $markingFee['slug']);
-        }
+        return sprintf('MarkingFee_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return MarkingFee
+     */
+    protected function transform(array $data)
+    {
+        return new MarkingFee($data['id'], $data['name'], $data['slug']);
     }
 }

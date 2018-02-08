@@ -1,25 +1,29 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantListPrice;
+use ES\RebirthApiClient\Model\VariantListPrice;
 
-class VariantListPriceTransformer extends AbstractTransformer
+class VariantListPriceTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantListPrices
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantListPrices)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantListPrices as $variantListPrice) {
-            $supplierProfile = SupplierProfileTransformer::fromArray($variantListPrice['supplier_profile']);
+        return sprintf('VariantListPrice_%s', $data['id']);
+    }
 
-            $response[] =  new VariantListPrice($variantListPrice['id'], $variantListPrice['calculation_value'], $variantListPrice['reduced_value'], $variantListPrice['value'], $supplierProfile);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantListPrice
+     */
+    protected function transform(array $data)
+    {
+        return new VariantListPrice($data['id'], $data['value'], $data['reduced_value'], $data['calculation_value'],
+            PartialSupplierProfileTransformer::create()->transformOne($data['supplier_profile']));
     }
 }

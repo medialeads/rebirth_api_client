@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Brand;
+use ES\RebirthApiClient\Model\Brand;
 
-/**
- * @author Dagan MENEZ
- */
-class BrandTransformer extends AbstractTransformer
+class BrandTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $brands
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($brands)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($brands as $brand) {
-            $response[] = new Brand($brand['id'], $brand['project_id'], $brand['name'], $brand['suffix'], $brand['slug']);
-        }
+        return sprintf('Brand_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return Brand
+     */
+    protected function transform(array $data)
+    {
+        return new Brand($data['id'], $data['name'], $data['suffix'], $data['slug']);
     }
 }

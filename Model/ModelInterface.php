@@ -2,15 +2,10 @@
 
 namespace ES\RebirthApiClient\Model;
 
-interface SupplierProfileInterface
+interface ModelInterface
 {
     /**
      * @return string
      */
     public function getId();
-
-    /**
-     * @return string
-     */
-    public function getCountryCode();
 }

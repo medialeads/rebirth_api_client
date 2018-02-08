@@ -1,13 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-use ES\APIv2Client\Helper\VariantHelper;
-
-/**
- * @author Dagan MENEZ
- */
-class Variant
+class Variant implements ModelInterface
 {
     /**
      * @var string
@@ -15,69 +10,54 @@ class Variant
     private $id;
 
     /**
-     * @var VariantMarking[]
-     */
-    private $variantMarkings;
-
-    /**
-     * @var SupplierProfile[]
-     */
-    private $supplierProfiles;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $rawDescription;
-
-    /**
-     * @var null|string
-     */
-    private $markingAdditionalInformation;
-
-    /**
      * @var string
      */
     private $supplierReference;
 
     /**
-     * @var float
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var string|null
+     */
+    private $description;
+
+    /**
+     * @var string|null
+     */
+    private $rawDescription;
+
+    /**
+     * @var bool
+     */
+    private $mandatoryMarking;
+
+    /**
+     * @var string|null
+     */
+    private $markingAdditionalInformation;
+
+    /**
+     * @var float|null
      */
     private $netWeight;
 
     /**
+     * @var float|null
+     */
+    private $grossWeight;
+
+    /**
      * @var int|null
-     */
-    private $mainVariantImageId;
-
-    /**
-     * @var VariantMinimumQuantity[]
-     */
-    private $variantMinimumQuantities;
-
-    /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var VariantPrice[]
-     */
-    private $variantPrices;
-
-    /**
-     * @var string
      */
     private $stock;
 
     /**
-     * @var float
+     * @var string|null
      */
-    private $grossWeight;
+    private $europeanArticleNumbering;
 
     /**
      * @var string
@@ -85,14 +65,49 @@ class Variant
     private $slug;
 
     /**
+     * @var VariantPackaging|null
+     */
+    private $variantPackaging;
+
+    /**
+     * @var VariantImage|null
+     */
+    private $mainVariantImage;
+
+    /**
+     * @var Attribute[]
+     */
+    private $attributes;
+
+    /**
+     * @var SupplierProfileInterface[]
+     */
+    private $supplierProfiles;
+
+    /**
+     * @var Keyword[]
+     */
+    private $keywords;
+
+    /**
+     * @var VariantPrice[]
+     */
+    private $variantPrices;
+
+    /**
      * @var VariantImage[]
      */
     private $variantImages;
 
     /**
-     * @var int|null
+     * @var VariantMarking[]
      */
-    private $europeanArticleNumbering;
+    private $variantMarkings;
+
+    /**
+     * @var VariantMinimumQuantity[]
+     */
+    private $variantMinimumQuantities;
 
     /**
      * @var VariantSamplePrice[]
@@ -105,34 +120,9 @@ class Variant
     private $variantExternalLinks;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var VariantListPrice[]
      */
     private $variantListPrices;
-
-    /**
-     * @var Attribute[]
-     */
-    private $attributes;
-
-    /**
-     * @var bool
-     */
-    private $mandatoryMarking;
-
-    /**
-     * @var Keyword[]
-     */
-    private $keywords;
-
-    /**
-     * @var VariantPackaging
-     */
-    private $variantPackaging;
 
     /**
      * @var VariantSize[]
@@ -141,105 +131,62 @@ class Variant
 
     /**
      * @param string $id
-     * @param VariantMarking[] $variantMarkings
-     * @param SupplierProfile[] $supplierProfiles
-     * @param string $description
-     * @param string $rawDescription
-     * @param null|string $markingAdditionalInformation
      * @param string $supplierReference
-     * @param float $netWeight
-     * @param int|null $mainVariantImageId
-     * @param VariantMinimumQuantity[] $variantMinimumQuantities
-     * @param string $projectId
-     * @param VariantPrice[] $variantPrices
-     * @param string $stock
-     * @param float $grossWeight
+     * @param string $name
+     * @param string|null $description
+     * @param string|null $rawDescription
+     * @param bool $mandatoryMarking
+     * @param string|null $markingAdditionalInformation
+     * @param float|null $netWeight
+     * @param float|null $grossWeight
+     * @param int|null $stock
+     * @param string|null $europeanArticleNumbering
      * @param string $slug
+     * @param VariantPackaging|null $variantPackaging
+     * @param VariantImage|null $mainVariantImage
+     * @param Attribute[] $attributes
+     * @param SupplierProfileInterface[] $supplierProfiles
+     * @param Keyword[] $keywords
+     * @param VariantPrice[] $variantPrices
      * @param VariantImage[] $variantImages
-     * @param int|null $europeanArticleNumbering
+     * @param VariantMarking[] $variantMarkings
+     * @param VariantMinimumQuantity[] $variantMinimumQuantities
      * @param VariantSamplePrice[] $variantSamplePrices
      * @param VariantExternalLink[] $variantExternalLinks
-     * @param string $name
      * @param VariantListPrice[] $variantListPrices
-     * @param Attribute[] $attributes
-     * @param bool $mandatoryMarking
-     * @param Keyword[] $keywords
-     * @param VariantPackaging $variantPackaging
      * @param VariantSize[] $variantSizes
      */
-    public function __construct($id, $variantMarkings, $supplierProfiles, $description, $rawDescription, $markingAdditionalInformation, $supplierReference, $netWeight, $mainVariantImageId, $variantMinimumQuantities, $projectId, $variantPrices, $stock, $grossWeight, $slug, $variantImages, $europeanArticleNumbering, $variantSamplePrices, $variantExternalLinks, $name, $variantListPrices, $attributes, $mandatoryMarking, $keywords, $variantPackaging, $variantSizes)
+    public function __construct($id, $supplierReference, $name, $description, $rawDescription, $mandatoryMarking,
+        $markingAdditionalInformation, $netWeight, $grossWeight, $stock, $europeanArticleNumbering, $slug,
+        VariantPackaging $variantPackaging = null, VariantImage $mainVariantImage = null, array $attributes,
+        array $supplierProfiles, array $keywords, array $variantPrices, array $variantImages, array $variantMarkings,
+        array $variantMinimumQuantities, array $variantSamplePrices, array $variantExternalLinks,
+        array $variantListPrices, array $variantSizes)
     {
-        foreach ($variantMarkings as $variantMarking) {
-            if (!$variantMarking instanceof VariantMarking) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($supplierProfiles as $supplierProfile) {
-            if (!$supplierProfile instanceof SupplierProfileInterface) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($variantImages as $variantImage) {
-            if (!$variantImage instanceof VariantImage) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($variantExternalLinks as $variantExternalLink) {
-            if (!$variantExternalLink instanceof VariantExternalLink) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($attributes as $attribute) {
-            if (!$attribute instanceof Attribute) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        foreach ($keywords as $keyword) {
-            if (!$keyword instanceof Keyword) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        if (!$variantPackaging instanceof VariantPackaging) {
-            throw new \InvalidArgumentException();
-        }
-
-        foreach ($variantSizes as $variantSize) {
-            if (!$variantSize instanceof VariantSize) {
-                throw new \InvalidArgumentException();
-            }
-        }
-
-        $this->variantMarkings = $variantMarkings;
-        $this->supplierProfiles = $supplierProfiles;
+        $this->id = $id;
+        $this->supplierReference = $supplierReference;
+        $this->name = $name;
         $this->description = $description;
         $this->rawDescription = $rawDescription;
+        $this->mandatoryMarking = $mandatoryMarking;
         $this->markingAdditionalInformation = $markingAdditionalInformation;
-        $this->supplierReference = $supplierReference;
         $this->netWeight = $netWeight;
-        $this->mainVariantImageId = $mainVariantImageId;
-        $this->variantMinimumQuantities = $variantMinimumQuantities;
-        $this->projectId = $projectId;
-        $this->variantPrices = $variantPrices;
-        $this->id = $id;
-        $this->stock = $stock;
         $this->grossWeight = $grossWeight;
-        $this->slug = $slug;
-        $this->variantImages = $variantImages;
+        $this->stock = $stock;
         $this->europeanArticleNumbering = $europeanArticleNumbering;
+        $this->slug = $slug;
+        $this->variantPackaging = $variantPackaging;
+        $this->mainVariantImage = $mainVariantImage;
+        $this->attributes = $attributes;
+        $this->supplierProfiles = $supplierProfiles;
+        $this->keywords = $keywords;
+        $this->variantPrices = $variantPrices;
+        $this->variantImages = $variantImages;
+        $this->variantMarkings = $variantMarkings;
+        $this->variantMinimumQuantities = $variantMinimumQuantities;
         $this->variantSamplePrices = $variantSamplePrices;
         $this->variantExternalLinks = $variantExternalLinks;
-        $this->name = $name;
-        $this->variantListPrices;
-        $this->attributes = $attributes;
-        $this->mandatoryMarking = $mandatoryMarking;
-        $this->keywords = $keywords;
-        $this->variantPackaging = $variantPackaging;
+        $this->variantListPrices = $variantListPrices;
         $this->variantSizes = $variantSizes;
     }
 
@@ -252,46 +199,6 @@ class Variant
     }
 
     /**
-     * @return VariantMarking[]
-     */
-    public function getVariantMarkings()
-    {
-        return $this->variantMarkings;
-    }
-
-    /**
-     * @return SupplierProfile[]
-     */
-    public function getSupplierProfiles()
-    {
-        return $this->supplierProfiles;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRawDescription()
-    {
-        return $this->rawDescription;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getMarkingAdditionalInformation()
-    {
-        return $this->markingAdditionalInformation;
-    }
-
-    /**
      * @return string
      */
     public function getSupplierReference()
@@ -300,7 +207,47 @@ class Variant
     }
 
     /**
-     * @return float
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRawDescription()
+    {
+        return $this->rawDescription;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMandatoryMarking()
+    {
+        return $this->mandatoryMarking;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMarkingAdditionalInformation()
+    {
+        return $this->markingAdditionalInformation;
+    }
+
+    /**
+     * @return float|null
      */
     public function getNetWeight()
     {
@@ -308,39 +255,15 @@ class Variant
     }
 
     /**
+     * @return float|null
+     */
+    public function getGrossWeight()
+    {
+        return $this->grossWeight;
+    }
+
+    /**
      * @return int|null
-     */
-    public function getMainVariantImageId()
-    {
-        return $this->mainVariantImageId;
-    }
-
-    /**
-     * @return VariantMinimumQuantity[]
-     */
-    public function getVariantMinimumQuantities()
-    {
-        return $this->variantMinimumQuantities;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return VariantPrice[]
-     */
-    public function getVariantPrices()
-    {
-        return $this->variantPrices;
-    }
-
-    /**
-     * @return string
      */
     public function getStock()
     {
@@ -348,11 +271,11 @@ class Variant
     }
 
     /**
-     * @return float
+     * @return string|null
      */
-    public function getGrossWeight()
+    public function getEuropeanArticleNumbering()
     {
-        return $this->grossWeight;
+        return $this->europeanArticleNumbering;
     }
 
     /**
@@ -364,6 +287,54 @@ class Variant
     }
 
     /**
+     * @return VariantPackaging|null
+     */
+    public function getVariantPackaging()
+    {
+        return $this->variantPackaging;
+    }
+
+    /**
+     * @return VariantImage|null
+     */
+    public function getMainVariantImage()
+    {
+        return $this->mainVariantImage;
+    }
+
+    /**
+     * @return Attribute[]
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @return SupplierProfile[]
+     */
+    public function getSupplierProfiles()
+    {
+        return $this->supplierProfiles;
+    }
+
+    /**
+     * @return Keyword[]
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
+    }
+
+    /**
+     * @return VariantPrice[]
+     */
+    public function getVariantPrices()
+    {
+        return $this->variantPrices;
+    }
+
+    /**
      * @return VariantImage[]
      */
     public function getVariantImages()
@@ -372,11 +343,19 @@ class Variant
     }
 
     /**
-     * @return int|null
+     * @return VariantMarking[]
      */
-    public function getEuropeanArticleNumbering()
+    public function getVariantMarkings()
     {
-        return $this->europeanArticleNumbering;
+        return $this->variantMarkings;
+    }
+
+    /**
+     * @return VariantMinimumQuantity[]
+     */
+    public function getVariantMinimumQuantities()
+    {
+        return $this->variantMinimumQuantities;
     }
 
     /**
@@ -396,14 +375,6 @@ class Variant
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @return VariantListPrice[]
      */
     public function getVariantListPrices()
@@ -412,47 +383,10 @@ class Variant
     }
 
     /**
-     * @return Attribute[]
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isMandatoryMarking()
-    {
-        return $this->mandatoryMarking;
-    }
-
-    /**
-     * @return Keyword[]
-     */
-    public function getKeywords()
-    {
-        return $this->keywords;
-    }
-
-    /**
-     * @return VariantPackaging
-     */
-    public function getVariantPackaging()
-    {
-        return $this->variantPackaging;
-    }
-
-    /**
      * @return VariantSize[]
      */
     public function getVariantSizes()
     {
         return $this->variantSizes;
-    }
-
-    public function getCalculatedPrice(SupplierProfile $supplierProfile, $quantity, array $variantMarkingModels = array())
-    {
-        return VariantHelper::getCalculatedPrice($this, $supplierProfile, $quantity, $variantMarkingModels);
     }
 }

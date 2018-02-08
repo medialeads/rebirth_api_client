@@ -4,13 +4,14 @@
   "type": "library",
   "autoload": {
     "psr-4": {
-      "ES\\APIv2Client\\": ""
+      "ES\\RebirthApiClient\\": ""
     }
   },
   "require": {
-    "symfony/expression-language": "^3.3"
+    "symfony/expression-language": "^3.4"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7"
+    "phpunit/phpunit": "^5.7",
+    "symfony/var-dumper": "^3.4"
   }
 }

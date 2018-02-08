@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantImage;
+use ES\RebirthApiClient\Model\VariantImage;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantImageTransformer extends AbstractTransformer
+class VariantImageTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantImages
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantImages)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantImages as $variantImage) {
-            $response[] = new VariantImage($variantImage['id'], $variantImage['original_filename'], $variantImage['url']);
-        }
+        return sprintf('VariantImage_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantImage
+     */
+    protected function transform(array $data)
+    {
+        return new VariantImage($data['id'], $data['original_filename'], $data['url']);
     }
 }

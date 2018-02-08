@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class AttributeGroup
+class AttributeGroup implements ModelInterface
 {
     /**
      * @var string
@@ -15,7 +12,7 @@ class AttributeGroup
     /**
      * @var string
      */
-    private $projectId;
+    private $type;
 
     /**
      * @var string
@@ -23,28 +20,29 @@ class AttributeGroup
     private $name;
 
     /**
+     * @var string|null
+     */
+    private $additionalTextDataType;
+
+    /**
      * @var string
      */
     private $slug;
 
     /**
-     * @var string
-     */
-    private $additionalTextDataType;
-
-    /**
      * @param string $id
-     * @param string $projectId
+     * @param string $type
      * @param string $name
+     * @param string|null $additionalTextDataType
      * @param string $slug
      */
-    public function __construct($id, $projectId, $name, $slug, $additionalTextDataType)
+    public function __construct($id, $type, $name, $additionalTextDataType, $slug)
     {
         $this->id = $id;
-        $this->projectId = $projectId;
+        $this->type = $type;
         $this->name = $name;
-        $this->slug = $slug;
         $this->additionalTextDataType = $additionalTextDataType;
+        $this->slug = $slug;
     }
 
     /**
@@ -58,9 +56,9 @@ class AttributeGroup
     /**
      * @return string
      */
-    public function getProjectId()
+    public function getType()
     {
-        return $this->projectId;
+        return $this->type;
     }
 
     /**
@@ -72,18 +70,18 @@ class AttributeGroup
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSlug()
+    public function getAdditionalTextDataType()
     {
-        return $this->slug;
+        return $this->additionalTextDataType;
     }
 
     /**
      * @return string
      */
-    public function getAdditionalTextDataType()
+    public function getSlug()
     {
-        return $this->additionalTextDataType;
+        return $this->slug;
     }
 }

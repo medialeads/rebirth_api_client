@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantExternalLink;
+use ES\RebirthApiClient\Model\VariantExternalLink;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantExternalLinkTransformer extends AbstractTransformer
+class VariantExternalLinkTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantExternalLinks
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantExternalLinks)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantExternalLinks as $variantExternalLink) {
-            $response[] = new VariantExternalLink($variantExternalLink['id'], $variantExternalLink['type'], $variantExternalLink['url']);
-        }
+        return sprintf('VariantExternalLink_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantExternalLink
+     */
+    protected function transform(array $data)
+    {
+        return new VariantExternalLink($data['id'], $data['type'], $data['url']);
     }
 }

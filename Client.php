@@ -1,170 +1,69 @@
 <?php
 
-namespace ES\APIv2Client;
+namespace ES\RebirthApiClient;
 
-use ES\APIv2Client\Transformer\ProductTransformer;
+use ES\RebirthApiClient\Model\Product;
+use ES\RebirthApiClient\Transformer\ProductTransformer;
 
-/**
- * @author Dagan MENEZ
- */
 class Client
 {
-    private $url;
+    /**
+     * @var array
+     */
+    private $headers;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $key;
+    private $searchUrl;
 
     /**
-     * @var string
+     * @param string $token
+     * @param string $baseUrl
      */
-    private $lang;
-
-    /**
-     * @param string $key
-     * @param string $lang
-     * @param string $version
-     */
-    public function __construct($key, $lang, $version)
+    public function __construct($token, $baseUrl = 'http://apiv2.europeansourcing.com/api/v1.0')
     {
-        $this->key = $key;
-        $this->lang = $lang;
-        $this->url  = sprintf("http://apiv2.europeansourcing.com/api/%s/search", $version);
-
-        $this->checkVersion($version);
-    }
-
-    /**
-     * @param array[] $handlers
-     * @param int $page
-     * @param int $offset
-     * @param int $limit
-     * @param string $sort_direction
-     *
-     * @return array|mixed|null
-     */
-    public function searchProductsBy($handlers, $page = 1, $offset = 0, $limit = 52, $sort_direction = 'asc')
-    {
-        $params = array(
-            'page' => $page,
-            'offset' => $offset,
-            'lang' => $this->lang,
-            'limit' => $limit,
-            'sort_direction' => $sort_direction,
-            'search_handlers' => $handlers
-        );
-
-        return $this->searchRequest($params);
-    }
-
-    /**
-     * @param string $query
-     * @param int $page
-     * @param int $offset
-     * @param int $limit
-     * @param string $sort_direction
-     *
-     * @return array|mixed|null
-     */
-    public function searchProductsByQuery($query, $page = 1, $offset = 0, $limit = 52, $sort_direction = 'asc')
-    {
-        $params = array(
-            'page' => $page,
-            'offset' => $offset,
-            'lang' => $this->lang,
-            'limit' => $limit,
-            'sort_direction' => $sort_direction,
-            'search_handlers' => array(
-                array(
-                    'query' => $query
-                )
-            )
-        );
-
-        return $this->searchRequest($params);
-    }
-
-    /**
-     * @param array[] $params
-     *
-     * @return array|mixed|null
-     */
-    private function searchRequest($params)
-    {
-        $ch = curl_init($this->url);
-        $param = json_encode($params);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        $this->headers = array(
             'Content-Type: application/ld+json',
             'Accept: application/ld+json',
-            'X-AUTH-TOKEN: ' .  $this->key
-        ));
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $param);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-        $data = curl_exec($ch);
+            sprintf('X-AUTH-TOKEN: %s', $token)
+        );
+        $this->searchUrl = sprintf('%s/search', rtrim($baseUrl, '/'));
+    }
 
-        if (false === $data) {
-            echo 'Erreur Curl : ' . curl_error($ch);
-            die();
+    /**
+     * @param array $params
+     *
+     * @return Product[]
+     */
+    public function search(array $params = array())
+    {
+        if (!isset($params['lang'])) {
+            $params['lang'] = 'fr';
+        }
+
+        $encodedParams = json_encode($params);
+        if (false === $encodedParams || JSON_ERROR_NONE !== json_last_error()) {
+            throw new \Exception(sprintf('Could not json_encode() your params : %s.', json_last_error_msg()));
+        }
+
+        $ch = curl_init($this->searchUrl);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $encodedParams);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        $curlErrno = curl_errno($ch);
+        if (0 !== $curlErrno || false === $response) {
+            throw new \Exception('CURL call failed : %s %s', $curlErrno, curl_error($ch));
         }
 
         curl_close($ch);
-        $data = json_decode($data, true);
+        $decodedResponse = json_decode($response, true);
 
-        if (null === $data) {
-            throw new \UnexpectedValueException("API did not answer with JSON data.");
+        if (null === $decodedResponse || JSON_ERROR_NONE !== json_last_error()) {
+            throw new \Exception(sprintf('Could not json_decode() the API response : %s', json_last_error_msg()));
         }
 
-        if (!isset($data['products'])) {
-            return $data;
-        }
-
-        $products = ProductTransformer::fromArray($data['products']);
-
-        return $products;
+        return ProductTransformer::create()->transformMultiple($decodedResponse['products']);
     }
-
-    /**
-     * @param string $version
-     */
-    private function checkVersion($version) {
-        if (substr($version, 0,1) !== "v") {
-            throw new \InvalidArgumentException('The version provided is not a valid version.');
-        }
-
-        preg_match('/^v([0-9]+)./', $version, $number);
-        if (intval($number[1]) > "1") {
-            throw new \InvalidArgumentException("The API version provided is not supported by this API client. Please consider using another API version or update this API Client");
-        }
-    }
-
-//    /**
-//     * @param Variant $variant
-//     * @return CalculatedPrice
-//     */
-//    public function price($variant)
-//    {
-//        /** @var SupplierProfile $supplierProfile */
-//        $supplierProfile = $variant->getSupplierProfiles()[0];
-//        $quantity = 50000;
-//        /** @var VariantMarking $variantMarking */
-//        if (empty($variant->getVariantMarkings())) {
-//            return;
-//        }
-//        $variantMarking = $variant->getVariantMarkings()[0];
-//        $variantMarkingModel = new VariantMarkingModel();
-//        $variantMarkingModel->setVariantMarking($variantMarking);
-//        $variantMarkingModel->setDiameter($variantMarking->getDiameter());
-//        $variantMarkingModel->setFullColor($variantMarking->isFullColor());
-//        $variantMarkingModel->setLength($variantMarking->getLength());
-//        $variantMarkingModel->setWidth($variantMarking->getWidth());
-//        $variantMarkingModel->setSquaredSize($variantMarking->getSquaredSize());
-//        $variantMarkingModel->setNumberOfColors($variantMarking->getNumberOfColors());
-//        $variantMarkingModel->setNumberOfLogos($variantMarking->getNumberOfLogos());
-//        $variantMarkingModel->setNumberOfPositions($variantMarking->getNumberOfPositions());
-//        $variantMarkingModels = array($variantMarkingModel);
-//
-//
-//        return $variant->getCalculatedPrice($supplierProfile, $quantity, $variantMarkingModels)->getValue();
-//    }
 }

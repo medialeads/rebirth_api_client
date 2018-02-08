@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class SupplierMarking
+class SupplierMarking implements ModelInterface
 {
     /**
      * @var string
@@ -13,38 +10,31 @@ class SupplierMarking
     private $id;
 
     /**
-     * @var null|string
-     */
-    private $nameComplement;
-
-    /**
      * @var string
      */
     private $code;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $projectId;
+    private $nameComplement;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $comment;
 
     /**
      * @param string $id
-     * @param null|string $nameComplement
      * @param string $code
-     * @param string $projectId
-     * @param null|string $comment
+     * @param string|null $nameComplement
+     * @param string|null $comment
      */
-    public function __construct($id, $nameComplement, $code, $projectId, $comment)
+    public function __construct($id, $code, $nameComplement, $comment)
     {
         $this->id = $id;
+        $this->code = $code;
         $this->nameComplement = $nameComplement;
-        $this->code;
-        $this->projectId = $projectId;
         $this->comment = $comment;
     }
 
@@ -57,14 +47,6 @@ class SupplierMarking
     }
 
     /**
-     * @return null|string
-     */
-    public function getNameComplement()
-    {
-        return $this->nameComplement;
-    }
-
-    /**
      * @return string
      */
     public function getCode()
@@ -73,15 +55,15 @@ class SupplierMarking
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProjectId()
+    public function getNameComplement()
     {
-        return $this->projectId;
+        return $this->nameComplement;
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getComment()
     {

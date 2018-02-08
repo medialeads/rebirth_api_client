@@ -1,33 +1,31 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\DynamicVariablePriceHolder;
+use ES\RebirthApiClient\Model\DynamicVariablePriceHolder;
 
-/**
- * @author Dagan MENEZ
- */
-class DynamicVariablePriceHolderTransformer extends AbstractTransformer
+class DynamicVariablePriceHolderTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $dynamicVariablePriceHolders
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($dynamicVariablePriceHolders)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($dynamicVariablePriceHolders as $dynamicVariablePriceHolder) {
+        return sprintf('DynamicVariablePriceHolder_%s', $data['id']);
+    }
 
-            $markingFees = MarkingFeeTransformer::fromArray($dynamicVariablePriceHolder['marking_fees']);
-
-            $dynamicVariablePrices = DynamicVariablePriceTransformer::fromArray($dynamicVariablePriceHolder['dynamic_variable_prices']);
-
-            $supplierProfile = SupplierProfileTransformer::fromArray($dynamicVariablePriceHolder['supplier_profile']);
-
-            $response[] =  new DynamicVariablePriceHolder($dynamicVariablePriceHolder['id'], $dynamicVariablePriceHolder['condition'], $dynamicVariablePriceHolder['total_price'], $dynamicVariablePriceHolder['project_id'], $markingFees, $dynamicVariablePrices, $supplierProfile);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return DynamicVariablePriceHolder
+     */
+    protected function transform(array $data)
+    {
+        return new DynamicVariablePriceHolder($data['id'], $data['condition'], $data['total_price'],
+            PartialSupplierProfileTransformer::create()->transformOne($data['supplier_profile']),
+            DynamicVariablePriceTransformer::create()->transformMultiple($data['dynamic_variable_prices']),
+            MarkingFeeTransformer::create()->transformMultiple($data['marking_fees']));
     }
 }

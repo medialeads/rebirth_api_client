@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Keyword;
+use ES\RebirthApiClient\Model\Keyword;
 
-/**
- * @author Dagan MENEZ
- */
-class KeywordTransformer extends AbstractTransformer
+class KeywordTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $keywords
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($keywords)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($keywords as $keyword) {
-            $response[] = new Keyword($keyword['id'], $keyword['project_id'], $keyword['value'], $keyword['slug']);
-        }
+        return sprintf('Keyword_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return Keyword
+     */
+    protected function transform(array $data)
+    {
+        return new Keyword($data['id'], $data['value'], $data['slug']);
     }
 }

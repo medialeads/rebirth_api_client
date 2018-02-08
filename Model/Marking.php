@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class Marking
+class Marking implements ModelInterface
 {
     /**
      * @var string
@@ -15,27 +12,12 @@ class Marking
     /**
      * @var string
      */
-    private $fullHierarchyName;
-
-    /**
-     * @var string
-     */
-    private $projectId;
-
-    /**
-     * @var null|string
-     */
-    private $parentId;
-
-    /**
-     * @var array
-     */
-    private $hierarchy;
-
-    /**
-     * @var string
-     */
     private $name;
+
+    /**
+     * @var string
+     */
+    private $fullHierarchyName;
 
     /**
      * @var string
@@ -43,22 +25,24 @@ class Marking
     private $slug;
 
     /**
-     * @param string $id
-     * @param string $fullHierarchyName
-     * @param string $projectId
-     * @param null|string $parentId
-     * @param array $hierarchy
-     * @param string $name
-     * @param string $slug
+     * @var Marking|null
      */
-    public function __construct($id, $fullHierarchyName, $projectId, $parentId, $hierarchy, $name, $slug)
+    private $parent;
+
+    /**
+     * @param string $id
+     * @param string $name
+     * @param string $fullHierarchyName
+     * @param string $slug
+     * @param Marking|null $parent
+     */
+    public function __construct($id, $name, $fullHierarchyName, $slug, Marking $parent = null)
     {
         $this->id = $id;
-        $this->fullHierarchyName = $fullHierarchyName;
-        $this->projectId = $projectId;
-        $this->hierarchy = $hierarchy;
         $this->name = $name;
+        $this->fullHierarchyName = $fullHierarchyName;
         $this->slug = $slug;
+        $this->parent = $parent;
     }
 
     /**
@@ -72,38 +56,6 @@ class Marking
     /**
      * @return string
      */
-    public function getFullHierarchyName()
-    {
-        return $this->fullHierarchyName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getParentId()
-    {
-        return $this->parentId;
-    }
-
-    /**
-     * @return array
-     */
-    public function getHierarchy()
-    {
-        return $this->hierarchy;
-    }
-
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
@@ -112,8 +64,24 @@ class Marking
     /**
      * @return string
      */
+    public function getFullHierarchyName()
+    {
+        return $this->fullHierarchyName;
+    }
+
+    /**
+     * @return string
+     */
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return Marking|null
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

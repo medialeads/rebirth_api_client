@@ -1,11 +1,8 @@
 <?php
 
-namespace ES\APIv2Client\Model;
+namespace ES\RebirthApiClient\Model;
 
-/**
- * @author Dagan MENEZ
- */
-class PartialSupplierProfile implements SupplierProfileInterface
+class PartialSupplierProfile implements ModelInterface, SupplierProfileInterface
 {
     /**
      * @var string

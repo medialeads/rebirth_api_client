@@ -1,26 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\MarkingPosition;
+use ES\RebirthApiClient\Model\MarkingPosition;
 
-/**
- * @author Dagan MENEZ
- */
-class MarkingPositionTransformer extends AbstractTransformer
+class MarkingPositionTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $markingPositions
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($markingPositions)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($markingPositions as $markingPosition) {
-            $response[] = new MarkingPosition($markingPosition['id'], $markingPosition['project_id'], $markingPosition['name'], $markingPosition['slug']);
-        }
+        return sprintf('MarkingPosition_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return MarkingPosition
+     */
+    protected function transform(array $data)
+    {
+        return new MarkingPosition($data['id'], $data['name'], $data['slug']);
     }
 }

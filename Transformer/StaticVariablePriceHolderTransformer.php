@@ -1,32 +1,31 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\StaticVariablePriceHolder;
+use ES\RebirthApiClient\Model\StaticVariablePriceHolder;
 
-/**
- * @author Dagan MENEZ
- */
-class StaticVariablePriceHolderTransformer extends AbstractTransformer
+class StaticVariablePriceHolderTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $staticVariablePriceHolders
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($staticVariablePriceHolders)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($staticVariablePriceHolders as $staticVariablePriceHolder) {
-            $markingFees = MarkingFeeTransformer::fromArray($staticVariablePriceHolder['marking_fees']);
+        return sprintf('StaticVariablePriceHolder_%s', $data['id']);
+    }
 
-            $staticVariablePrices = StaticVariablePriceTransformer::fromArray($staticVariablePriceHolder['static_variable_prices']);
-
-            $supplierProfile = SupplierProfileTransformer::fromArray($staticVariablePriceHolder['supplier_profile']);
-
-            $response[] =  new StaticVariablePriceHolder($staticVariablePriceHolder['id'], $staticVariablePriceHolder['condition'], $staticVariablePriceHolder['total_price'], $staticVariablePriceHolder['project_id'], $markingFees, $staticVariablePrices, $supplierProfile);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return StaticVariablePriceHolder
+     */
+    protected function transform(array $data)
+    {
+        return new StaticVariablePriceHolder($data['id'], $data['condition'], $data['total_price'],
+            PartialSupplierProfileTransformer::create()->transformOne($data['supplier_profile']),
+            StaticVariablePriceTransformer::create()->transformMultiple($data['static_variable_prices']),
+            MarkingFeeTransformer::create()->transformMultiple($data['marking_fees']));
     }
 }

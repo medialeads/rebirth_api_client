@@ -1,26 +1,29 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\AttributeGroup;
+use ES\RebirthApiClient\Model\AttributeGroup;
 
-/**
- * @author Dagan MENEZ
- */
-class AttributeGroupTransformer extends AbstractTransformer
+class AttributeGroupTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $attributeGroups
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($attributeGroups)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($attributeGroups as $attributeGroup) {
-            $response[] = new AttributeGroup($attributeGroup['id'], $attributeGroup['project_id'], $attributeGroup['name'], $attributeGroup['slug'], $attributeGroup['additional_text_data']);
-        }
+        return sprintf('AttributeGroup_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return AttributeGroup
+     */
+    protected function transform(array $data)
+    {
+        return new AttributeGroup($data['id'], $data['type'], $data['name'], $data['additional_text_data_type'],
+            $data['slug']);
     }
 }

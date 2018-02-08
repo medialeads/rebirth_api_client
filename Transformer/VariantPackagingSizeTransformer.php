@@ -1,27 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantPackagingSize;
+use ES\RebirthApiClient\Model\VariantPackagingSize;
 
-
-/**
- * @author Dagan MENEZ
- */
-class VariantPackagingSizeTransformer extends AbstractTransformer
+class VariantPackagingSizeTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantPackagingSizes
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantPackagingSizes)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantPackagingSizes as $variantPackagingSize) {
-            $response[] = new VariantPackagingSize($variantPackagingSize['id'], $variantPackagingSize['project_id'], $variantPackagingSize['name'], $variantPackagingSize['slug']);
-        }
+        return sprintf('VariantPackagingSize_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantPackagingSize
+     */
+    protected function transform(array $data)
+    {
+        return new VariantPackagingSize($data['id'], $data['type'], $data['value']);
     }
 }

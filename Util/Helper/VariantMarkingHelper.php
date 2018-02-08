@@ -1,33 +1,21 @@
 <?php
 
-namespace ES\APIv2Client\Helper;
+namespace ES\RebirthApiClient\Util\Helper;
 
-use ES\APIv2Client\Model\DynamicFixedPrice;
-use ES\APIv2Client\Model\DynamicVariablePrice;
-use ES\APIv2Client\Model\DynamicVariablePriceHolder;
-use ES\APIv2Client\Model\StaticFixedPrice;
-use ES\APIv2Client\Model\StaticVariablePrice;
-use ES\APIv2Client\Model\StaticVariablePriceHolder;
-use ES\APIv2Client\Model\SupplierProfileInterface;
-use ES\APIv2Client\Model\CalculatedPrice;
-use ES\APIv2Client\Model\VariantMarking;
-use ES\APIv2Client\Model\VariantMarkingModel;
-use ES\APIv2Client\Model\VariantSimpleMarkingCalculatedPrice;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use ES\RebirthApiClient\Model\SupplierProfileInterface;
+use ES\RebirthApiClient\Util\Model\CalculatedPrice;
+use ES\RebirthApiClient\Util\Model\SelectedVariantMarking;
 
-/**
- * @author Dagan MENEZ
- */
 class VariantMarkingHelper
 {
     /**
+     * @param SelectedVariantMarking $selectedVariantMarking
      * @param SupplierProfileInterface $supplierProfile
      * @param int $quantity
-     * @param VariantMarkingModel $variantMarkingModel
      *
      * @return CalculatedPrice
      */
-    public static function getCalculatedPrice(SupplierProfileInterface $supplierProfile, $quantity, VariantMarkingModel $variantMarkingModel)
+    public static function getCalculatedPrice(SelectedVariantMarking $selectedVariantMarking, SupplierProfileInterface $supplierProfile, $quantity)
     {
         $variantMarking = $variantMarkingModel->getVariantMarking();
         if (!$variantMarking instanceof VariantMarking) {

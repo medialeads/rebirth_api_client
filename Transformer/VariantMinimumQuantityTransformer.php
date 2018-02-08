@@ -1,30 +1,29 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\VariantMinimumQuantity;
+use ES\RebirthApiClient\Model\VariantMinimumQuantity;
 
-/**
- * @author Dagan MENEZ
- */
-class VariantMinimumQuantityTransformer extends AbstractTransformer
+class VariantMinimumQuantityTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $variantMinimumQuantities
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($variantMinimumQuantities)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($variantMinimumQuantities as $variantMinimumQuantity) {
-            $supplierProfile = SupplierProfileTransformer::fromArray($variantMinimumQuantity['supplier_profile']);
+        return sprintf('VariantMinimumQuantity_%s', $data['id']);
+    }
 
-            $variantMinimumQuantity['project_id'] = 1; //TODO REMOVE
-
-            $response[] =  new VariantMinimumQuantity($variantMinimumQuantity['id'], $variantMinimumQuantity['project_id'], $variantMinimumQuantity['value'], $supplierProfile);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return VariantMinimumQuantity
+     */
+    protected function transform(array $data)
+    {
+        return new VariantMinimumQuantity($data['id'], $data['value'],
+            PartialSupplierProfileTransformer::create()->transformOne($data['supplier_profile']));
     }
 }

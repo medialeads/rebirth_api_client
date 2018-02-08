@@ -1,27 +1,29 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Supplier;
+use ES\RebirthApiClient\Model\Supplier;
 
-/**
- * @author Dagan MENEZ
- */
-class SupplierTransformer extends AbstractTransformer
+class SupplierTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $suppliers
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($suppliers)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($suppliers as $supplier) {
-            $supplierProfiles = SupplierProfileTransformer::fromArray($supplier['supplier_profiles']);
-            $response[] = new Supplier($supplier['id'], $supplier['project_id'], $supplier['vat_identification_number'], $supplierProfiles, $supplier['name'], $supplier['legal_name'], $supplier['slug']);
-        }
+        return sprintf('Supplier_%s', $data['id']);
+    }
 
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return Supplier
+     */
+    protected function transform(array $data)
+    {
+        return new Supplier($data['id'], $data['vat_identification_number'], $data['name'], $data['legal_name'],
+            $data['slug'], SupplierProfileTransformer::create()->transformMultiple($data['supplier_profiles']));
     }
 }

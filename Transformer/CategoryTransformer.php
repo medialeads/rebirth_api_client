@@ -1,30 +1,28 @@
 <?php
 
-namespace ES\APIv2Client\Transformer;
+namespace ES\RebirthApiClient\Transformer;
 
-use ES\APIv2Client\Model\Category;
+use ES\RebirthApiClient\Model\Category;
 
-/**
- * @author Dagan MENEZ
- */
-class CategoryTransformer extends AbstractTransformer
+class CategoryTransformer extends AbstractModelTransformer
 {
     /**
-     * @param array $categories
+     * @param array $data
      *
-     * @return array
+     * @return string
      */
-    public static function doFromArray($categories)
+    protected function getId(array $data)
     {
-        $response = array();
-        foreach ($categories as $category) {
-            if (isset($category['synonyms'])) {
-                $synonyms = SynonymTransformer::fromArray($category['synonyms']);
-            }
+        return sprintf('Category_%s', $data['id']);
+    }
 
-            $response[] = new Category($category['id'], $category['full_hierarchy_name'], $category['project_id'], $category['parent_id'], $category['name'], $category['slug'], $synonyms);
-        }
-
-        return $response;
+    /**
+     * @param array $data
+     *
+     * @return Category
+     */
+    protected function transform(array $data)
+    {
+        return new Category($data['id'], $data['name'], $data['full_hierarchy_name'], $data['slug']);
     }
 }
