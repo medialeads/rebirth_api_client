@@ -2,6 +2,8 @@
 
 namespace ES\RebirthApiClient\Model;
 
+use Money\Money;
+
 class StaticVariablePrice implements ModelInterface
 {
     /**
@@ -15,28 +17,28 @@ class StaticVariablePrice implements ModelInterface
     private $fromQuantity;
 
     /**
-     * @var float
+     * @var Money
      */
     private $value;
 
     /**
-     * @var float|null
+     * @var Money|null
      */
     private $reducedValue;
 
     /**
-     * @var float
+     * @var Money
      */
     private $calculationValue;
 
     /**
      * @param string $id
      * @param int $fromQuantity
-     * @param float $value
-     * @param float|null $reducedValue
-     * @param float $calculationValue
+     * @param Money $value
+     * @param Money|null $reducedValue
+     * @param Money $calculationValue
      */
-    public function __construct($id, $fromQuantity, $value, $reducedValue, $calculationValue)
+    public function __construct($id, $fromQuantity, Money $value, Money $reducedValue = null, Money $calculationValue)
     {
         $this->id = $id;
         $this->fromQuantity = $fromQuantity;
@@ -62,7 +64,7 @@ class StaticVariablePrice implements ModelInterface
     }
 
     /**
-     * @return float
+     * @return Money
      */
     public function getValue()
     {
@@ -70,7 +72,7 @@ class StaticVariablePrice implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return Money|null
      */
     public function getReducedValue()
     {
@@ -78,7 +80,7 @@ class StaticVariablePrice implements ModelInterface
     }
 
     /**
-     * @return float
+     * @return Money
      */
     public function getCalculationValue()
     {

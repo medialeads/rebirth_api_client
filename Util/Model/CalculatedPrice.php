@@ -2,53 +2,63 @@
 
 namespace ES\RebirthApiClient\Util\Model;
 
+use Money\Money;
+
 class CalculatedPrice
 {
     /**
-     * @var float|null
+     * @var bool
      */
-    private $value;
+    private $onQuote;
 
     /**
-     * @return float|null
+     * @var Money
      */
-    public function getValue()
+    private $money;
+
+    public function __construct()
     {
-        return $this->value;
+        $this->onQuote = true;
+        $this->money = Money::EUR(0);
     }
 
     /**
-     * @param float $value
+     * @return bool
+     */
+    public function isOnQuote()
+    {
+        return $this->onQuote;
+    }
+
+    /**
+     * @param bool $onQuote
      *
      * @return CalculatedPrice
      */
-    public function setValue($value)
+    public function setOnQuote($onQuote)
     {
-        $value = floatval($value);
-        if ($value <= 0.0) {
-            $value = null;
-        }
-
-        $this->value = $value;
+        $this->onQuote = $onQuote;
 
         return $this;
     }
 
+    // one unit = 0.001 €
     /**
-     * @param float $value
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->money->getAmount();
+    }
+
+    /**
+     * @param Money $money
      *
      * @return CalculatedPrice
      */
-    public function addValue($value)
+    public function add(Money $money)
     {
-        $value = floatval($value);
-        if ($value > 0.0) {
-            if (null === $this->value) {
-                $this->value = 0.0;
-            }
-
-            $this->value += $value;
-        }
+        $this->money = $this->money->add($money);
 
         return $this;
     }

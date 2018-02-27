@@ -3,6 +3,7 @@
 namespace ES\RebirthApiClient\Transformer;
 
 use ES\RebirthApiClient\Model\VariantSamplePrice;
+use Money\Money;
 
 class VariantSamplePriceTransformer extends AbstractModelTransformer
 {
@@ -23,7 +24,11 @@ class VariantSamplePriceTransformer extends AbstractModelTransformer
      */
     protected function transform(array $data)
     {
-        return new VariantSamplePrice($data['id'], $data['value'], $data['reduced_value'], $data['calculation_value'],
+        $reducedValue = $data['reduced_value'];
+
+        return new VariantSamplePrice($data['id'], Money::EUR(intval($data['value'] * 1000)),
+            null === $reducedValue ? null : Money::EUR(intval($reducedValue * 1000)),
+            Money::EUR(intval($data['calculation_value'] * 1000)),
             PartialSupplierProfileTransformer::create()->transformOne($data['supplier_profile']));
     }
 }

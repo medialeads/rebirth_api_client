@@ -40,12 +40,12 @@ class Variant implements ModelInterface
     private $markingAdditionalInformation;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $netWeight;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $grossWeight;
 
@@ -110,6 +110,11 @@ class Variant implements ModelInterface
     private $variantMinimumQuantities;
 
     /**
+     * @var VariantDeliveryTime[]
+     */
+    private $variantDeliveryTimes;
+
+    /**
      * @var VariantSamplePrice[]
      */
     private $variantSamplePrices;
@@ -137,8 +142,8 @@ class Variant implements ModelInterface
      * @param string|null $rawDescription
      * @param bool $mandatoryMarking
      * @param string|null $markingAdditionalInformation
-     * @param float|null $netWeight
-     * @param float|null $grossWeight
+     * @param string|null $netWeight
+     * @param string|null $grossWeight
      * @param int|null $stock
      * @param string|null $europeanArticleNumbering
      * @param string $slug
@@ -151,6 +156,7 @@ class Variant implements ModelInterface
      * @param VariantImage[] $variantImages
      * @param VariantMarking[] $variantMarkings
      * @param VariantMinimumQuantity[] $variantMinimumQuantities
+     * @param VariantDeliveryTime[] $variantDeliveryTimes
      * @param VariantSamplePrice[] $variantSamplePrices
      * @param VariantExternalLink[] $variantExternalLinks
      * @param VariantListPrice[] $variantListPrices
@@ -160,8 +166,8 @@ class Variant implements ModelInterface
         $markingAdditionalInformation, $netWeight, $grossWeight, $stock, $europeanArticleNumbering, $slug,
         VariantPackaging $variantPackaging = null, VariantImage $mainVariantImage = null, array $attributes,
         array $supplierProfiles, array $keywords, array $variantPrices, array $variantImages, array $variantMarkings,
-        array $variantMinimumQuantities, array $variantSamplePrices, array $variantExternalLinks,
-        array $variantListPrices, array $variantSizes)
+        array $variantMinimumQuantities, array $variantDeliveryTimes, array $variantSamplePrices,
+        array $variantExternalLinks, array $variantListPrices, array $variantSizes)
     {
         $this->id = $id;
         $this->supplierReference = $supplierReference;
@@ -184,6 +190,7 @@ class Variant implements ModelInterface
         $this->variantImages = $variantImages;
         $this->variantMarkings = $variantMarkings;
         $this->variantMinimumQuantities = $variantMinimumQuantities;
+        $this->variantDeliveryTimes = $variantDeliveryTimes;
         $this->variantSamplePrices = $variantSamplePrices;
         $this->variantExternalLinks = $variantExternalLinks;
         $this->variantListPrices = $variantListPrices;
@@ -247,7 +254,7 @@ class Variant implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getNetWeight()
     {
@@ -255,7 +262,7 @@ class Variant implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getGrossWeight()
     {
@@ -356,6 +363,14 @@ class Variant implements ModelInterface
     public function getVariantMinimumQuantities()
     {
         return $this->variantMinimumQuantities;
+    }
+
+    /**
+     * @return VariantDeliveryTime[]
+     */
+    public function getVariantDeliveryTimes()
+    {
+        return $this->variantDeliveryTimes;
     }
 
     /**

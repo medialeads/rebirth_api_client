@@ -3,6 +3,7 @@
 namespace ES\RebirthApiClient\Transformer;
 
 use ES\RebirthApiClient\Model\StaticVariablePrice;
+use Money\Money;
 
 class StaticVariablePriceTransformer extends AbstractModelTransformer
 {
@@ -23,7 +24,11 @@ class StaticVariablePriceTransformer extends AbstractModelTransformer
      */
     protected function transform(array $data)
     {
-        return new StaticVariablePrice($data['id'], $data['from_quantity'], $data['value'], $data['reduced_value'],
-            $data['calculation_value']);
+        $reducedValue = $data['reduced_value'];
+
+        return new StaticVariablePrice($data['id'], $data['from_quantity'],
+            Money::EUR(intval($data['value'] * 1000)),
+            null === $reducedValue ? null : Money::EUR(intval($reducedValue * 1000)),
+            Money::EUR(intval($data['calculation_value'] * 1000)));
     }
 }

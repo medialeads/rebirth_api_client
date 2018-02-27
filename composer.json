@@ -1,6 +1,6 @@
 {
-  "name": "es/apiv2-client",
-  "license": "MIT",
+  "name": "es/rebirth-api-client",
+  "license": "proprietary",
   "type": "library",
   "autoload": {
     "psr-4": {
@@ -8,10 +8,18 @@
     }
   },
   "require": {
-    "symfony/expression-language": "^3.4"
+    "symfony/expression-language": "^3.4",
+    "es/rebirth-common": "dev-master#016af9cccf11d2f73d5a41ed55b5d5796d6964c2",
+    "moneyphp/money": "^3.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7",
     "symfony/var-dumper": "^3.4"
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "git@github.com:medialeads/rebirth_common.git"
+    }
+  ]
 }

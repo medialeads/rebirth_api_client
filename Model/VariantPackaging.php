@@ -20,7 +20,7 @@ class VariantPackaging implements ModelInterface
     private $innerQuantity;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $weight;
 
@@ -38,7 +38,7 @@ class VariantPackaging implements ModelInterface
      * @param string $id
      * @param string|null $type
      * @param int|null $innerQuantity
-     * @param float|null $weight
+     * @param string|null $weight
      * @param VariantPackaging|null $parent
      * @param VariantPackagingSize[] $variantPackagingSizes
      */
@@ -78,7 +78,7 @@ class VariantPackaging implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getWeight()
     {

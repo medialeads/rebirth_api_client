@@ -39,6 +39,7 @@ class VariantTransformer extends AbstractModelTransformer
             VariantPriceTransformer::create()->transformMultiple($data['variant_prices']), $variantImages,
             VariantMarkingTransformer::create()->transformMultiple($data['variant_markings']),
             VariantMinimumQuantityTransformer::create()->transformMultiple($data['variant_minimum_quantities']),
+            VariantDeliveryTimeTransformer::create()->transformMultiple($data['variant_delivery_times']),
             VariantSamplePriceTransformer::create()->transformMultiple($data['variant_sample_prices']),
             VariantExternalLinkTransformer::create()->transformMultiple($data['variant_external_links']),
             VariantListPriceTransformer::create()->transformMultiple($data['variant_list_prices']),

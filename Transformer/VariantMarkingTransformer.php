@@ -33,7 +33,7 @@ class VariantMarkingTransformer extends AbstractModelTransformer
             $data['maximum_number_of_positions'], $data['free_entry_number_of_positions'], $data['number_of_logos'],
             $data['minimum_number_of_logos'], $data['maximum_number_of_logos'], $data['free_entry_number_of_logos'],
             $data['full_color'], $data['minimum_quantity'], $data['maximum_quantity'], $data['comment'],
-            $data['use_only_variant_prices'],
+            $data['included_in_variant_prices'],
             MarkingPositionTransformer::create()->transformOne($data['marking_position']),
             SupplierMarkingTransformer::create()->transformOne($data['supplier_marking']),
             MarkingTransformer::create()->transformOne($data['marking']),

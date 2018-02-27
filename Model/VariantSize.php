@@ -15,14 +15,14 @@ class VariantSize implements ModelInterface
     private $type;
 
     /**
-     * @var float
+     * @var string
      */
     private $value;
 
     /**
      * @param string $id
      * @param string|null $type
-     * @param float $value
+     * @param string $value
      */
     public function __construct($id, $type, $value)
     {
@@ -48,7 +48,7 @@ class VariantSize implements ModelInterface
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getValue()
     {

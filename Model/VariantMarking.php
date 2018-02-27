@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class VariantMarking implements ModelInterface
+use ES\RebirthCommon\VariantMarkingOptionsInterface;
+
+class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
 {
     /**
      * @var string
@@ -20,17 +22,17 @@ class VariantMarking implements ModelInterface
     private $type;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $length;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $minimumLength;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $maximumLength;
 
@@ -40,17 +42,17 @@ class VariantMarking implements ModelInterface
     private $freeEntryLength;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $width;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $minimumWidth;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $maximumWidth;
 
@@ -60,17 +62,17 @@ class VariantMarking implements ModelInterface
     private $freeEntryWidth;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $squaredSize;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $minimumSquaredSize;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $maximumSquaredSize;
 
@@ -80,17 +82,17 @@ class VariantMarking implements ModelInterface
     private $freeEntrySquaredSize;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $diameter;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $minimumDiameter;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $maximumDiameter;
 
@@ -182,7 +184,7 @@ class VariantMarking implements ModelInterface
     /**
      * @var bool
      */
-    private $useOnlyVariantPrices;
+    private $includedInVariantPrices;
 
     /**
      * @var MarkingPosition|null
@@ -228,21 +230,21 @@ class VariantMarking implements ModelInterface
      * @param string $id
      * @param string $key
      * @param string $type
-     * @param float|null $length
-     * @param float|null $minimumLength
-     * @param float|null $maximumLength
+     * @param string|null $length
+     * @param string|null $minimumLength
+     * @param string|null $maximumLength
      * @param bool $freeEntryLength
-     * @param float|null $width
-     * @param float|null $minimumWidth
-     * @param float|null $maximumWidth
+     * @param string|null $width
+     * @param string|null $minimumWidth
+     * @param string|null $maximumWidth
      * @param bool $freeEntryWidth
-     * @param float|null $squaredSize
-     * @param float|null $minimumSquaredSize
-     * @param float|null $maximumSquaredSize
+     * @param string|null $squaredSize
+     * @param string|null $minimumSquaredSize
+     * @param string|null $maximumSquaredSize
      * @param bool $freeEntrySquaredSize
-     * @param float|null $diameter
-     * @param float|null $minimumDiameter
-     * @param float|null $maximumDiameter
+     * @param string|null $diameter
+     * @param string|null $minimumDiameter
+     * @param string|null $maximumDiameter
      * @param bool $freeEntryDiameter
      * @param int|null $numberOfColors
      * @param int|null $minimumNumberOfColors
@@ -260,7 +262,7 @@ class VariantMarking implements ModelInterface
      * @param int|null $minimumQuantity
      * @param int|null $maximumQuantity
      * @param string $comment
-     * @param bool $useOnlyVariantPrices
+     * @param bool $includedInVariantPrices
      * @param MarkingPosition|null $markingPosition
      * @param SupplierMarking|null $supplierMarking
      * @param Marking $marking
@@ -276,7 +278,7 @@ class VariantMarking implements ModelInterface
         $minimumNumberOfColors, $maximumNumberOfColors, $freeEntryNumberOfColors, $numberOfPositions,
         $minimumNumberOfPositions, $maximumNumberOfPositions, $freeEntryNumberOfPositions, $numberOfLogos,
         $minimumNumberOfLogos, $maximumNumberOfLogos, $freeEntryNumberOfLogos, $fullColor, $minimumQuantity,
-        $maximumQuantity, $comment, $useOnlyVariantPrices, MarkingPosition $markingPosition = null,
+        $maximumQuantity, $comment, $includedInVariantPrices, MarkingPosition $markingPosition = null,
         SupplierMarking $supplierMarking = null, Marking $marking, array $supplierProfiles, array $dynamicFixedPrices,
         array $dynamicVariablePriceHolders, array $staticFixedPrices, array $staticVariablePriceHolders)
     {
@@ -315,7 +317,7 @@ class VariantMarking implements ModelInterface
         $this->minimumQuantity = $minimumQuantity;
         $this->maximumQuantity = $maximumQuantity;
         $this->comment = $comment;
-        $this->useOnlyVariantPrices = $useOnlyVariantPrices;
+        $this->includedInVariantPrices = $includedInVariantPrices;
         $this->markingPosition = $markingPosition;
         $this->supplierMarking = $supplierMarking;
         $this->marking = $marking;
@@ -351,7 +353,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getLength()
     {
@@ -359,7 +361,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMinimumLength()
     {
@@ -367,7 +369,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMaximumLength()
     {
@@ -383,7 +385,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getWidth()
     {
@@ -391,7 +393,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMinimumWidth()
     {
@@ -399,7 +401,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMaximumWidth()
     {
@@ -415,7 +417,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getSquaredSize()
     {
@@ -423,7 +425,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMinimumSquaredSize()
     {
@@ -431,7 +433,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMaximumSquaredSize()
     {
@@ -447,7 +449,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getDiameter()
     {
@@ -455,7 +457,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMinimumDiameter()
     {
@@ -463,7 +465,7 @@ class VariantMarking implements ModelInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getMaximumDiameter()
     {
@@ -609,9 +611,9 @@ class VariantMarking implements ModelInterface
     /**
      * @return bool
      */
-    public function isUseOnlyVariantPrices()
+    public function isIncludedInVariantPrices()
     {
-        return $this->useOnlyVariantPrices;
+        return $this->includedInVariantPrices;
     }
 
     /**
