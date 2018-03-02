@@ -177,7 +177,7 @@ class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
     private $maximumQuantity;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $comment;
 
@@ -261,7 +261,7 @@ class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
      * @param bool $fullColor
      * @param int|null $minimumQuantity
      * @param int|null $maximumQuantity
-     * @param string $comment
+     * @param string|null $comment
      * @param bool $includedInVariantPrices
      * @param MarkingPosition|null $markingPosition
      * @param SupplierMarking|null $supplierMarking
@@ -601,7 +601,7 @@ class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getComment()
     {

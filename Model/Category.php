@@ -10,25 +10,25 @@ class Category implements ModelInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $fullHierarchyName;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
     /**
      * @param string $id
-     * @param string $name
-     * @param string $fullHierarchyName
-     * @param string $slug
+     * @param string|null $name
+     * @param string|null $fullHierarchyName
+     * @param string|null $slug
      */
     public function __construct($id, $name, $fullHierarchyName, $slug)
     {
@@ -47,7 +47,7 @@ class Category implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -55,7 +55,7 @@ class Category implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFullHierarchyName()
     {
@@ -63,7 +63,7 @@ class Category implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

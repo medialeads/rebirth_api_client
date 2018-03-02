@@ -10,17 +10,17 @@ class Marking implements ModelInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $fullHierarchyName;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
@@ -31,9 +31,9 @@ class Marking implements ModelInterface
 
     /**
      * @param string $id
-     * @param string $name
-     * @param string $fullHierarchyName
-     * @param string $slug
+     * @param string|null $name
+     * @param string|null $fullHierarchyName
+     * @param string|null $slug
      * @param Marking|null $parent
      */
     public function __construct($id, $name, $fullHierarchyName, $slug, Marking $parent = null)
@@ -54,7 +54,7 @@ class Marking implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -62,7 +62,7 @@ class Marking implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFullHierarchyName()
     {
@@ -70,7 +70,7 @@ class Marking implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

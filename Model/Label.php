@@ -10,19 +10,19 @@ class Label implements ModelInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
     /**
      * @param string $id
-     * @param string $name
-     * @param string $slug
+     * @param string|null $name
+     * @param string|null $slug
      */
     public function __construct($id, $name, $slug)
     {
@@ -40,7 +40,7 @@ class Label implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -48,7 +48,7 @@ class Label implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {
