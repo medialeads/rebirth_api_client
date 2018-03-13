@@ -4,7 +4,7 @@ namespace ES\RebirthApiClient\Model;
 
 use ES\RebirthCommon\VariantInterface;
 
-class Variant implements ModelInterface, VariantInterface
+class Variant extends AbstractModel implements VariantInterface
 {
     /**
      * @var string
@@ -82,7 +82,7 @@ class Variant implements ModelInterface, VariantInterface
     private $attributes;
 
     /**
-     * @var SupplierProfileInterface[]
+     * @var SupplierProfile[]
      */
     private $supplierProfiles;
 
@@ -152,7 +152,7 @@ class Variant implements ModelInterface, VariantInterface
      * @param VariantPackaging|null $variantPackaging
      * @param VariantImage|null $mainVariantImage
      * @param Attribute[] $attributes
-     * @param SupplierProfileInterface[] $supplierProfiles
+     * @param SupplierProfile[] $supplierProfiles
      * @param Keyword[] $keywords
      * @param VariantPrice[] $variantPrices
      * @param VariantImage[] $variantImages

@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Marking implements ModelInterface
+class Marking extends AbstractModel
 {
     /**
      * @var string

@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class StaticVariablePriceHolder implements ModelInterface
+use ES\RebirthCommon\StaticVariablePriceHolderInterface;
+
+class StaticVariablePriceHolder extends AbstractModel implements StaticVariablePriceHolderInterface
 {
     /**
      * @var string
@@ -20,7 +22,7 @@ class StaticVariablePriceHolder implements ModelInterface
     private $totalPrice;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
@@ -38,11 +40,11 @@ class StaticVariablePriceHolder implements ModelInterface
      * @param string $id
      * @param string|null $condition
      * @param bool $totalPrice
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      * @param StaticVariablePrice[] $staticVariablePrices
      * @param MarkingFee[] $markingFees
      */
-    public function __construct($id, $condition, $totalPrice, SupplierProfileInterface $supplierProfile,
+    public function __construct($id, $condition, $totalPrice, PartialSupplierProfile $supplierProfile,
         array $staticVariablePrices, array $markingFees)
     {
         $this->id = $id;
@@ -78,7 +80,7 @@ class StaticVariablePriceHolder implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {

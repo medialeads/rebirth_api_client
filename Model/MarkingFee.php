@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class MarkingFee implements ModelInterface
+class MarkingFee extends AbstractModel
 {
     /**
      * @var string

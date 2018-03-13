@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Label implements ModelInterface
+class Label extends AbstractModel
 {
     /**
      * @var string

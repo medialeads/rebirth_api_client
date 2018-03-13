@@ -2,6 +2,7 @@
 
 namespace ES\RebirthApiClient\Util\Helper;
 
+use ES\RebirthCommon\AttributeGroupInterface;
 use ES\RebirthCommon\AttributeInterface;
 use ES\RebirthCommon\ProductInterface;
 use Fhaculty\Graph\Graph;
@@ -24,53 +25,68 @@ class ProductHelper
      * @param ProductInterface $product
      * @param array $attributeGroupsOrder
      *
-     * @return Graph
+     * @return array
      */
-    public static function getAttributesGraph(ProductInterface $product, array $attributeGroupsOrder = array())
+    public static function getAttributesData(ProductInterface $product, array $attributeGroupsOrder = array())
     {
-        $graph = new Graph();
-
-        $stack = array();
+        $data = array();
+        $attributeGroups = array();
         $attributeGroupsMaxPositionStack = array();
-        foreach ($product->getVariants() as $variant) {
-            $data = array(
-                'variant' => $variant,
-                'attributes' => array()
-            );
 
+        foreach ($product->getVariants() as $variant) {
             $attributesStack = array();
             /* @var AttributeInterface $attribute */
             foreach ($variant->getAttributes() as $attribute) {
-                $attributeGroupUniqueId = $attribute->getAttributeGroup()->getUniqueId();
+                $attributeGroup = $attribute->getAttributeGroup();
+                $attributeGroupUniqueId = $attributeGroup->getUniqueId();
                 if (!isset($attributesStack[$attributeGroupUniqueId])) {
-                    $attributesStack[$attributeGroupUniqueId] = array();
+                    $attributesStack[$attributeGroupUniqueId] = array(
+                        'attribute_group' => $attributeGroup,
+                        'attributes' => array()
+                    );
                 }
 
-                $attributesStack[$attributeGroupUniqueId][] = $attribute;
+                $attributesStack[$attributeGroupUniqueId]['attributes'][] = $attribute;
+
+                if (!isset($attributeGroups[$attributeGroupUniqueId])) {
+                    $attributeGroups[$attributeGroupUniqueId] = $attributeGroup;
+                }
             }
 
-            foreach ($attributesStack as $attributeGroupUniqueId => $attributes) {
+            if (empty($attributesStack)) {
+                continue;
+            }
+
+            foreach ($attributesStack as $attributeGroupUniqueId => $row) {
                 if (!isset($attributeGroupsMaxPositionStack[$attributeGroupUniqueId])) {
-                    $attributeGroupsMaxPositionStack[$attributeGroupUniqueId] = count($attributes);
+                    $attributeGroupsMaxPositionStack[$attributeGroupUniqueId] = count($row['attributes']);
                 } else {
-                    $attributeGroupsMaxPositionStack[$attributeGroupUniqueId] = max($attributeGroupsMaxPositionStack[$attributeGroupUniqueId], count($attributes));
+                    $attributeGroupsMaxPositionStack[$attributeGroupUniqueId] = max($attributeGroupsMaxPositionStack[$attributeGroupUniqueId], count($row['attributes']));
                 }
             }
 
-            $data['attributes'] = $attributesStack;
-
-            $stack[] = $data;
+            $data[] = array(
+                'data' => $attributesStack,
+                'variant' => $variant
+            );
         }
 
-        foreach($stack as &$row) {
+        if (empty($data)) {
+            return array();
+        }
+
+        foreach($data as &$row) {
             foreach ($attributeGroupsMaxPositionStack as $attributeGroupUniqueId => $attributeGroupMaxPosition) {
-                if (!isset($row['attributes'][$attributeGroupUniqueId])) {
-                    $row['attributes'][$attributeGroupUniqueId] = array();
+                if (!isset($row['data'][$attributeGroupUniqueId])) {
+                    $row['data'][$attributeGroupUniqueId] = array(
+                        'attribute_group' => $attributeGroups[$attributeGroupUniqueId],
+                        'attributes' => array()
+                    );
                 }
 
                 for ($i = 0; $i < $attributeGroupMaxPosition; $i++) {
-                    if (!isset($row['attributes'][$attributeGroupUniqueId][$i])) {
-                        $row['attributes'][$attributeGroupUniqueId][$i] = null;
+                    if (!isset($row['data'][$attributeGroupUniqueId]['attributes'][$i])) {
+                        $row['data'][$attributeGroupUniqueId]['attributes'][$i] = null;
                     }
                 }
             }
@@ -96,34 +112,62 @@ class ProductHelper
                 }
             }
 
-            foreach ($stack as &$row) {
-                uksort($row['attributes'], function ($a, $b) use ($attributeGroupsOrder) {
+            foreach ($data as &$row) {
+                uksort($row['data'], function ($a, $b) use ($attributeGroupsOrder) {
                     return $attributeGroupsOrder[$a] - $attributeGroupsOrder[$b];
                 });
             }
 
             unset($row);
         } else {
-            foreach ($stack as &$row) {
-                ksort($row['attributes']);
+            foreach ($data as &$row) {
+                ksort($row['data']);
             }
 
             unset($row);
         }
 
-        $maxLevel = array_sum($attributeGroupsMaxPositionStack);
+        array_walk($data, function (&$row) {
+            $row['data'] = array_values($row['data']);
+        });
 
-        $start = $graph->createVertex('start');
+        return $data;
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param array $attributeGroupsOrder
+     *
+     * @return Graph
+     */
+    public static function getAttributesGraph(ProductInterface $product, array $attributeGroupsOrder = array())
+    {
+        $graph = new Graph();
+
+        $start = $graph->createVertex(self::GRAPH_START_VERTEX_ID);
         $start->setGroup(0);
-        $end = $graph->createVertex('end');
+        $end = $graph->createVertex(self::GRAPH_END_VERTEX_ID);
+        $end->setGroup(1);
+
+        $data = self::getAttributesData($product, $attributeGroupsOrder);
+        if (empty($data)) {
+            return $graph;
+        }
+
+        $maxLevel = array_reduce($data[0]['data'], function ($carry, $row) {
+            return $carry + count($row['attributes']);
+        }, 0);
         $end->setGroup($maxLevel + 1);
-        foreach ($stack as $row) {
+
+        foreach ($data as $row) {
             $level = 1;
             $lastVertex = null;
-            foreach ($row['attributes'] as $attributeGroupUniqueId => $attributes) {
-                foreach ($attributes as $position => $attribute) {
-                    $nullAttribute = !$attribute instanceof AttributeInterface;
-                    if (!$nullAttribute) {
+            foreach ($row['data'] as $row2) {
+                /* @var AttributeGroupInterface $attributeGroup */
+                $attributeGroup = $row2['attribute_group'];
+                $attributeGroupUniqueId = $attributeGroup->getUniqueId();
+                foreach ($row2['attributes'] as $position => $attribute) {
+                    if ($attribute instanceof AttributeInterface) {
                         $attributeVertexId = sprintf('%s_%s_%s', $attributeGroupUniqueId, $attribute->getUniqueId(), $position);
                     } else {
                         $attributeVertexId = sprintf('_%s_%s', $attributeGroupUniqueId, $position);
@@ -164,12 +208,18 @@ class ProductHelper
     }
 
     /**
-     * @param Graph $graph
+     * @param ProductInterface $product
+     * @param array $attributeGroupsOrder
      *
-     * @return string
+     * @return string|null
      */
-    public static function getAttributesGraphImageSrc(Graph $graph)
+    public static function getAttributesGraphImageSrc(ProductInterface $product, array $attributeGroupsOrder = array())
     {
+        $graph = self::getAttributesGraph($product, $attributeGroupsOrder);
+        if ($graph->getVertices()->count() <= 2) {
+            return null;
+        }
+
         $graph->setAttribute('graphviz.graph.rankdir', 'RL');
 
         $start = $graph->getVertex(self::GRAPH_START_VERTEX_ID);

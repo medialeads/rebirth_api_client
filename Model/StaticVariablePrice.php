@@ -2,9 +2,10 @@
 
 namespace ES\RebirthApiClient\Model;
 
+use ES\RebirthCommon\StaticVariablePriceInterface;
 use Money\Money;
 
-class StaticVariablePrice implements ModelInterface
+class StaticVariablePrice extends AbstractModel implements StaticVariablePriceInterface
 {
     /**
      * @var string

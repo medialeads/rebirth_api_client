@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class DynamicVariablePrice implements ModelInterface
+use ES\RebirthCommon\DynamicVariablePriceInterface;
+
+class DynamicVariablePrice extends AbstractModel implements DynamicVariablePriceInterface
 {
     /**
      * @var string

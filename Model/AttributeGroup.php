@@ -4,7 +4,7 @@ namespace ES\RebirthApiClient\Model;
 
 use ES\RebirthCommon\AttributeGroupInterface;
 
-class AttributeGroup implements ModelInterface, AttributeGroupInterface
+class AttributeGroup extends AbstractModel implements AttributeGroupInterface
 {
     /**
      * @var string

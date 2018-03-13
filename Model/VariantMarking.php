@@ -4,7 +4,7 @@ namespace ES\RebirthApiClient\Model;
 
 use ES\RebirthCommon\VariantMarkingOptionsInterface;
 
-class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
+class VariantMarking extends AbstractModel implements VariantMarkingOptionsInterface
 {
     /**
      * @var string
@@ -202,7 +202,7 @@ class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
     private $marking;
 
     /**
-     * @var SupplierProfileInterface[]
+     * @var PartialSupplierProfile[]
      */
     private $supplierProfiles;
 
@@ -266,7 +266,7 @@ class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
      * @param MarkingPosition|null $markingPosition
      * @param SupplierMarking|null $supplierMarking
      * @param Marking $marking
-     * @param SupplierProfileInterface[] $supplierProfiles
+     * @param PartialSupplierProfile[] $supplierProfiles
      * @param DynamicFixedPrice[] $dynamicFixedPrices
      * @param DynamicVariablePriceHolder[] $dynamicVariablePriceHolders
      * @param StaticFixedPrice[] $staticFixedPrices
@@ -641,7 +641,7 @@ class VariantMarking implements ModelInterface, VariantMarkingOptionsInterface
     }
 
     /**
-     * @return SupplierProfileInterface[]
+     * @return PartialSupplierProfile[]
      */
     public function getSupplierProfiles()
     {

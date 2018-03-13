@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class VariantExternalLink implements ModelInterface
+class VariantExternalLink extends AbstractModel
 {
     /**
      * @var string

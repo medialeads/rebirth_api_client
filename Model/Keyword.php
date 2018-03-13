@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Keyword implements ModelInterface
+class Keyword extends AbstractModel
 {
     /**
      * @var string

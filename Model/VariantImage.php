@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class VariantImage implements ModelInterface
+class VariantImage extends AbstractModel
 {
     /**
      * @var string

@@ -2,9 +2,10 @@
 
 namespace ES\RebirthApiClient\Model;
 
+use ES\RebirthCommon\StaticFixedPriceInterface;
 use Money\Money;
 
-class StaticFixedPrice implements ModelInterface
+class StaticFixedPrice extends AbstractModel implements StaticFixedPriceInterface
 {
     /**
      * @var string
@@ -37,7 +38,7 @@ class StaticFixedPrice implements ModelInterface
     private $totalPrice;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
@@ -53,11 +54,11 @@ class StaticFixedPrice implements ModelInterface
      * @param Money|null $reducedValue
      * @param Money $calculationValue
      * @param bool $totalPrice
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      * @param MarkingFee[] $markingFees
      */
     public function __construct($id, $condition, Money $value, Money $reducedValue = null,
-        Money $calculationValue = null, $totalPrice, SupplierProfileInterface $supplierProfile, array $markingFees)
+        Money $calculationValue = null, $totalPrice, PartialSupplierProfile $supplierProfile, array $markingFees)
     {
         $this->id = $id;
         $this->condition = $condition;
@@ -118,7 +119,7 @@ class StaticFixedPrice implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {

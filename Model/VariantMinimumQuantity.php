@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class VariantMinimumQuantity implements ModelInterface
+use ES\RebirthCommon\VariantMinimumQuantityInterface;
+
+class VariantMinimumQuantity extends AbstractModel implements VariantMinimumQuantityInterface
 {
     /**
      * @var string
@@ -15,16 +17,16 @@ class VariantMinimumQuantity implements ModelInterface
     private $value;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
     /**
      * @param string $id
      * @param int $value
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      */
-    public function __construct($id, $value, SupplierProfileInterface $supplierProfile)
+    public function __construct($id, $value, PartialSupplierProfile $supplierProfile)
     {
         $this->id = $id;
         $this->value = $value;
@@ -48,7 +50,7 @@ class VariantMinimumQuantity implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {

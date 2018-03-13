@@ -3,15 +3,15 @@
 namespace ES\RebirthApiClient\Util\Helper;
 
 use ES\RebirthApiClient\Exception\NotImplementedException;
-use ES\RebirthApiClient\Model\DynamicFixedPrice;
-use ES\RebirthApiClient\Model\DynamicVariablePrice;
-use ES\RebirthApiClient\Model\DynamicVariablePriceHolder;
-use ES\RebirthApiClient\Model\StaticFixedPrice;
-use ES\RebirthApiClient\Model\StaticVariablePrice;
-use ES\RebirthApiClient\Model\StaticVariablePriceHolder;
-use ES\RebirthApiClient\Model\SupplierProfileInterface;
 use ES\RebirthApiClient\Util\Model\SelectedVariantMarking;
 use ES\RebirthApiClient\Util\Model\VariantMarkingCalculatedPrice;
+use ES\RebirthCommon\DynamicFixedPriceInterface;
+use ES\RebirthCommon\DynamicVariablePriceHolderInterface;
+use ES\RebirthCommon\DynamicVariablePriceInterface;
+use ES\RebirthCommon\StaticFixedPriceInterface;
+use ES\RebirthCommon\StaticVariablePriceHolderInterface;
+use ES\RebirthCommon\StaticVariablePriceInterface;
+use ES\RebirthCommon\SupplierProfileInterface;
 use ES\RebirthCommon\VariantMarkingOptionsInterface;
 use Money\Money;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -50,26 +50,26 @@ class VariantMarkingHelper
 
         $expressionLanguage = new ExpressionLanguage();
         $dynamicFixedPrices = array_filter($variantMarking->getDynamicFixedPrices(),
-            function (DynamicFixedPrice $dynamicFixedPrice) use ($variables, $supplierProfile, $expressionLanguage) {
-                return $dynamicFixedPrice->getSupplierProfile()->getId() === $supplierProfile->getId() &&
+            function (DynamicFixedPriceInterface $dynamicFixedPrice) use ($variables, $supplierProfile, $expressionLanguage) {
+                return $dynamicFixedPrice->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
                     (null === $dynamicFixedPrice->getCondition() ||
                     $expressionLanguage->evaluate($dynamicFixedPrice->getCondition(), $variables));
         });
         $staticFixedPrices = array_filter($variantMarking->getStaticFixedPrices(),
-            function (StaticFixedPrice $staticFixedPrice) use ($variables, $supplierProfile, $expressionLanguage) {
-                return $staticFixedPrice->getSupplierProfile()->getId() === $supplierProfile->getId() &&
+            function (StaticFixedPriceInterface $staticFixedPrice) use ($variables, $supplierProfile, $expressionLanguage) {
+                return $staticFixedPrice->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
                     (null === $staticFixedPrice->getCondition() ||
                         $expressionLanguage->evaluate($staticFixedPrice->getCondition(), $variables));
         });
         $dynamicVariablePriceHolders = array_filter($variantMarking->getDynamicVariablePriceHolders(),
-            function (DynamicVariablePriceHolder $dynamicVariablePriceHolder) use ($variables, $supplierProfile, $expressionLanguage) {
-                return $dynamicVariablePriceHolder->getSupplierProfile()->getId() === $supplierProfile->getId() &&
+            function (DynamicVariablePriceHolderInterface $dynamicVariablePriceHolder) use ($variables, $supplierProfile, $expressionLanguage) {
+                return $dynamicVariablePriceHolder->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
                     (null === $dynamicVariablePriceHolder->getCondition() ||
                         $expressionLanguage->evaluate($dynamicVariablePriceHolder->getCondition(), $variables));
         });
         $staticVariablePriceHolders = array_filter($variantMarking->getStaticVariablePriceHolders(),
-            function (StaticVariablePriceHolder $staticVariablePriceHolder) use ($variables, $supplierProfile, $expressionLanguage) {
-                return $staticVariablePriceHolder->getSupplierProfile()->getId() === $supplierProfile->getId() &&
+            function (StaticVariablePriceHolderInterface $staticVariablePriceHolder) use ($variables, $supplierProfile, $expressionLanguage) {
+                return $staticVariablePriceHolder->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
                     (null === $staticVariablePriceHolder->getCondition() ||
                         $expressionLanguage->evaluate($staticVariablePriceHolder->getCondition(), $variables));
             });
@@ -94,7 +94,7 @@ class VariantMarkingHelper
         }
 
         $markingFees = array();
-        /* @var DynamicFixedPrice $dynamicFixedPrice */
+        /* @var DynamicFixedPriceInterface $dynamicFixedPrice */
         foreach ($dynamicFixedPrices as $dynamicFixedPrice) {
             $value = $expressionLanguage->evaluate($dynamicFixedPrice->getCalculationValue(), $variables);
             if (!is_numeric($value)) {
@@ -109,16 +109,21 @@ class VariantMarkingHelper
             }
 
             foreach ($dynamicFixedPrice->getMarkingFees() as $markingFee) {
-                $markingFeeId = $markingFee->getId();
-                if (!isset($markingFees[$markingFeeId])) {
-                    $markingFees[$markingFeeId] = $markingFee;
+                $markingFeeUniqueId = $markingFee->getUniqueId();
+                if (!isset($markingFees[$markingFeeUniqueId])) {
+                    $markingFees[$markingFeeUniqueId] = $markingFee;
                 }
             }
         }
 
-        /* @var StaticFixedPrice $staticFixedPrice */
+        /* @var StaticFixedPriceInterface $staticFixedPrice */
         foreach ($staticFixedPrices as $staticFixedPrice) {
-            $variantMarkingCalculatedPrice->add($staticFixedPrice->getCalculationValue());
+            $calculationValue = $staticFixedPrice->getCalculationValue();
+            if (!$calculationValue instanceof Money) {
+                $calculationValue = Money::EUR(intval($calculationValue * 1000));
+            }
+
+            $variantMarkingCalculatedPrice->add($calculationValue);
 
             // if one variant marking price is the total price, we consider every other as total price too
             if ($staticFixedPrice->isTotalPrice()) {
@@ -126,22 +131,22 @@ class VariantMarkingHelper
             }
 
             foreach ($staticFixedPrice->getMarkingFees() as $markingFee) {
-                $markingFeeId = $markingFee->getId();
-                if (!isset($markingFees[$markingFeeId])) {
-                    $markingFees[$markingFeeId] = $markingFee;
+                $markingFeeUniqueId = $markingFee->getUniqueId();
+                if (!isset($markingFees[$markingFeeUniqueId])) {
+                    $markingFees[$markingFeeUniqueId] = $markingFee;
                 }
             }
         }
 
-        /* @var DynamicVariablePriceHolder $dynamicVariablePriceHolder */
+        /* @var DynamicVariablePriceHolderInterface $dynamicVariablePriceHolder */
         foreach ($dynamicVariablePriceHolders as $dynamicVariablePriceHolder) {
             $matchingDynamicVariablePrice = null;
-            /* @var DynamicVariablePrice $dynamicVariablePrice */
+            /* @var DynamicVariablePriceInterface $dynamicVariablePrice */
             foreach (array_filter($dynamicVariablePriceHolder->getDynamicVariablePrices(),
-                function (DynamicVariablePrice $dynamicVariablePrice) use ($quantity) {
+                function (DynamicVariablePriceInterface $dynamicVariablePrice) use ($quantity) {
                     return $dynamicVariablePrice->getFromQuantity() <= $quantity;
             }) as $dynamicVariablePrice) {
-                if (!$matchingDynamicVariablePrice instanceof DynamicVariablePrice) {
+                if (!$matchingDynamicVariablePrice instanceof DynamicVariablePriceInterface) {
                     $matchingDynamicVariablePrice = $dynamicVariablePrice;
 
                     continue;
@@ -159,7 +164,7 @@ class VariantMarkingHelper
                 }
             }
 
-            if (!$matchingDynamicVariablePrice instanceof DynamicVariablePrice) {
+            if (!$matchingDynamicVariablePrice instanceof DynamicVariablePriceInterface) {
                 continue;
             }
 
@@ -176,22 +181,22 @@ class VariantMarkingHelper
             }
 
             foreach ($dynamicVariablePriceHolder->getMarkingFees() as $markingFee) {
-                $markingFeeId = $markingFee->getId();
-                if (!isset($markingFees[$markingFeeId])) {
-                    $markingFees[$markingFeeId] = $markingFee;
+                $markingFeeUniqueId = $markingFee->getUniqueId();
+                if (!isset($markingFees[$markingFeeUniqueId])) {
+                    $markingFees[$markingFeeUniqueId] = $markingFee;
                 }
             }
         }
 
-        /* @var StaticVariablePriceHolder $staticVariablePriceHolder */
+        /* @var StaticVariablePriceHolderInterface $staticVariablePriceHolder */
         foreach ($staticVariablePriceHolders as $staticVariablePriceHolder) {
             $matchingStaticVariablePrice = null;
-            /* @var StaticVariablePrice $staticVariablePrice */
+            /* @var StaticVariablePriceInterface $staticVariablePrice */
             foreach (array_filter($staticVariablePriceHolder->getStaticVariablePrices(),
-                function (StaticVariablePrice $staticVariablePrice) use ($quantity) {
+                function (StaticVariablePriceInterface $staticVariablePrice) use ($quantity) {
                     return $staticVariablePrice->getFromQuantity() <= $quantity;
                 }) as $staticVariablePrice) {
-                if (!$matchingStaticVariablePrice instanceof StaticVariablePrice) {
+                if (!$matchingStaticVariablePrice instanceof StaticVariablePriceInterface) {
                     $matchingStaticVariablePrice = $staticVariablePrice;
 
                     continue;
@@ -209,11 +214,16 @@ class VariantMarkingHelper
                 }
             }
 
-            if (!$matchingStaticVariablePrice instanceof StaticVariablePrice) {
+            if (!$matchingStaticVariablePrice instanceof StaticVariablePriceInterface) {
                 continue;
             }
 
-            $variantMarkingCalculatedPrice->add($matchingStaticVariablePrice->getCalculationValue()->multiply($quantity));
+            $calculationValue = $matchingStaticVariablePrice->getCalculationValue();
+            if (!$calculationValue instanceof Money) {
+                $calculationValue = Money::EUR(intval($calculationValue * 1000));
+            }
+
+            $variantMarkingCalculatedPrice->add($calculationValue->multiply($quantity));
 
             // if one variant marking price is the total price, we consider every other as total price too
             if ($staticVariablePriceHolder->isTotalPrice()) {
@@ -221,9 +231,9 @@ class VariantMarkingHelper
             }
 
             foreach ($staticVariablePriceHolder->getMarkingFees() as $markingFee) {
-                $markingFeeId = $markingFee->getId();
-                if (!isset($markingFees[$markingFeeId])) {
-                    $markingFees[$markingFeeId] = $markingFee;
+                $markingFeeUniqueId = $markingFee->getUniqueId();
+                if (!isset($markingFees[$markingFeeUniqueId])) {
+                    $markingFees[$markingFeeUniqueId] = $markingFee;
                 }
             }
         }

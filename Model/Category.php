@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Category implements ModelInterface
+class Category extends AbstractModel
 {
     /**
      * @var string

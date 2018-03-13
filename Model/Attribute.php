@@ -4,7 +4,7 @@ namespace ES\RebirthApiClient\Model;
 
 use ES\RebirthCommon\AttributeInterface;
 
-class Attribute implements ModelInterface, AttributeInterface
+class Attribute extends AbstractModel implements AttributeInterface
 {
     /**
      * @var string
@@ -57,7 +57,7 @@ class Attribute implements ModelInterface, AttributeInterface
      * @param AttributeGroup $attributeGroup
      */
     public function __construct($id, $type, $value, $fullHierarchyValue, $additionalTextData, $slug,
-        Attribute $parent = null, AttributeGroup $attributeGroup)
+                                Attribute $parent = null, AttributeGroup $attributeGroup)
     {
         $this->id = $id;
         $this->type = $type;

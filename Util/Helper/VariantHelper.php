@@ -2,25 +2,25 @@
 
 namespace ES\RebirthApiClient\Util\Helper;
 
-use ES\RebirthApiClient\Model\SupplierProfileInterface;
-use ES\RebirthApiClient\Model\Variant;
-use ES\RebirthApiClient\Model\VariantPrice;
 use ES\RebirthApiClient\Util\Model\CalculatedPrice;
 use ES\RebirthApiClient\Util\Model\SelectedVariantMarking;
 use ES\RebirthApiClient\Util\Model\VariantMarkingCalculatedPrice;
+use ES\RebirthCommon\SupplierProfileInterface;
+use ES\RebirthCommon\VariantInterface;
+use ES\RebirthCommon\VariantPriceInterface;
 use Money\Money;
 
 class VariantHelper
 {
     /**
-     * @param Variant $variant
+     * @param VariantInterface $variant
      * @param SupplierProfileInterface $supplierProfile
      * @param int $quantity
      * @param SelectedVariantMarking[] $selectedVariantMarkings
      *
      * @return CalculatedPrice
      */
-    public static function getCalculatedPrice(Variant $variant, SupplierProfileInterface $supplierProfile, $quantity,
+    public static function getCalculatedPrice(VariantInterface $variant, SupplierProfileInterface $supplierProfile, $quantity,
         array $selectedVariantMarkings)
     {
         $calculatedPrice = new CalculatedPrice();
@@ -32,7 +32,7 @@ class VariantHelper
         }
 
         foreach ($variant->getVariantMinimumQuantities() as $variantMinimumQuantity) {
-            if ($variantMinimumQuantity->getSupplierProfile()->getId() !== $supplierProfile->getId()) {
+            if ($variantMinimumQuantity->getSupplierProfile()->getUniqueId() !== $supplierProfile->getUniqueId()) {
                 continue;
             }
 
@@ -49,12 +49,18 @@ class VariantHelper
             return $calculatedPrice;
         }
 
+        $filteredVariantPrices = array();
+        /* @var VariantPriceInterface $variantPrice */
+        foreach ($variant->getVariantPrices() as $variantPrice) {
+            if ($supplierProfile->getUniqueId() === $variantPrice->getSupplierProfile()->getUniqueId() && $variantPrice->getFromQuantity() <= $quantity) {
+                $filteredVariantPrices[] = $variantPrice;
+            }
+        }
+
         $matchingVariantPrice = null;
-        /* @var VariantPrice $variantPrice */
-        foreach (array_filter($variant->getVariantPrices(), function (VariantPrice $variantPrice) use ($supplierProfile, $quantity) {
-            return $supplierProfile->getId() === $variantPrice->getSupplierProfile()->getId() && $variantPrice->getFromQuantity() <= $quantity;
-        }) as $variantPrice) {
-            if (!$matchingVariantPrice instanceof VariantPrice) {
+        /* @var VariantPriceInterface $variantPrice */
+        foreach ($filteredVariantPrices as $variantPrice) {
+            if (!$matchingVariantPrice instanceof VariantPriceInterface) {
                 $matchingVariantPrice = $variantPrice;
 
                 continue;
@@ -73,7 +79,7 @@ class VariantHelper
         }
 
         // if there is no matching variant price => on quote
-        if (!$matchingVariantPrice instanceof VariantPrice) {
+        if (!$matchingVariantPrice instanceof VariantPriceInterface) {
             return $calculatedPrice;
         }
 
@@ -101,7 +107,12 @@ class VariantHelper
 
             switch ($totalPriceCount) {
                 case 0:
-                    $calculatedPrice->add($matchingVariantPrice->getCalculationValue()->multiply($quantity));
+                    $calculationValue = $matchingVariantPrice->getCalculationValue();
+                    if (!$calculationValue instanceof Money) {
+                        $calculationValue = Money::EUR(intval($calculationValue * 1000));
+                    }
+
+                    $calculatedPrice->add($calculationValue->multiply($quantity));
                 case 1:
                     /* @var VariantMarkingCalculatedPrice $variantMarkingCalculatedPrice */
                     foreach ($variantMarkingCalculatedPrices as $variantMarkingCalculatedPrice) {
@@ -113,7 +124,12 @@ class VariantHelper
                     throw new \LogicException();
             }
         } else {
-            $calculatedPrice->add($matchingVariantPrice->getCalculationValue()->multiply($quantity));
+            $calculationValue = $matchingVariantPrice->getCalculationValue();
+            if (!$calculationValue instanceof Money) {
+                $calculationValue = Money::EUR(intval($calculationValue * 1000));
+            }
+
+            $calculatedPrice->add($calculationValue->multiply($quantity));
         }
 
         $calculatedPrice->setOnQuote(false);

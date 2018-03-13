@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Supplier implements ModelInterface
+class Supplier extends AbstractModel
 {
     /**
      * @var string

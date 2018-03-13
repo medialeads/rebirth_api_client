@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class DynamicFixedPrice implements ModelInterface
+use ES\RebirthCommon\DynamicFixedPriceInterface;
+
+class DynamicFixedPrice extends AbstractModel implements DynamicFixedPriceInterface
 {
     /**
      * @var string
@@ -35,7 +37,7 @@ class DynamicFixedPrice implements ModelInterface
     private $totalPrice;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
@@ -51,11 +53,11 @@ class DynamicFixedPrice implements ModelInterface
      * @param string|null $reducedValue
      * @param string $calculationValue
      * @param bool $totalPrice
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      * @param MarkingFee[] $markingFees
      */
     public function __construct($id, $condition, $value, $reducedValue, $calculationValue, $totalPrice,
-        SupplierProfileInterface $supplierProfile, array $markingFees)
+        PartialSupplierProfile $supplierProfile, array $markingFees)
     {
         $this->id = $id;
         $this->condition = $condition;
@@ -116,7 +118,7 @@ class DynamicFixedPrice implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {
