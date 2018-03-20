@@ -30,6 +30,7 @@ class ProductHelper
     public static function getAttributesData(ProductInterface $product, array $attributeGroupsOrder = array())
     {
         $data = array();
+
         $attributeGroups = array();
         $attributeGroupsMaxPositionStack = array();
 

@@ -57,7 +57,7 @@ class Attribute extends AbstractModel implements AttributeInterface
      * @param AttributeGroup $attributeGroup
      */
     public function __construct($id, $type, $value, $fullHierarchyValue, $additionalTextData, $slug,
-                                Attribute $parent = null, AttributeGroup $attributeGroup)
+        Attribute $parent = null, AttributeGroup $attributeGroup)
     {
         $this->id = $id;
         $this->type = $type;

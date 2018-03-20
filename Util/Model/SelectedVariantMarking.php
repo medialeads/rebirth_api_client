@@ -2,28 +2,27 @@
 
 namespace ES\RebirthApiClient\Util\Model;
 
-use ES\RebirthApiClient\Model\VariantMarking;
-use ES\RebirthCommon\VariantMarkingOptionsInterface;
+use ES\RebirthCommon\VariantMarkingInterface;
 
-class SelectedVariantMarking implements VariantMarkingOptionsInterface
+class SelectedVariantMarking
 {
     /**
-     * @var float|null
+     * @var string|null
      */
     private $length;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $width;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $squaredSize;
 
     /**
-     * @var float|null
+     * @var string|null
      */
     private $diameter;
 
@@ -43,24 +42,17 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     private $numberOfLogos;
 
     /**
-     * @var bool
-     */
-    private $fullColor;
-
-    /**
-     * @var VariantMarking
+     * @var VariantMarkingInterface
      */
     private $variantMarking;
 
-    public function __construct(VariantMarking $variantMarking)
+    public function __construct(VariantMarkingInterface $variantMarking)
     {
         $this->variantMarking = $variantMarking;
-
-        $this->fullColor = false;
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getLength()
     {
@@ -68,7 +60,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @param float|null $length
+     * @param string|null $length
      *
      * @return SelectedVariantMarking
      */
@@ -80,7 +72,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getWidth()
     {
@@ -88,7 +80,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @param float|null $width
+     * @param string|null $width
      *
      * @return SelectedVariantMarking
      */
@@ -100,7 +92,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getSquaredSize()
     {
@@ -108,7 +100,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @param float|null $squaredSize
+     * @param string|null $squaredSize
      *
      * @return SelectedVariantMarking
      */
@@ -120,7 +112,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
     public function getDiameter()
     {
@@ -128,7 +120,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @param float|null $diameter
+     * @param string|null $diameter
      *
      * @return SelectedVariantMarking
      */
@@ -200,27 +192,7 @@ class SelectedVariantMarking implements VariantMarkingOptionsInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isFullColor()
-    {
-        return $this->fullColor;
-    }
-
-    /**
-     * @param bool $fullColor
-     *
-     * @return SelectedVariantMarking
-     */
-    public function setFullColor($fullColor)
-    {
-        $this->fullColor = $fullColor;
-
-        return $this;
-    }
-
-    /**
-     * @return VariantMarking
+     * @return VariantMarkingInterface
      */
     public function getVariantMarking()
     {
