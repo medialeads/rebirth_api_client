@@ -7,21 +7,21 @@ abstract class AbstractProcessedVariantMarkingOption implements ProcessedVariant
     /**
      * @var string
      */
-    protected $name;
+    protected $variantMarkingOption;
 
     /**
-     * @param string $name
+     * @param string $variantMarkingOption
      */
-    public function __construct($name)
+    public function __construct($variantMarkingOption)
     {
-        $this->name = $name;
+        $this->variantMarkingOption = $variantMarkingOption;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getVariantMarkingOption()
     {
-        return $this->name;
+        return $this->variantMarkingOption;
     }
 }

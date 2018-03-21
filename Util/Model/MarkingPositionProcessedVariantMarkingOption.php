@@ -35,6 +35,6 @@ class MarkingPositionProcessedVariantMarkingOption extends AbstractProcessedVari
      */
     public function getUniqueId()
     {
-        return sprintf('%s_%s_%s', get_class($this), $this->name, $this->markingPosition->getUniqueId());
+        return sprintf('%s_%s_%s', get_class($this), $this->variantMarkingOption, $this->markingPosition->getUniqueId());
     }
 }

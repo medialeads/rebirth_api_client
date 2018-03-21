@@ -51,7 +51,7 @@ class MarkingProcessedVariantMarkingOption extends AbstractProcessedVariantMarki
      */
     public function getUniqueId()
     {
-        $uniqueId = sprintf('%s_%s_%s', get_class($this), $this->name, $this->marking->getUniqueId());
+        $uniqueId = sprintf('%s_%s_%s', get_class($this), $this->variantMarkingOption, $this->marking->getUniqueId());
         if ($this->supplierMarking instanceof SupplierMarkingInterface && is_string($this->supplierMarking->getNameComplement())) {
             $uniqueId .= sprintf('_%s', $this->supplierMarking->getUniqueId());
         }

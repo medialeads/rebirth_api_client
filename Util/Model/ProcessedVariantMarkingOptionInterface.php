@@ -12,5 +12,5 @@ interface ProcessedVariantMarkingOptionInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getVariantMarkingOption();
 }

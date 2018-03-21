@@ -9,6 +9,6 @@ class TrueProcessedVariantMarkingOption extends AbstractProcessedVariantMarkingO
      */
     public function getUniqueId()
     {
-        return sprintf('%s_%s', get_class($this), $this->name);
+        return sprintf('%s_%s', get_class($this), $this->variantMarkingOption);
     }
 }

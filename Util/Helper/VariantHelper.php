@@ -59,7 +59,7 @@ class VariantHelper
                 if (null !== $minimumLength && $minimumLength === $maximumLength) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::LENGTH] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::LENGTH, (string) $minimumLength);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::LENGTH] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::LENGTH, $freeEntryLength, null !== $minimumLength ? (string) $minimumLength : null, null !== $maximumLength ? (string) $maximumLength : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::LENGTH] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::LENGTH, false, $freeEntryLength, null !== $minimumLength ? (string) $minimumLength : null, null !== $maximumLength ? (string) $maximumLength : null);
                 }
             }
 
@@ -70,7 +70,7 @@ class VariantHelper
                 if (null !== $minimumWidth && $minimumWidth === $maximumWidth) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::WIDTH] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::WIDTH, (string) $minimumWidth);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::WIDTH] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::WIDTH, $freeEntryWidth, null !== $minimumWidth ? (string) $minimumWidth : null, null !== $maximumWidth ? (string) $maximumWidth : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::WIDTH] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::WIDTH, false, $freeEntryWidth, null !== $minimumWidth ? (string) $minimumWidth : null, null !== $maximumWidth ? (string) $maximumWidth : null);
                 }
             }
 
@@ -81,7 +81,7 @@ class VariantHelper
                 if (null !== $minimumSquaredSize && $minimumSquaredSize === $maximumSquaredSize) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::SQUARED_SIZE] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::SQUARED_SIZE, (string) $minimumSquaredSize);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::SQUARED_SIZE] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::SQUARED_SIZE, $freeEntrySquaredSize, null !== $minimumSquaredSize ? (string) $minimumSquaredSize : null, null !== $maximumSquaredSize ? (string) $maximumSquaredSize : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::SQUARED_SIZE] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::SQUARED_SIZE, false, $freeEntrySquaredSize, null !== $minimumSquaredSize ? (string) $minimumSquaredSize : null, null !== $maximumSquaredSize ? (string) $maximumSquaredSize : null);
                 }
             }
 
@@ -92,7 +92,7 @@ class VariantHelper
                 if (null !== $minimumDiameter && $minimumDiameter === $maximumDiameter) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::DIAMETER] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::DIAMETER, (string) $minimumDiameter);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::DIAMETER] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::DIAMETER, $freeEntryDiameter, null !== $minimumDiameter ? (string) $minimumDiameter : null, null !== $maximumDiameter ? (string) $maximumDiameter : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::DIAMETER] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::DIAMETER, false, $freeEntryDiameter, null !== $minimumDiameter ? (string) $minimumDiameter : null, null !== $maximumDiameter ? (string) $maximumDiameter : null);
                 }
             }
 
@@ -103,7 +103,7 @@ class VariantHelper
                 if (null !== $minimumNumberOfColors && $minimumNumberOfColors === $maximumNumberOfColors) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_COLORS] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_COLORS, $minimumNumberOfColors);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_COLORS] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_COLORS, $freeEntryNumberOfColors, null !== $minimumNumberOfColors ? $minimumNumberOfColors : null, null !== $maximumNumberOfColors ? $maximumNumberOfColors : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_COLORS] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_COLORS, true, $freeEntryNumberOfColors, null !== $minimumNumberOfColors ? $minimumNumberOfColors : null, null !== $maximumNumberOfColors ? $maximumNumberOfColors : null);
                 }
             }
 
@@ -114,7 +114,7 @@ class VariantHelper
                 if (null !== $minimumNumberOfPositions && $minimumNumberOfPositions === $maximumNumberOfPositions) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_POSITIONS] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_POSITIONS, $minimumNumberOfPositions);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_POSITIONS] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_POSITIONS, $freeEntryNumberOfPositions, null !== $minimumNumberOfPositions ? $minimumNumberOfPositions : null, null !== $maximumNumberOfPositions ? $maximumNumberOfPositions : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_POSITIONS] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_POSITIONS, true, $freeEntryNumberOfPositions, null !== $minimumNumberOfPositions ? $minimumNumberOfPositions : null, null !== $maximumNumberOfPositions ? $maximumNumberOfPositions : null);
                 }
             }
 
@@ -125,7 +125,7 @@ class VariantHelper
                 if (null !== $minimumNumberOfLogos && $minimumNumberOfLogos === $maximumNumberOfLogos) {
                     $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_LOGOS] = new SimpleFixedProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_LOGOS, $minimumNumberOfLogos);
                 } else {
-                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_LOGOS] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_LOGOS, $freeEntryNumberOfLogos, null !== $minimumNumberOfLogos ? $minimumNumberOfLogos : null, null !== $maximumNumberOfLogos ? $maximumNumberOfLogos : null);
+                    $variantMarkingOptionsStack[VariantMarkingOptionsInterface::NUMBER_OF_LOGOS] = new SimpleVariableProcessedVariantMarkingOption(VariantMarkingOptionsInterface::NUMBER_OF_LOGOS, true, $freeEntryNumberOfLogos, null !== $minimumNumberOfLogos ? $minimumNumberOfLogos : null, null !== $maximumNumberOfLogos ? $maximumNumberOfLogos : null);
                 }
             }
 
@@ -294,7 +294,7 @@ class VariantHelper
                 $processedVariantMarkingOption = $vertex->getAttribute('processed_variant_marking_option');
                 if ($processedVariantMarkingOption instanceof ProcessedVariantMarkingOptionInterface) {
                     if ($processedVariantMarkingOption instanceof MarkingProcessedVariantMarkingOption) {
-                        $label = sprintf('%s : %s', ucfirst($processedVariantMarkingOption->getName()), $processedVariantMarkingOption->getMarking()->getName());
+                        $label = sprintf('%s : %s', ucfirst($processedVariantMarkingOption->getVariantMarkingOption()), $processedVariantMarkingOption->getMarking()->getName());
                         $supplierMarking = $processedVariantMarkingOption->getSupplierMarking();
                         if ($supplierMarking instanceof SupplierMarkingInterface) {
                             $nameComplement = $supplierMarking->getNameComplement();
@@ -303,11 +303,11 @@ class VariantHelper
                             }
                         }
                     } elseif ($processedVariantMarkingOption instanceof SimpleFixedProcessedVariantMarkingOption) {
-                        $label = sprintf('%s = %s', ucfirst($processedVariantMarkingOption->getName()), (string) $processedVariantMarkingOption->getValue());
+                        $label = sprintf('%s = %s', ucfirst($processedVariantMarkingOption->getVariantMarkingOption()), (string) $processedVariantMarkingOption->getValue());
                     } elseif ($processedVariantMarkingOption instanceof MarkingPositionProcessedVariantMarkingOption) {
-                        $label = sprintf('%s : %s', ucfirst($processedVariantMarkingOption->getName()), $processedVariantMarkingOption->getMarkingPosition()->getName());
+                        $label = sprintf('%s : %s', ucfirst($processedVariantMarkingOption->getVariantMarkingOption()), $processedVariantMarkingOption->getMarkingPosition()->getName());
                     } elseif ($processedVariantMarkingOption instanceof SimpleVariableProcessedVariantMarkingOption) {
-                        $label = ucfirst($processedVariantMarkingOption->getName());
+                        $label = ucfirst($processedVariantMarkingOption->getVariantMarkingOption());
                         $minimumValue = $processedVariantMarkingOption->getMinimumValue();
                         if (is_string($minimumValue)) {
                             $label = sprintf('%s < %s', $minimumValue, $label);
@@ -318,7 +318,7 @@ class VariantHelper
                             $label = sprintf('%s < %s', $label, $maximumValue);
                         }
                     } elseif ($processedVariantMarkingOption instanceof TrueProcessedVariantMarkingOption) {
-                        $label = ucfirst($processedVariantMarkingOption->getName());
+                        $label = ucfirst($processedVariantMarkingOption->getVariantMarkingOption());
                     } else {
                         throw new NotImplementedException();
                     }

@@ -33,6 +33,6 @@ class SimpleFixedProcessedVariantMarkingOption extends AbstractProcessedVariantM
      */
     public function getUniqueId()
     {
-        return sprintf('%s_%s_%s', get_class($this), $this->name, (string) $this->value);
+        return sprintf('%s_%s_%s', get_class($this), $this->variantMarkingOption, (string)$this->value);
     }
 }
