@@ -309,12 +309,12 @@ class VariantHelper
                     } elseif ($processedVariantMarkingOption instanceof SimpleVariableProcessedVariantMarkingOption) {
                         $label = ucfirst($processedVariantMarkingOption->getVariantMarkingOption());
                         $minimumValue = $processedVariantMarkingOption->getMinimumValue();
-                        if (is_string($minimumValue)) {
+                        if (null !== $minimumValue) {
                             $label = sprintf('%s < %s', $minimumValue, $label);
                         }
 
                         $maximumValue = $processedVariantMarkingOption->getMaximumValue();
-                        if (is_string($maximumValue)) {
+                        if (null !== $maximumValue) {
                             $label = sprintf('%s < %s', $label, $maximumValue);
                         }
                     } elseif ($processedVariantMarkingOption instanceof TrueProcessedVariantMarkingOption) {
