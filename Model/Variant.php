@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Variant implements ModelInterface
+use ES\RebirthCommon\VariantInterface;
+
+class Variant extends AbstractModel implements VariantInterface
 {
     /**
      * @var string
@@ -15,7 +17,7 @@ class Variant implements ModelInterface
     private $supplierReference;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
@@ -60,7 +62,7 @@ class Variant implements ModelInterface
     private $europeanArticleNumbering;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
@@ -80,7 +82,7 @@ class Variant implements ModelInterface
     private $attributes;
 
     /**
-     * @var SupplierProfileInterface[]
+     * @var SupplierProfile[]
      */
     private $supplierProfiles;
 
@@ -137,7 +139,7 @@ class Variant implements ModelInterface
     /**
      * @param string $id
      * @param string $supplierReference
-     * @param string $name
+     * @param string|null $name
      * @param string|null $description
      * @param string|null $rawDescription
      * @param bool $mandatoryMarking
@@ -146,11 +148,11 @@ class Variant implements ModelInterface
      * @param string|null $grossWeight
      * @param int|null $stock
      * @param string|null $europeanArticleNumbering
-     * @param string $slug
+     * @param string|null $slug
      * @param VariantPackaging|null $variantPackaging
      * @param VariantImage|null $mainVariantImage
      * @param Attribute[] $attributes
-     * @param SupplierProfileInterface[] $supplierProfiles
+     * @param SupplierProfile[] $supplierProfiles
      * @param Keyword[] $keywords
      * @param VariantPrice[] $variantPrices
      * @param VariantImage[] $variantImages
@@ -214,7 +216,7 @@ class Variant implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -286,7 +288,7 @@ class Variant implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

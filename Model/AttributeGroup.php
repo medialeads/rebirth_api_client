@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class AttributeGroup implements ModelInterface
+use ES\RebirthCommon\AttributeGroupInterface;
+
+class AttributeGroup extends AbstractModel implements AttributeGroupInterface
 {
     /**
      * @var string
@@ -15,7 +17,7 @@ class AttributeGroup implements ModelInterface
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
@@ -25,16 +27,16 @@ class AttributeGroup implements ModelInterface
     private $additionalTextDataType;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
     /**
      * @param string $id
      * @param string $type
-     * @param string $name
+     * @param string|null $name
      * @param string|null $additionalTextDataType
-     * @param string $slug
+     * @param string|null $slug
      */
     public function __construct($id, $type, $name, $additionalTextDataType, $slug)
     {
@@ -62,7 +64,7 @@ class AttributeGroup implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -78,7 +80,7 @@ class AttributeGroup implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

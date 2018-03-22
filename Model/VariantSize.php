@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class VariantSize implements ModelInterface
+class VariantSize extends AbstractModel
 {
     /**
      * @var string

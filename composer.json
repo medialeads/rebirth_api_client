@@ -9,8 +9,7 @@
   },
   "require": {
     "symfony/expression-language": "^3.4",
-    "es/rebirth-common": "dev-master#016af9cccf11d2f73d5a41ed55b5d5796d6964c2",
-    "moneyphp/money": "^3.1"
+    "es/rebirth-common": "dev-master#8f5fcba27cd235905b354fa4c6733f307e488b45"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7",

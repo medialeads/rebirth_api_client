@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class MarkingFee implements ModelInterface
+use ES\RebirthCommon\MarkingFeeInterface;
+
+class MarkingFee extends AbstractModel implements MarkingFeeInterface
 {
     /**
      * @var string
@@ -10,19 +12,19 @@ class MarkingFee implements ModelInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
     /**
      * @param string $id
-     * @param string $name
-     * @param string $slug
+     * @param string|null $name
+     * @param string|null $slug
      */
     public function __construct($id, $name, $slug)
     {
@@ -40,7 +42,7 @@ class MarkingFee implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -48,7 +50,7 @@ class MarkingFee implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

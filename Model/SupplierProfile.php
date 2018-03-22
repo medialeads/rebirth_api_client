@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class SupplierProfile implements ModelInterface, SupplierProfileInterface
+use ES\RebirthCommon\SupplierProfileInterface;
+
+class SupplierProfile extends AbstractModel implements SupplierProfileInterface
 {
     /**
      * @var string

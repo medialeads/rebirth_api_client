@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class PartialSupplierProfile implements ModelInterface, SupplierProfileInterface
+use ES\RebirthCommon\SupplierProfileInterface;
+
+class PartialSupplierProfile extends AbstractModel implements SupplierProfileInterface
 {
     /**
      * @var string

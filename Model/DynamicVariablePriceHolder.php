@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class DynamicVariablePriceHolder implements ModelInterface
+use ES\RebirthCommon\DynamicVariablePriceHolderInterface;
+
+class DynamicVariablePriceHolder extends AbstractModel implements DynamicVariablePriceHolderInterface
 {
     /**
      * @var string
@@ -20,7 +22,7 @@ class DynamicVariablePriceHolder implements ModelInterface
     private $totalPrice;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
@@ -38,11 +40,11 @@ class DynamicVariablePriceHolder implements ModelInterface
      * @param string $id
      * @param string|null $condition
      * @param bool $totalPrice
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      * @param DynamicVariablePrice[] $dynamicVariablePrices
      * @param MarkingFee[] $markingFees
      */
-    public function __construct($id, $condition, $totalPrice, SupplierProfileInterface $supplierProfile,
+    public function __construct($id, $condition, $totalPrice, PartialSupplierProfile $supplierProfile,
         array $dynamicVariablePrices, array $markingFees)
     {
         $this->id = $id;
@@ -78,7 +80,7 @@ class DynamicVariablePriceHolder implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {

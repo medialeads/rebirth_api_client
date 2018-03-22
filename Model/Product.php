@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Product implements ModelInterface
+use ES\RebirthCommon\ProductInterface;
+
+class Product extends AbstractModel implements ProductInterface
 {
     /**
      * @var string

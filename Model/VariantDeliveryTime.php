@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class VariantDeliveryTime implements ModelInterface
+class VariantDeliveryTime extends AbstractModel
 {
     /**
      * @var string
@@ -15,16 +15,16 @@ class VariantDeliveryTime implements ModelInterface
     private $value;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
     /**
      * @param string $id
      * @param int $value
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      */
-    public function __construct($id, $value, SupplierProfileInterface $supplierProfile)
+    public function __construct($id, $value, PartialSupplierProfile $supplierProfile)
     {
         $this->id = $id;
         $this->value = $value;
@@ -48,7 +48,7 @@ class VariantDeliveryTime implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {

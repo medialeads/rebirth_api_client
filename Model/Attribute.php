@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Attribute implements ModelInterface
+use ES\RebirthCommon\AttributeInterface;
+
+class Attribute extends AbstractModel implements AttributeInterface
 {
     /**
      * @var string
@@ -15,12 +17,12 @@ class Attribute implements ModelInterface
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $value;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $fullHierarchyValue;
 
@@ -30,7 +32,7 @@ class Attribute implements ModelInterface
     private $additionalTextData;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
@@ -47,10 +49,10 @@ class Attribute implements ModelInterface
     /**
      * @param string $id
      * @param string $type
-     * @param string $value
-     * @param string $fullHierarchyValue
+     * @param string|null $value
+     * @param string|null $fullHierarchyValue
      * @param string|null $additionalTextData
-     * @param string $slug
+     * @param string|null $slug
      * @param Attribute|null $parent
      * @param AttributeGroup $attributeGroup
      */
@@ -84,7 +86,7 @@ class Attribute implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getValue()
     {
@@ -92,7 +94,7 @@ class Attribute implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFullHierarchyValue()
     {
@@ -108,7 +110,7 @@ class Attribute implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

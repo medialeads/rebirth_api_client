@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Keyword implements ModelInterface
+class Keyword extends AbstractModel
 {
     /**
      * @var string
@@ -10,19 +10,19 @@ class Keyword implements ModelInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $value;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $slug;
 
     /**
      * @param string $id
-     * @param string $value
-     * @param string $slug
+     * @param string|null $value
+     * @param string|null $slug
      */
     public function __construct($id, $value, $slug)
     {
@@ -40,7 +40,7 @@ class Keyword implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getValue()
     {
@@ -48,7 +48,7 @@ class Keyword implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSlug()
     {

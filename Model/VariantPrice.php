@@ -2,9 +2,10 @@
 
 namespace ES\RebirthApiClient\Model;
 
+use ES\RebirthCommon\VariantPriceInterface;
 use Money\Money;
 
-class VariantPrice implements ModelInterface
+class VariantPrice extends AbstractModel implements VariantPriceInterface
 {
     /**
      * @var string
@@ -32,7 +33,7 @@ class VariantPrice implements ModelInterface
     private $calculationValue;
 
     /**
-     * @var SupplierProfileInterface
+     * @var PartialSupplierProfile
      */
     private $supplierProfile;
 
@@ -42,10 +43,10 @@ class VariantPrice implements ModelInterface
      * @param Money $value
      * @param Money|null $reducedValue
      * @param Money $calculationValue
-     * @param SupplierProfileInterface $supplierProfile
+     * @param PartialSupplierProfile $supplierProfile
      */
     public function __construct($id, $fromQuantity, Money $value, Money $reducedValue = null, Money $calculationValue,
-        SupplierProfileInterface $supplierProfile)
+        PartialSupplierProfile $supplierProfile)
     {
         $this->id = $id;
         $this->fromQuantity = $fromQuantity;
@@ -96,7 +97,7 @@ class VariantPrice implements ModelInterface
     }
 
     /**
-     * @return SupplierProfileInterface
+     * @return PartialSupplierProfile
      */
     public function getSupplierProfile()
     {

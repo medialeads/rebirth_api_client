@@ -2,7 +2,7 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class Brand implements ModelInterface
+class Brand extends AbstractModel
 {
     /**
      * @var string

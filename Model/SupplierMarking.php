@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class SupplierMarking implements ModelInterface
+use ES\RebirthCommon\SupplierMarkingInterface;
+
+class SupplierMarking extends AbstractModel implements SupplierMarkingInterface
 {
     /**
      * @var string
