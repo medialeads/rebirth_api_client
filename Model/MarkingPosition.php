@@ -2,7 +2,9 @@
 
 namespace ES\RebirthApiClient\Model;
 
-class MarkingPosition extends AbstractModel
+use ES\RebirthCommon\MarkingPositionInterface;
+
+class MarkingPosition extends AbstractModel implements MarkingPositionInterface
 {
     /**
      * @var string
