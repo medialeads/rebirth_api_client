@@ -171,11 +171,11 @@ class VariantMarkingHelper
         /* @var DynamicVariablePriceHolderInterface $dynamicVariablePriceHolder */
         foreach ($filteredDynamicVariablePriceHolders as $dynamicVariablePriceHolder) {
             $matchingDynamicVariablePrice = null;
-            /* @var DynamicVariablePriceInterface $dynamicVariablePrice */
-            foreach (array_filter($dynamicVariablePriceHolder->getDynamicVariablePrices(),
-                function (DynamicVariablePriceInterface $dynamicVariablePrice) use ($quantity) {
-                    return $dynamicVariablePrice->getFromQuantity() <= $quantity;
-            }) as $dynamicVariablePrice) {
+            foreach ($dynamicVariablePriceHolder->getDynamicVariablePrices() as $dynamicVariablePrice) {
+                if ($dynamicVariablePrice->getFromQuantity() > $quantity) {
+                    continue;
+                }
+
                 if (!$matchingDynamicVariablePrice instanceof DynamicVariablePriceInterface) {
                     $matchingDynamicVariablePrice = $dynamicVariablePrice;
 
@@ -226,11 +226,11 @@ class VariantMarkingHelper
         /* @var StaticVariablePriceHolderInterface $staticVariablePriceHolder */
         foreach ($filteredStaticVariablePriceHolders as $staticVariablePriceHolder) {
             $matchingStaticVariablePrice = null;
-            /* @var StaticVariablePriceInterface $staticVariablePrice */
-            foreach (array_filter($staticVariablePriceHolder->getStaticVariablePrices(),
-                function (StaticVariablePriceInterface $staticVariablePrice) use ($quantity) {
-                    return $staticVariablePrice->getFromQuantity() <= $quantity;
-                }) as $staticVariablePrice) {
+            foreach ($staticVariablePriceHolder->getStaticVariablePrices() as $staticVariablePrice) {
+                if ($staticVariablePrice->getFromQuantity() > $quantity) {
+                    continue;
+                }
+
                 if (!$matchingStaticVariablePrice instanceof StaticVariablePriceInterface) {
                     $matchingStaticVariablePrice = $staticVariablePrice;
 
@@ -275,7 +275,9 @@ class VariantMarkingHelper
 
         $variantMarkingCalculatedPrice->setMarkingFees($markingFees);
 
-        $variantMarkingCalculatedPrice->setOnQuote(false);
+        if ($variantMarkingCalculatedPrice->getAmount() > 0) {
+            $variantMarkingCalculatedPrice->setOnQuote(false);
+        }
 
         return $variantMarkingCalculatedPrice;
     }

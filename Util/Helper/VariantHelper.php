@@ -350,8 +350,8 @@ class VariantHelper
      *
      * @return CalculatedPrice
      */
-    public static function getCalculatedPrice(VariantInterface $variant, SupplierProfileInterface $supplierProfile, $quantity,
-        array $selectedVariantMarkings)
+    public static function getCalculatedPrice(VariantInterface $variant, SupplierProfileInterface $supplierProfile,
+        $quantity, array $selectedVariantMarkings)
     {
         $calculatedPrice = new CalculatedPrice();
 
@@ -466,7 +466,9 @@ class VariantHelper
             $calculatedPrice->add($calculationValue->multiply($quantity));
         }
 
-        $calculatedPrice->setOnQuote(false);
+        if ($calculatedPrice->getAmount() > 0) {
+            $calculatedPrice->setOnQuote(false);
+        }
 
         return $calculatedPrice;
     }
