@@ -7,8 +7,15 @@
       "ES\\RebirthApiClient\\": ""
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
   "require": {
     "symfony/expression-language": "^3.4",
+    "clue/graph": "^0.9.0",
+    "graphp/graphviz": "^0.2.1",
     "es/rebirth-common": "dev-master#8f5fcba27cd235905b354fa4c6733f307e488b45"
   },
   "require-dev": {

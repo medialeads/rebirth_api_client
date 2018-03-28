@@ -41,12 +41,14 @@ class VariantMarkingHelper
 
         $variantMarking = $selectedVariantMarking->getVariantMarking();
         // if the provided quantity is inferior than the variant marking minimum quantity => on quote
-        if (null !== $variantMarking->getMinimumQuantity() && $quantity < $variantMarking->getMinimumQuantity()) {
+        $minimumQuantity = $variantMarking->getMinimumQuantity();
+        if (null !== $minimumQuantity && $quantity < $minimumQuantity) {
             return $variantMarkingCalculatedPrice;
         }
 
         // if the provided quantity is superior than the variant marking maximum quantity => on quote
-        if (null !== $variantMarking->getMaximumQuantity() && $quantity > $variantMarking->getMaximumQuantity()) {
+        $maximumQuantity = $variantMarking->getMaximumQuantity();
+        if (null !== $maximumQuantity && $quantity > $maximumQuantity) {
             return $variantMarkingCalculatedPrice;
         }
 
@@ -54,9 +56,10 @@ class VariantMarkingHelper
 
         $filteredDynamicFixedPrices = array();
         foreach ($variantMarking->getDynamicFixedPrices() as $dynamicFixedPrice) {
+            $condition = $dynamicFixedPrice->getCondition();
             try {
                 if ($dynamicFixedPrice->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
-                    (null === $dynamicFixedPrice->getCondition() || $expressionLanguage->evaluate($dynamicFixedPrice->getCondition(), $variables))) {
+                    (null === $condition || $expressionLanguage->evaluate($condition, $variables))) {
                     $filteredDynamicFixedPrices[] = $dynamicFixedPrice;
                 }
             } catch (SyntaxError $e) {
@@ -66,9 +69,10 @@ class VariantMarkingHelper
 
         $filteredStaticFixedPrices = array();
         foreach ($variantMarking->getStaticFixedPrices() as $staticFixedPrice) {
+            $condition = $staticFixedPrice->getCondition();
             try {
                 if ($staticFixedPrice->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
-                    (null === $staticFixedPrice->getCondition() || $expressionLanguage->evaluate($staticFixedPrice->getCondition(), $variables))) {
+                    (null === $condition || $expressionLanguage->evaluate($condition, $variables))) {
                     $filteredStaticFixedPrices[] = $staticFixedPrice;
                 }
             } catch (SyntaxError $e) {
@@ -78,9 +82,10 @@ class VariantMarkingHelper
 
         $filteredDynamicVariablePriceHolders = array();
         foreach ($variantMarking->getDynamicVariablePriceHolders() as $dynamicVariablePriceHolder) {
+            $condition = $dynamicVariablePriceHolder->getCondition();
             try {
                 if ($dynamicVariablePriceHolder->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
-                    (null === $dynamicVariablePriceHolder->getCondition() || $expressionLanguage->evaluate($dynamicVariablePriceHolder->getCondition(), $variables))) {
+                    (null === $condition || $expressionLanguage->evaluate($condition, $variables))) {
                     $filteredDynamicVariablePriceHolders[] = $dynamicVariablePriceHolder;
                 }
             } catch (SyntaxError $e) {
@@ -90,9 +95,10 @@ class VariantMarkingHelper
 
         $filteredStaticVariablePriceHolders = array();
         foreach ($variantMarking->getStaticVariablePriceHolders() as $staticVariablePriceHolder) {
+            $condition = $staticVariablePriceHolder->getCondition();
             try {
                 if ($staticVariablePriceHolder->getSupplierProfile()->getUniqueId() === $supplierProfile->getUniqueId() &&
-                    (null === $staticVariablePriceHolder->getCondition() || $expressionLanguage->evaluate($staticVariablePriceHolder->getCondition(), $variables))) {
+                    (null === $condition || $expressionLanguage->evaluate($condition, $variables))) {
                     $filteredStaticVariablePriceHolders[] = $staticVariablePriceHolder;
                 }
             } catch (SyntaxError $e) {
@@ -172,7 +178,8 @@ class VariantMarkingHelper
         foreach ($filteredDynamicVariablePriceHolders as $dynamicVariablePriceHolder) {
             $matchingDynamicVariablePrice = null;
             foreach ($dynamicVariablePriceHolder->getDynamicVariablePrices() as $dynamicVariablePrice) {
-                if ($dynamicVariablePrice->getFromQuantity() > $quantity) {
+                $fromQuantity = $dynamicVariablePrice->getFromQuantity();
+                if ($fromQuantity > $quantity) {
                     continue;
                 }
 
@@ -182,7 +189,6 @@ class VariantMarkingHelper
                     continue;
                 }
 
-                $fromQuantity = $dynamicVariablePrice->getFromQuantity();
                 $matchingFromQuantity = $matchingDynamicVariablePrice->getFromQuantity();
                 // if two dynamic variable prices are set for the same from quantity => on quote
                 if ($fromQuantity === $matchingFromQuantity) {
@@ -227,7 +233,8 @@ class VariantMarkingHelper
         foreach ($filteredStaticVariablePriceHolders as $staticVariablePriceHolder) {
             $matchingStaticVariablePrice = null;
             foreach ($staticVariablePriceHolder->getStaticVariablePrices() as $staticVariablePrice) {
-                if ($staticVariablePrice->getFromQuantity() > $quantity) {
+                $fromQuantity = $staticVariablePrice->getFromQuantity();
+                if ($fromQuantity > $quantity) {
                     continue;
                 }
 
@@ -237,7 +244,6 @@ class VariantMarkingHelper
                     continue;
                 }
 
-                $fromQuantity = $staticVariablePrice->getFromQuantity();
                 $matchingFromQuantity = $matchingStaticVariablePrice->getFromQuantity();
                 // if two dynamic variable prices are set for the same from quantity => null
                 if ($fromQuantity === $matchingFromQuantity) {

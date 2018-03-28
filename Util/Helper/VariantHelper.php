@@ -412,11 +412,6 @@ class VariantHelper
             }
         }
 
-        // if there is no matching variant price => on quote
-        if (!$matchingVariantPrice instanceof VariantPriceInterface) {
-            return $calculatedPrice;
-        }
-
         if (!empty($selectedVariantMarkings)) {
             $totalPriceCount = 0;
             $variantMarkingCalculatedPrices = array();
